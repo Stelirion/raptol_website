@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 3D Engine for Portals -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.145.0/three.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/three@0.145.0/examples/js/controls/OrbitControls.js"></script>
+    <!-- Postprocessing for Bloom -->
+    
+    <title>RAPTOL | Darkest Dreams — Nouveau Single</title>
+    <meta name="description" content="Darkest Dreams, le nouveau single de Raptol. Death metal mélodique. Disponible le 24 avril.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/Logo Raptol.png">
+    <link rel="apple-touch-icon" href="images/Logo Raptol.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.raptol.fr/">
+    <meta property="og:title" content="RAPTOL — Darkest Dreams">
+    <meta property="og:description" content="Le nouveau single. Death metal mélodique. Disponible le 24 avril.">
+    <meta property="og:image" content="https://www.raptol.fr/images/Darkest_Dreams.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="RAPTOL — Darkest Dreams">
+    <meta property="twitter:description" content="Le nouveau single. Death metal mélodique. Disponible le 24 avril.">
+    <meta property="twitter:image" content="https://www.raptol.fr/images/Darkest_Dreams.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Outfit:wght@300;500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-logo">
+            <canvas id="loadingLogoCanvas" width="280" height="60"></canvas>
+        </div>
+        <div class="loading-bar-wrapper">
+            <div class="loading-bar" id="loading-bar"></div>
+        </div>
+        <p class="loading-text">Initialisation de l'univers...</p>
+    </div>
+
+    <!-- Cosmic Cursor (ring only) -->
+    <div id="cursor-ring"></div>
+
+    <!-- Planet Hover Tooltip -->
+    <div id="planet-tooltip" class="planet-tooltip">
+        <div class="tooltip-content">
+            <span class="tooltip-badge">ALBUM</span>
+            <h4 id="tooltip-title">Starlight</h4>
+        </div>
+        <div class="tooltip-line"></div>
+    </div>
+
+    <!-- Canvas Background -->
+    <canvas id="starfield"></canvas>
+
+    <!-- 3D Solar System View — full screen overlay -->
+    <div id="solar-system-view" class="solar-system-view hidden">
+        <div id="solar-system-3d"></div>
+        <canvas id="warp-fx-canvas"></canvas>
+        <div id="warp-vignette" class="warp-vignette"></div>
+        <div class="solar-hud-top">
+            <button id="exit-solar" class="exit-solar-btn">← Retour</button>
+            <div id="solar-status">Raptol Star System</div>
+        </div>
+        <div id="planet-surface-name">
+            <span id="planet-surface-subtitle">Sélection d'orbite</span>
+        </div>
+        <div id="poi-overlay"></div>
+        <div id="poi-panel">
+            <button class="poi-panel-close" id="poi-panel-close">✕</button>
+            <div class="poi-panel-info">
+                <div class="poi-panel-badge" id="poi-panel-badge">Track</div>
+                <div class="poi-panel-title" id="poi-panel-title">—</div>
+                <div class="poi-panel-planet" id="poi-panel-planet">—</div>
+            </div>
+            <div class="poi-panel-content">
+                <div class="poi-panel-tabs" id="poi-panel-tabs"></div>
+                <div class="poi-panel-text" id="poi-panel-text"></div>
+            </div>
+            <div class="poi-panel-actions" id="poi-panel-actions"></div>
+        </div>
+        
+        <!-- Warp Jump Flash -->
+        <div id="warp-flash" class="warp-flash"></div>
+    </div>
+
+    <!-- 2D Site Wrapper for cinematic transitions -->
+    <div id="site-wrapper" class="site-wrapper">
+        <!-- Streaming Sidebar (left) -->
+        <div class="social-sidebar">
+            <span class="sidebar-label">Écouter</span>
+            <a href="https://open.spotify.com/artist/5iZwGnQHKkWgjg9yCFm9um" target="_blank" class="social-link" data-tooltip="Spotify">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+            </a>
+            <a href="https://music.apple.com/fr/artist/raptol/1503556593" target="_blank" class="social-link" data-tooltip="Apple Music">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+            </a>
+            <a href="https://www.deezer.com/fr/artist/88821362" target="_blank" class="social-link" data-tooltip="Deezer">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 18h2v-5H2v5zm4 0h2V6H6v12zm4 0h2v-8h-2v8zm4 0h2V4h-2v14zm4 0h2V9h-2v9z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@Raptol" target="_blank" class="social-link" data-tooltip="YouTube">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+            </a>
+        </div>
+
+        <!-- Mobile menu overlay (hors nav pour éviter le stacking context) -->
+        <div id="mobile-menu" class="mobile-menu-overlay">
+            <div class="mob-menu-header">
+                <canvas id="mobLogoCanvas" width="250" height="45"></canvas>
+                <button id="mob-close" class="mob-close-btn" aria-label="Fermer">✕</button>
+            </div>
+            <nav class="mob-menu-nav">
+                <a href="#release" id="mob-release-link" class="mob-link">Darkest Dreams</a>
+                <a href="#discography" class="mob-link">Discographie</a>
+                <button id="mob-explorer-btn" class="mob-link mob-nav-btn">Exploration 3D</button>
+                <a href="#newsletter" class="mob-link">Newsletter</a>
+                <a href="#" class="mob-link mob-link-shop" title="Bientôt disponible" onclick="return false;">Boutique</a>
+            </nav>
+            <div class="mob-menu-footer">
+                <a href="https://www.instagram.com/rapt0l/" target="_blank" class="mob-social">IG</a>
+                <a href="https://www.tiktok.com/@raptol_off" target="_blank" class="mob-social">TK</a>
+                <a href="https://open.spotify.com/artist/5iZwGnQHKkWgjg9yCFm9um" target="_blank" class="mob-social">SP</a>
+                <a href="https://www.youtube.com/@Raptol" target="_blank" class="mob-social">YT</a>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="glass-nav">
+            <a href="#" class="logo">
+                <canvas id="logoCanvas" width="250" height="45"></canvas>
+            </a>
+            <button id="hamburger" class="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#release" id="nav-release-link">Dernière Sortie</a></li>
+                <li><a href="#discography">Discographie</a></li>
+                <li><button id="explorer-btn" class="nav-link-btn">Exploration 3D</button></li>
+                <!-- <li><a href="#tour">Concerts</a></li> -->
+                <li><a href="#newsletter">Newsletter</a></li>
+                <li><a href="#" id="nav-shop-link" style="color:#ffd700;opacity:0.55;cursor:not-allowed;" title="Bientôt disponible" onclick="return false;">Boutique</a></li>
+            </ul>
+            <div class="nav-socials">
+                <a href="https://www.instagram.com/rapt0l/" target="_blank" class="nav-social-icon" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+                <a href="https://www.tiktok.com/@raptol_off" target="_blank" class="nav-social-icon" aria-label="TikTok">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/Rapt0l" target="_blank" class="nav-social-icon" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+                </a>
+                <a href="https://x.com/raptol_" target="_blank" class="nav-social-icon" aria-label="X / Twitter">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Sections remain the same -->
+            <section id="release" class="hero-showcase">
+                <div class="hero-typography">
+                    <span class="badge">Nouveau Single</span>
+                    <h1 class="music-title">Darkest Dreams</h1>
+                    <p class="subtitle">Bienvenue dans ses rêves les plus sombres.</p>
+                    <div class="button-group">
+                        <span class="btn-primary" style="opacity:0.45;cursor:not-allowed;pointer-events:none;" title="Disponible vendredi">
+                            <span class="play-icon">▶</span> Sortie vendredi
+                        </span>
+                    </div>
+                </div>
+                <div class="hologram-screen-wrapper" id="video">
+                    <div class="hologram-screen" style="padding:0;overflow:hidden;">
+                        <img src="images/Darkest_Dreams.png" alt="Darkest Dreams Cover" style="width:100%;display:block;border-radius:8px;">
+                    </div>
+                    <div class="screen-reflection"></div>
+                </div>
+            </section>
+
+
+            <section id="discography" class="discography-section">
+                <h2 class="section-title">Discographie</h2>
+                <div class="gallery-grid discography-grid">
+                    <div class="gallery-item glass-card album-card" data-album="DARKEST DREAMS" id="album-DARKEST DREAMS">
+                        <picture>
+                            <img src="images/Darkest_Dreams.png" alt="Darkest Dreams Cover" loading="lazy">
+                        </picture>
+                        <div class="play-overlay"><button class="play-btn">▶</button></div>
+                        <div class="item-overlay">
+                            <h3>Darkest Dreams</h3>
+                            <p>Single • 2026</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item glass-card album-card" data-album="VIRGO" id="album-VIRGO">
+                        <picture>
+                            <source srcset="images/cover virgo.avif" type="image/avif">
+                            <img src="images/cover virgo.jpg" alt="Virgo Cover" loading="lazy">
+                        </picture>
+                        <div class="play-overlay"><button class="play-btn">▶</button></div>
+                        <div class="item-overlay">
+                            <h3>Virgo</h3>
+                            <p>Single • 2026</p>
+                            <span style="font-size: 0.8rem; color: var(--accent-cyan);">Clip officiel</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item glass-card album-card" data-album="STARLIGHT" id="album-STARLIGHT">
+                        <picture>
+                            <source srcset="images/Cover Starlight.avif" type="image/avif">
+                            <img src="images/Cover Starlight.png" alt="Starlight Album Cover" loading="lazy">
+                        </picture>
+                        <div class="play-overlay"><button class="play-btn">▶</button></div>
+                        <div class="item-overlay">
+                            <h3>Starlight</h3>
+                            <p>Album • 2025</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item glass-card album-card" data-album="THE REVENGE" id="album-THE REVENGE">
+                        <picture>
+                            <source srcset="images/COVER THE REVENGE.avif" type="image/avif">
+                            <img src="images/COVER THE REVENGE.png" alt="The Revenge Single Cover" loading="lazy">
+                        </picture>
+                        <div class="play-overlay"><button class="play-btn">▶</button></div>
+                        <div class="item-overlay">
+                            <h3>The Revenge</h3>
+                            <p>Single • 2025</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item glass-card album-card" data-album="ULONIA" id="album-ULONIA">
+                        <picture>
+                            <source srcset="images/cover ulonia.avif" type="image/avif">
+                            <img src="images/cover ulonia.jpg" alt="Ulonia Cover" loading="lazy">
+                        </picture>
+                        <div class="play-overlay"><button class="play-btn">▶</button></div>
+                        <div class="item-overlay">
+                            <h3>Ulonia</h3>
+                            <p>Single • 2021</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION CONCERTS — masquée temporairement, décommenter pour réactiver
+            <section id="tour" class="tour-section">
+                <h2 class="section-title">En Tournée</h2>
+                <div class="tour-container glass-card glowing-border" style="text-align: center; padding: 3rem;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-primary);">Aucune date annoncée pour le moment.</h3>
+                    <p style="color: var(--text-secondary);">La prochaine expédition spatiale est en préparation. Abonnez-vous pour être alerté(e).</p>
+                </div>
+            </section>
+            -->
+            
+            <section id="newsletter" class="contact-section">
+                <div class="contact-card glass-card glowing-border">
+                    <div class="newsletter-streams">
+                        <p class="newsletter-stream-label">Retrouve RAPTOL sur</p>
+                        <div class="button-group">
+                            <a href="https://open.spotify.com/artist/5iZwGnQHKkWgjg9yCFm9um" target="_blank" class="btn-secondary" style="border-color: #1DB954; color: #1DB954;">🎵 Spotify</a>
+                            <a href="https://music.apple.com/fr/artist/raptol/1503556593" target="_blank" class="btn-secondary" style="border-color: #FA243C; color: #FA243C;">🍎 Apple Music</a>
+                            <a href="https://www.youtube.com/@Raptol" target="_blank" class="btn-secondary" style="border-color: #FF0000; color: #FF0000;">📺 YouTube</a>
+                        </div>
+                    </div>
+                    <div class="newsletter-divider"></div>
+                    <div class="newsletter-block">
+                        <div class="newsletter-icon">📡</div>
+                        <h2 class="section-title" style="margin-bottom: 0.5rem;">La Newsletter</h2>
+                        <p class="newsletter-desc">Reçois en avant-première les nouvelles sorties, dates de concerts et exclusivités de l'univers RAPTOL.</p>
+                        <div id="form-success" class="form-success-msg" style="display:none;">
+                            ✦ Newsletter activée. Bienvenue dans la Constellation. ✦
+                        </div>
+                        <form class="newsletter-form" id="newsletter-form" action="https://formspree.io/f/xnjoezpg" method="POST">
+                            <input type="hidden" name="_subject" value="Nouvel abonné RAPTOL Newsletter">
+                            <div class="newsletter-input-row">
+                                <input type="email" name="email" placeholder="ton@email.com" required>
+                                <button type="submit" class="btn-primary" id="form-submit-btn">S'abonner →</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <canvas id="footerLogoCanvas" width="250" height="45"></canvas>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://open.spotify.com/artist/5iZwGnQHKkWgjg9yCFm9um" target="_blank" class="footer-social-link">Spotify</a>
+                    <a href="https://music.apple.com/fr/artist/raptol/1503556593" target="_blank" class="footer-social-link">Apple Music</a>
+                    <a href="https://www.youtube.com/@Raptol" target="_blank" class="footer-social-link">YouTube</a>
+                    <a href="https://www.instagram.com/rapt0l/" target="_blank" class="footer-social-link">Instagram</a>
+                    <a href="https://www.tiktok.com/@raptol_off" target="_blank" class="footer-social-link">TikTok</a>
+                </div>
+                <p class="footer-copyright">&copy; 2026 Raptol. Tous droits réservés.</p>
+                <p class="footer-copyright" style="margin-top: 0.5rem; font-size: 0.55rem; opacity: 0.3;">Textures plan&egrave;tes : <a href="https://www.solarsystemscope.com/textures/" target="_blank" style="color: inherit;">Solar System Scope</a> (CC BY 4.0)</p>
+            </div>
+        </footer>
+
+    </div> <!-- End site-wrapper -->
+
+    <!-- Scroll to top — mobile only -->
+    <button id="scroll-top-btn" aria-label="Retour en haut">↑</button>
+
+    <!-- Removed duplicate script tag -->
+</body>
+</html>
