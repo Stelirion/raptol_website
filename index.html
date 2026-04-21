@@ -135,7 +135,7 @@
             <nav class="mob-menu-nav">
                 <a href="#release" id="mob-release-link" class="mob-link">Darkest Dreams</a>
                 <a href="#discography" class="mob-link">Discographie</a>
-                <a href="#about" class="mob-link">À Propos</a>
+                <a href="#" id="mob-about-link" class="mob-link" onclick="openArtistPanel();document.getElementById('mobile-menu').classList.remove('active');return false;">À Propos</a>
                 <button id="mob-explorer-btn" class="mob-link mob-nav-btn">Exploration 3D</button>
                 <a href="#newsletter" class="mob-link">Newsletter</a>
                 <a href="#" class="mob-link mob-link-shop" title="Bientôt disponible" onclick="return false;">Boutique</a>
@@ -157,12 +157,19 @@
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="nav-links">
-                <li><a href="#release" id="nav-release-link">Dernière Sortie</a></li>
-                <li><a href="#discography">Discographie</a></li>
-                <li><button id="explorer-btn" class="nav-link-btn">Exploration 3D</button></li>
+                <li class="nav-group nav-group-left">
+                    <a href="#release" id="nav-release-link">Dernière Sortie</a>
+                    <a href="#discography">Discographie</a>
+                </li>
+                <li class="nav-group nav-group-center">
+                    <button id="explorer-btn" class="nav-link-btn">Exploration 3D</button>
+                </li>
                 <!-- <li><a href="#tour">Concerts</a></li> -->
-                <li><a href="#newsletter">Newsletter</a></li>
-                <li><a href="#" id="nav-shop-link" style="color:#ffd700;opacity:0.55;cursor:not-allowed;" title="Bientôt disponible" onclick="return false;">Boutique</a></li>
+                <li class="nav-group nav-group-right">
+                    <a href="#" id="nav-about-link" onclick="openArtistPanel();return false;">À Propos</a>
+                    <a href="#newsletter">Newsletter</a>
+                    <a href="#" id="nav-shop-link" style="color:#ffd700;opacity:0.55;cursor:not-allowed;" title="Bientôt disponible" onclick="return false;">Boutique</a>
+                </li>
             </ul>
             <div class="nav-socials">
                 <a href="https://www.instagram.com/rapt0l/" target="_blank" class="nav-social-icon" aria-label="Instagram">
