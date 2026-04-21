@@ -2246,6 +2246,10 @@ function zoomToPlanet(body) {
     hidePlanetTooltip();
 
     // Clean up surface UI
+    document.getElementById('mobile-list-toggle')?.classList.remove('open');
+    document.getElementById('mobile-list-backdrop')?.classList.remove('visible');
+    if (_planetListEl) _planetListEl.classList.remove('mob-open');
+
     document.getElementById('planet-surface-name').classList.remove('visible');
     document.getElementById('exit-solar').textContent = '← Retour';
     document.getElementById('exit-solar').dataset.state = 'system';
@@ -2529,6 +2533,7 @@ function exitSurfaceMode() {
         _sidebarEl.classList.remove('mob-open');
         _sidebarEl.style.transform = ''; // clear inline, let CSS take over
     }
+    if (_planetListEl) _planetListEl.classList.remove('mob-open');
 
     // Cancel any in-progress zoom animation
     if (SS._zoomRaf) {
@@ -3545,6 +3550,7 @@ function closeSolarSystem() {
             // System mode → slide planet list in from right
             _planetListEl.classList.add('mob-open');
             _planetListEl.style.display = 'flex';
+            _planetListEl.style.opacity = '1';
             _planetListEl.style.pointerEvents = 'none';
             _planetListEl.style.transform = 'translateX(100%)';
             void _planetListEl.offsetWidth; // force reflow for transition
