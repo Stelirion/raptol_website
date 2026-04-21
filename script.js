@@ -2262,8 +2262,39 @@ function zoomToPlanet(body) {
 // ─────────────────────────────────────────────
 // 9. SURFACE MODE UI
 // ─────────────────────────────────────────────
+// ── Helper: set album-color CSS vars on an element ──
+function setAlbumColorVars(el, hex) {
+    const h = (hex || '#5090ff').replace('#','');
+    const r = parseInt(h.substring(0,2),16);
+    const g = parseInt(h.substring(2,4),16);
+    const b = parseInt(h.substring(4,6),16);
+    const a = (alpha) => `rgba(${r},${g},${b},${alpha})`;
+    el.style.setProperty('--album-color', hex || '#5090ff');
+    el.style.setProperty('--ac1', a(0.08));
+    el.style.setProperty('--ac2', a(0.18));
+    el.style.setProperty('--ac3', a(0.28));
+    el.style.setProperty('--ac4', a(0.42));
+    el.style.setProperty('--ac5', a(0.58));
+    el.style.setProperty('--ac6', a(0.72));
+    el.style.setProperty('--ac7', a(0.88));
+}
+
+function clearAlbumColorVars(el) {
+    ['--album-color','--ac1','--ac2','--ac3','--ac4','--ac5','--ac6','--ac7']
+        .forEach(v => el.style.removeProperty(v));
+}
+
 function enterSurfaceMode(body) {
     document.querySelector('.solar-hud-top').classList.add('visible');
+
+    // ── Apply planet color theme to all explorer UI elements ──
+    const _planetColor = body.data.color || '#5090ff';
+    const explorerEl = document.getElementById('solar-system-3d');
+    if (explorerEl) setAlbumColorVars(explorerEl, _planetColor);
+    // Sidebar + POI overlay are appended to body — set vars directly
+    if (_sidebarEl) setAlbumColorVars(_sidebarEl, _planetColor);
+    const poiOverlay = document.getElementById('poi-overlay');
+    if (poiOverlay) setAlbumColorVars(poiOverlay, _planetColor);
 
     const nameEl = document.getElementById('planet-surface-name');
     const nameText = body.data.type === 'album'
@@ -2296,6 +2327,13 @@ function exitSurfaceMode() {
     SS.state = 'transitioning';
     SS.focused = null;
     SS.localCameraOffset = null;
+
+    // Reset planet color theme
+    const explorerEl = document.getElementById('solar-system-3d');
+    if (explorerEl) clearAlbumColorVars(explorerEl);
+    if (_sidebarEl) clearAlbumColorVars(_sidebarEl);
+    const poiOverlay = document.getElementById('poi-overlay');
+    if (poiOverlay) clearAlbumColorVars(poiOverlay);
 
     document.getElementById('planet-surface-name').classList.remove('visible');
     document.getElementById('exit-solar').textContent = '← Retour';
@@ -2352,48 +2390,48 @@ function exitSurfaceMode() {
     .poi-region.visible { pointer-events: auto; }
     .poi-dot {
         width: 5px; height: 5px; border-radius: 50%;
-        background: rgba(120,200,255,0.7);
+        background: var(--ac6, rgba(120,200,255,0.7));
         flex-shrink: 0;
-        box-shadow: 0 0 6px rgba(100,200,255,0.5);
+        box-shadow: 0 0 6px var(--ac5, rgba(100,200,255,0.5));
         transition: all 0.2s;
     }
     .poi-region.active .poi-dot, .poi-region:hover .poi-dot {
         background: #fff;
-        box-shadow: 0 0 10px rgba(120,220,255,0.9);
+        box-shadow: 0 0 10px var(--album-color, rgba(120,220,255,0.9));
         transform: scale(1.4);
     }
     .poi-line {
         width: 28px; height: 1px;
-        background: linear-gradient(to right, rgba(100,190,255,0.5), rgba(100,190,255,0.15));
+        background: linear-gradient(to right, var(--ac5, rgba(100,190,255,0.5)), var(--ac2, rgba(100,190,255,0.15)));
         flex-shrink: 0;
         transition: width 0.2s;
     }
     .poi-region.active .poi-line, .poi-region:hover .poi-line {
         width: 36px;
-        background: linear-gradient(to right, rgba(180,230,255,0.8), rgba(100,190,255,0.2));
+        background: linear-gradient(to right, var(--ac7, rgba(180,230,255,0.8)), var(--ac3, rgba(100,190,255,0.2)));
     }
     .poi-tag {
         display: flex; flex-direction: column;
         padding: 5px 10px;
-        background: rgba(4, 10, 28, 0.78);
-        border: 1px solid rgba(80, 170, 255, 0.18);
+        background: rgba(4, 10, 28, 0.82);
+        border: 1px solid var(--ac2, rgba(80,170,255,0.18));
         border-left: none;
         cursor: pointer;
         transition: all 0.2s;
         backdrop-filter: blur(8px);
     }
     .poi-region:hover .poi-tag, .poi-region.active .poi-tag {
-        background: rgba(8, 22, 58, 0.88);
-        border-color: rgba(100, 200, 255, 0.38);
+        background: rgba(8, 18, 38, 0.92);
+        border-color: var(--ac4, rgba(100,200,255,0.38));
     }
     .poi-num {
         font: 8px 'Major Mono Display', monospace;
-        letter-spacing: 0.2em; color: rgba(80,180,255,0.6);
+        letter-spacing: 0.2em; color: var(--ac5, rgba(80,180,255,0.6));
         line-height: 1.2;
     }
     .poi-name {
         font: 11px 'Major Mono Display', monospace;
-        letter-spacing: 0.05em; color: rgba(210,230,255,0.88);
+        letter-spacing: 0.05em; color: rgba(220,235,255,0.9);
         line-height: 1.3; white-space: nowrap;
         max-width: 140px; overflow: hidden; text-overflow: ellipsis;
     }
@@ -2414,9 +2452,9 @@ function exitSurfaceMode() {
         width: 100%; max-width: 960px;
         max-height: 90vh;
         background: linear-gradient(135deg, rgba(4,9,28,0.98) 0%, rgba(6,14,40,0.96) 100%);
-        border: 1px solid rgba(80,160,255,0.14);
+        border: 1px solid var(--ac2, rgba(80,160,255,0.14));
         border-radius: 4px;
-        box-shadow: 0 32px 80px rgba(0,0,20,0.9), 0 0 0 1px rgba(60,120,255,0.06), inset 0 1px 0 rgba(100,180,255,0.08);
+        box-shadow: 0 32px 80px rgba(0,0,20,0.9), 0 0 0 1px var(--ac1, rgba(60,120,255,0.06)), inset 0 1px 0 var(--ac1, rgba(100,180,255,0.08));
         display: flex; flex-direction: column;
         overflow: hidden;
         animation: rpFadeIn 0.3s cubic-bezier(0.16,1,0.3,1) both;
@@ -2431,7 +2469,7 @@ function exitSurfaceMode() {
     .rp-close {
         position: absolute; top: 18px; right: 20px; z-index: 10;
         background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-        color: rgba(180,210,255,0.5); width: 32px; height: 32px;
+        color: rgba(255,255,255,0.45); width: 32px; height: 32px;
         border-radius: 50%; font-size: 18px; line-height: 1;
         cursor: pointer; display: flex; align-items: center; justify-content: center;
         transition: all 0.2s;
@@ -2458,7 +2496,7 @@ function exitSurfaceMode() {
         position: relative; background: #000;
         display: flex; align-items: center; justify-content: center;
         min-height: 300px;
-        border-right: 1px solid rgba(80,160,255,0.1);
+        border-right: 1px solid var(--ac1, rgba(80,160,255,0.1));
         overflow: hidden;
     }
     .rm-media iframe {
@@ -2491,19 +2529,19 @@ function exitSurfaceMode() {
         margin-bottom: 10px;
     }
 
-    /* Album name — below, smaller, colored */
+    /* Album name — below, smaller, planet-colored */
     .rm-album-name {
         font-size: clamp(13px, 1.8vw, 18px);
         letter-spacing: 0.16em; line-height: 1;
         margin-bottom: 14px;
         color: var(--album-color, rgba(120,180,255,0.9));
-        text-shadow: 0 0 24px var(--album-color, rgba(80,140,255,0.3));
+        text-shadow: 0 0 24px var(--ac4, rgba(80,140,255,0.3));
     }
 
     /* Meta row: duration · credits */
     .rm-meta {
         font-size: 9px; letter-spacing: 0.2em;
-        color: rgba(140,190,255,0.4);
+        color: var(--ac4, rgba(140,190,255,0.4));
         margin-bottom: 24px;
         display: flex; flex-wrap: wrap; gap: 0 12px; align-items: center;
     }
@@ -2511,14 +2549,14 @@ function exitSurfaceMode() {
 
     /* Divider */
     .rm-divider {
-        height: 1px; background: rgba(80,140,255,0.12);
+        height: 1px; background: var(--ac1, rgba(80,140,255,0.12));
         margin-bottom: 20px;
     }
 
     /* Tabs */
     .rp-tabs {
         display: flex; gap: 0; margin-bottom: 16px;
-        border-bottom: 1px solid rgba(60,140,255,0.1);
+        border-bottom: 1px solid var(--ac1, rgba(60,140,255,0.1));
     }
     .rp-tab {
         background: none; border: none; color: rgba(255,255,255,0.28);
@@ -2527,14 +2565,14 @@ function exitSurfaceMode() {
         border-bottom: 2px solid transparent; margin-bottom: -1px;
         transition: all 0.18s;
     }
-    .rp-tab.active { color: rgba(120,200,255,0.9); border-bottom-color: rgba(100,190,255,0.6); }
+    .rp-tab.active { color: var(--album-color, rgba(120,200,255,0.9)); border-bottom-color: var(--ac5, rgba(100,190,255,0.6)); }
     .rp-tab:hover:not(.active) { color: rgba(255,255,255,0.55); }
 
     /* Tab text */
     .rp-text {
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         font-size: 13px; line-height: 1.8;
-        color: rgba(180,210,240,0.7);
+        color: rgba(200,215,230,0.75);
         flex: 1; margin-bottom: 24px;
         white-space: pre-line;
     }
@@ -2548,77 +2586,77 @@ function exitSurfaceMode() {
         cursor: pointer; transition: all 0.2s; border-radius: 2px;
         text-align: center; display: flex; align-items: center; justify-content: center; gap: 5px;
     }
-    .rp-btn.rp-listen { background: rgba(0,200,255,0.07); border-color: rgba(0,200,255,0.25); color: rgba(80,220,255,0.9); }
-    .rp-btn.rp-listen:hover { background: rgba(0,200,255,0.15); border-color: rgba(0,220,255,0.5); color: #00e5ff; }
-    .rp-btn.rp-clip { background: rgba(220,40,40,0.07); border-color: rgba(220,40,40,0.2); color: rgba(255,100,100,0.85); }
+    .rp-btn.rp-listen { background: var(--ac1, rgba(0,200,255,0.07)); border-color: var(--ac3, rgba(0,200,255,0.25)); color: var(--album-color, rgba(80,220,255,0.9)); }
+    .rp-btn.rp-listen:hover { background: var(--ac2, rgba(0,200,255,0.15)); border-color: var(--ac5, rgba(0,220,255,0.5)); color: #fff; }
+    .rp-btn.rp-clip { background: rgba(220,40,40,0.07); border-color: rgba(220,40,40,0.2); color: rgba(255,110,110,0.85); }
     .rp-btn.rp-clip:hover { background: rgba(220,40,40,0.15); border-color: rgba(255,80,80,0.45); color: #ff5555; }
 
     /* ── Tracklist sidebar ── */
     #track-sidebar {
         position: fixed; left: 0; top: 50%; transform: translateY(-50%);
         z-index: 9400; width: 260px;
-        background: rgba(2,6,20,0.88);
-        border-right: 1px solid rgba(80,160,255,0.12);
+        background: rgba(2,6,20,0.90);
+        border-right: 1px solid var(--ac2, rgba(80,160,255,0.12));
         backdrop-filter: blur(14px);
         max-height: 80vh; overflow-y: auto; overflow-x: hidden;
         display: none; flex-direction: column;
-        scrollbar-width: thin; scrollbar-color: rgba(80,160,255,0.2) transparent;
+        scrollbar-width: thin; scrollbar-color: var(--ac3, rgba(80,160,255,0.2)) transparent;
     }
     #track-sidebar.visible { display: flex; }
     .ts-header {
         font: 8px 'Major Mono Display', monospace; letter-spacing: 0.3em;
-        color: rgba(80,160,255,0.5); padding: 14px 16px 10px;
-        border-bottom: 1px solid rgba(80,160,255,0.08);
+        color: var(--ac5, rgba(80,160,255,0.5)); padding: 14px 16px 10px;
+        border-bottom: 1px solid var(--ac1, rgba(80,160,255,0.08));
         flex-shrink: 0;
     }
     .ts-row {
         display: flex; align-items: center; gap: 0;
-        padding: 0; border-bottom: 1px solid rgba(80,160,255,0.05);
+        padding: 0; border-bottom: 1px solid var(--ac1, rgba(80,160,255,0.05));
         transition: background 0.15s;
         cursor: pointer;
     }
-    .ts-row:hover { background: rgba(80,160,255,0.06); }
-    .ts-row.active { background: rgba(80,160,255,0.1); }
+    .ts-row:hover { background: var(--ac1, rgba(80,160,255,0.06)); }
+    .ts-row.active { background: var(--ac2, rgba(80,160,255,0.1)); }
     .ts-row.active .ts-name { color: #fff; }
-    .ts-row.active .ts-num { color: rgba(120,200,255,0.7); }
+    .ts-row.active .ts-num { color: var(--ac6, rgba(120,200,255,0.7)); }
     .ts-num {
         font: 8px 'Major Mono Display', monospace; letter-spacing: 0.15em;
-        color: rgba(80,160,255,0.35); width: 34px; flex-shrink: 0;
+        color: var(--ac4, rgba(80,160,255,0.35)); width: 34px; flex-shrink: 0;
         text-align: right; padding: 11px 8px 11px 14px;
         pointer-events: none;
     }
     .ts-name {
         font: 10px 'Major Mono Display', monospace; letter-spacing: 0.06em;
-        color: rgba(180,210,255,0.65); flex: 1;
+        color: rgba(200,215,235,0.7); flex: 1;
         padding: 11px 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         pointer-events: none;
     }
     .ts-open {
         flex-shrink: 0; width: 36px; height: 100%; min-height: 36px;
-        background: none; border: none; border-left: 1px solid rgba(80,160,255,0.08);
-        color: rgba(120,180,255,0.4); cursor: pointer;
+        background: none; border: none; border-left: 1px solid var(--ac1, rgba(80,160,255,0.08));
+        color: var(--ac4, rgba(120,180,255,0.4)); cursor: pointer;
         display: flex; align-items: center; justify-content: center;
         font-size: 13px; transition: all 0.15s;
     }
-    .ts-open:hover { background: rgba(80,160,255,0.12); color: rgba(160,210,255,0.9); }
+    .ts-open:hover { background: var(--ac2, rgba(80,160,255,0.12)); color: var(--album-color, rgba(160,210,255,0.9)); }
 
     /* ── Prev / Next nav in modal ── */
     .rp-nav {
         display: flex; align-items: center; justify-content: space-between;
         padding-top: 16px; margin-top: 8px;
-        border-top: 1px solid rgba(80,140,255,0.08);
+        border-top: 1px solid var(--ac1, rgba(80,140,255,0.08));
     }
     .rp-nav-btn {
-        background: rgba(80,160,255,0.06); border: 1px solid rgba(80,160,255,0.15);
-        color: rgba(140,200,255,0.6); font: 10px 'Major Mono Display', monospace;
+        background: var(--ac1, rgba(80,160,255,0.06)); border: 1px solid var(--ac2, rgba(80,160,255,0.15));
+        color: var(--ac5, rgba(140,200,255,0.6)); font: 10px 'Major Mono Display', monospace;
         letter-spacing: 0.1em; padding: 8px 14px; cursor: pointer; border-radius: 2px;
         transition: all 0.18s;
     }
-    .rp-nav-btn:hover:not(:disabled) { background: rgba(80,160,255,0.14); color: #fff; border-color: rgba(100,180,255,0.4); }
+    .rp-nav-btn:hover:not(:disabled) { background: var(--ac2, rgba(80,160,255,0.14)); color: #fff; border-color: var(--ac4, rgba(100,180,255,0.4)); }
     .rp-nav-btn:disabled { opacity: 0.2; cursor: default; }
     .rp-nav-info {
         font: 8px 'Major Mono Display', monospace; letter-spacing: 0.2em;
-        color: rgba(120,180,255,0.4);
+        color: var(--ac4, rgba(120,180,255,0.4));
     }
     `;
     document.head.appendChild(s);
@@ -2800,34 +2838,54 @@ const _poiNormal = new THREE.Vector3();
 function updatePOIOverlay() {
     if (!SS.focused || !poiMarkers.length) return;
     const body = SS.focused;
-    // matrixWorld already updated by the camera-follow block above
 
     const iW = innerWidth, iH = innerHeight;
+    // Label bounding box: ~180px wide, ~38px tall (centered at the anchor point)
+    const LW = 190, LH = 40;
 
-    for (const m of poiMarkers) {
-        // World position of this POI
+    // 1. Compute base opacity + screen position for every marker
+    const computed = poiMarkers.map(m => {
         _poiWorld.copy(m.localPos).applyMatrix4(body.mesh.matrixWorld);
-
-        // Project to NDC
         _poiProj.copy(_poiWorld).project(SS.camera);
-
-        // Face-culling: dot of surface normal with camera direction
         _poiToCam.subVectors(SS.camera.position, _poiWorld).normalize();
         _poiNormal.copy(m.localPos).applyQuaternion(body.mesh.quaternion).normalize();
         const dot = _poiNormal.dot(_poiToCam);
-
         let opacity = Math.max(0, Math.min(1, (dot - 0.08) * 5));
         if (_poiProj.z > 1) opacity = 0;
-
         const sx = (_poiProj.x  *  0.5 + 0.5) * iW;
         const sy = (-_poiProj.y * 0.5 + 0.5) * iH;
+        return { m, sx, sy, opacity };
+    });
 
+    // 2. Collision detection — highest priority = active, then by lowest idx
+    // Sort: active first, then by face-dot (frontmost)
+    const sorted = [...computed].sort((a, b) => {
+        const aActive = a.m.idx === activePOIIdx ? 1 : 0;
+        const bActive = b.m.idx === activePOIIdx ? 1 : 0;
+        return bActive - aActive || b.opacity - a.opacity;
+    });
+
+    const placed = []; // { sx, sy } of already-placed visible labels
+    for (const item of sorted) {
+        if (item.opacity < 0.12) continue; // already hidden by culling
+        // Check overlap with all placed labels
+        const overlaps = placed.some(p =>
+            Math.abs(item.sx - p.sx) < LW && Math.abs(item.sy - p.sy) < LH
+        );
+        if (overlaps && item.m.idx !== activePOIIdx) {
+            item.opacity = 0; // hide the lower-priority overlapping label
+        } else {
+            placed.push({ sx: item.sx, sy: item.sy });
+        }
+    }
+
+    // 3. Apply to DOM
+    for (const { m, sx, sy, opacity } of computed) {
         const s = m.el.style;
         s.opacity       = opacity;
         s.pointerEvents = opacity > 0.15 ? 'auto' : 'none';
         s.left = `${sx}px`;
         s.top  = `${sy}px`;
-
         m.el.classList.toggle('active', m.idx === activePOIIdx);
     }
 }
@@ -2860,9 +2918,10 @@ function openPOIPanel(body, idx) {
         if (activeRow) activeRow.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
 
-    // ── Album color (CSS var for themed glow) ──
+    // ── Album color — propagate to backdrop + panel ──
     const albumColor = body.data.color || '#5090ff';
-    _rpPanel.style.setProperty('--album-color', albumColor);
+    setAlbumColorVars(_rpPanel, albumColor);
+    setAlbumColorVars(_rpBackdrop, albumColor);
 
     // ── Album name (BIG) ──
     const albumLabel = toTitleCase(body.key);
