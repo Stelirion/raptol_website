@@ -2883,15 +2883,15 @@ function exitSurfaceMode() {
             <div class="ap-identity-col">
                 <div class="ap-label">◉ Système Stellaire · Artiste</div>
                 <div class="ap-name">RAPTOL</div>
-                <div class="ap-genre">Death Metal Mélodique</div>
+                <div class="ap-genre">Artiste Multi-Genre &amp; Narratif</div>
 
                 <div class="ap-stats">
                     <div class="ap-stat">
                         <div class="ap-stat-num">3</div>
-                        <div class="ap-stat-lbl">Albums & EP</div>
+                        <div class="ap-stat-lbl">Albums &amp; EP</div>
                     </div>
                     <div class="ap-stat">
-                        <div class="ap-stat-num">13+</div>
+                        <div class="ap-stat-num">24</div>
                         <div class="ap-stat-lbl">Titres</div>
                     </div>
                     <div class="ap-stat">
@@ -2901,7 +2901,7 @@ function exitSurfaceMode() {
                 </div>
 
                 <p class="ap-bio">
-                    RAPTOL est un projet de death metal mélodique né en 2020, à la croisée de la puissance brute et de la narration émotionnelle. Chaque release est une constellation — un espace sonore où la douleur, la possession et la libération coexistent. De&nbsp;<em>Virgo</em>&nbsp;à l'odyssée concept de&nbsp;<em>Starlight</em>, jusqu'au nouveau singles&nbsp;<em>Darkest Dreams</em>, RAPTOL construit un univers aussi vaste que le vide entre les étoiles.
+                    Ayant commencé la musique en 2017 et lancé ce projet en 2020, RAPTOL est un projet musical qui refuse de s'enfermer dans une seule case. Si ses racines se trouvent dans le metal mélodique et l'électro cinématique, l'objectif est aujourd'hui d'explorer une liberté totale de création. De la puissance du metal à la nostalgie de la synthwave, en passant par des morceaux en italien, chaque titre est pensé comme une expérience immersive. Après avoir posé ses bases avec <em>Virgo</em> et l'album concept <em>Starlight</em>, RAPTOL continue d'évoluer sans barrières stylistiques. L'idée est simple&nbsp;: briser les codes pour ne garder que l'essentiel — l'émotion et la narration.
                 </p>
 
                 <div class="ap-socials">
