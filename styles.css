@@ -1899,7 +1899,7 @@ body.cursor-hover #cursor-ring {
    MOBILE — Slide animations pour les panneaux 3D
    ══════════════════════════════════════════════ */
 
-/* Planet list → right-side drawer on mobile */
+/* Planet list → right-side drawer on mobile (display + transform controlled by JS) */
 @media (max-width: 768px) {
     #planet-list {
         top: 0 !important;
@@ -1907,15 +1907,7 @@ body.cursor-hover #cursor-ring {
         right: 0 !important;
         width: min(280px, 88vw) !important;
         max-height: none !important;
-        transform: translateX(100%) !important;
-        opacity: 1 !important;
-        pointer-events: none !important;
         transition: transform 0.38s cubic-bezier(0.16,1,0.3,1) !important;
-        display: flex !important;
-    }
-    #planet-list.mob-open {
-        transform: translateX(0) !important;
-        pointer-events: auto !important;
     }
 }
 

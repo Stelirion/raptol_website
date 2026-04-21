@@ -3502,8 +3502,16 @@ function closeSolarSystem() {
     function closeMobileList() {
         btn.classList.remove('open');
         if (backdrop) backdrop.classList.remove('visible');
-        // Planet list: slide out right
-        if (_planetListEl) _planetListEl.classList.remove('mob-open');
+        // Planet list: slide out then hide
+        if (_planetListEl && _planetListEl.classList.contains('mob-open')) {
+            _planetListEl.classList.remove('mob-open');
+            _planetListEl.style.transform = 'translateX(100%)';
+            _planetListEl.style.pointerEvents = 'none';
+            setTimeout(() => {
+                if (!_planetListEl.classList.contains('mob-open'))
+                    _planetListEl.style.display = 'none';
+            }, 400);
+        }
         // Track sidebar: slide down
         if (_sidebarEl && _sidebarEl.classList.contains('mob-open')) {
             _sidebarEl.style.transform = 'translateY(100%)';
@@ -3528,6 +3536,12 @@ function closeSolarSystem() {
         } else if (_planetListEl) {
             // System mode → slide planet list in from right
             _planetListEl.classList.add('mob-open');
+            _planetListEl.style.display = 'flex';
+            _planetListEl.style.pointerEvents = 'none';
+            _planetListEl.style.transform = 'translateX(100%)';
+            void _planetListEl.offsetWidth; // force reflow for transition
+            _planetListEl.style.transform = 'translateX(0)';
+            _planetListEl.style.pointerEvents = 'auto';
         }
     });
 
