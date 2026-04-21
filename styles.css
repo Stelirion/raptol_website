@@ -328,33 +328,14 @@ section .glass-card, section .section-title, section .gallery-item {
     position: relative;
 }
 
-.hologram-screen::before, .hologram-screen::after {
-    content: '';
-    position: absolute;
-    width: 40px; height: 40px;
-    border: 3px solid var(--accent-cyan);
-    z-index: 5;
-    pointer-events: none;
-    transition: var(--transition);
-}
-.hologram-screen::before {
-    top: -5px; left: -5px;
-    border-right: none; border-bottom: none;
-}
-.hologram-screen::after {
-    bottom: -5px; right: -5px;
-    border-left: none; border-top: none;
-}
+
 
 .hologram-screen:hover {
     transform: rotateX(0deg) translateY(0) scale(1.02);
     box-shadow: 0 10px 80px rgba(0, 229, 255, 0.25), 0 0 120px rgba(168, 85, 247, 0.15), inset 0 0 50px rgba(168, 85, 247, 0.3);
     border-color: rgba(0, 229, 255, 0.6);
 }
-.hologram-screen:hover::before, .hologram-screen:hover::after {
-    border-color: #fff;
-    box-shadow: 0 0 20px #fff;
-}
+
 
 .badge {
     display: inline-block;
