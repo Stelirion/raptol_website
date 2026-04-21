@@ -2965,7 +2965,8 @@ function exitSurfaceMode() {
                     <div class="ap-quote-author">— Raptol, Darkest Dreams</div>
                 </div>
                 <p class="ap-bio" style="margin:0;">
-                    Architecte de ses propres univers, RAPTOL ne se contente pas d'écrire des chansons — il construit des récits. Chaque album est une planète : Starlight raconte la possession et la libération à travers dix morceaux d'une intensité crescendo. Ulonia explore la géographie émotionnelle. Et maintenant, Darkest Dreams plonge dans les rêves les plus sombres de l'âme humaine.
+                    Plus qu'un simple projet musical, RAPTOL est un espace de narration où les frontières de genres n'ont pas leur place. Chaque sortie est pensée comme le nouveau chapitre d'une histoire en constante évolution. Si des projets comme <em>Starlight</em> ou <em>Ulonia</em> ont posé les bases d'un univers très immersif et émotionnel, la suite s'annonce totalement décloisonnée.<br><br>
+                    Avec <em>Darkest Dreams</em> et les titres à venir, RAPTOL assume une liberté créative totale : faire le grand écart entre le metal, le shatta, ou encore des morceaux en italien. Peu importe le style, le fil conducteur reste le même : casser les codes pour livrer des récits intenses et des émotions brutes.
                 </p>
             </div>
         </div>
