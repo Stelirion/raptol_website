@@ -2520,6 +2520,14 @@ function enterSurfaceMode(body) {
 }
 
 function exitSurfaceMode() {
+    // Reset mobile hamburger state
+    document.getElementById('mobile-list-toggle')?.classList.remove('open');
+    document.getElementById('mobile-list-backdrop')?.classList.remove('visible');
+    if (_sidebarEl) {
+        _sidebarEl.classList.remove('mob-open');
+        _sidebarEl.style.transform = ''; // clear inline, let CSS take over
+    }
+
     // Cancel any in-progress zoom animation
     if (SS._zoomRaf) {
         cancelAnimationFrame(SS._zoomRaf);
@@ -2940,14 +2948,15 @@ function exitSurfaceMode() {
         .rp-nav { padding-top: 10px; margin-top: 8px; }
         .rp-nav-btn { padding: 11px 14px; font-size: 12px; }
 
-        /* ── Track sidebar: full-width bottom sheet instead of left panel ── */
+        /* ── Track sidebar: full-width bottom sheet, hidden until mob-open ── */
         #track-sidebar {
             top: auto !important;
             bottom: 0;
             left: 0 !important;
             right: 0;
             width: 100% !important;
-            transform: none !important;
+            transform: translateY(100%); /* no !important — JS inline style overrides for open state */
+            transition: transform 0.38s cubic-bezier(0.16,1,0.3,1) !important;
             max-height: 42vh;
             border-right: none;
             border-top: 1px solid var(--ac3, rgba(80,160,255,0.18));
@@ -3481,6 +3490,59 @@ function closeSolarSystem() {
         closePOIPanel();
     }
 }
+
+// ── Mobile hamburger: toggles planet list (system) or track sidebar (surface) ──
+(function() {
+    const btn      = document.getElementById('mobile-list-toggle');
+    const backdrop = document.getElementById('mobile-list-backdrop');
+    if (!btn) return;
+
+    function isMobile() { return window.innerWidth <= 768; }
+
+    function closeMobileList() {
+        btn.classList.remove('open');
+        if (backdrop) backdrop.classList.remove('visible');
+        // Planet list: slide out right
+        if (_planetListEl) _planetListEl.classList.remove('mob-open');
+        // Track sidebar: slide down
+        if (_sidebarEl && _sidebarEl.classList.contains('mob-open')) {
+            _sidebarEl.style.transform = 'translateY(100%)';
+            _sidebarEl.classList.remove('mob-open');
+        }
+    }
+
+    btn.addEventListener('click', () => {
+        if (!isMobile()) return;
+
+        const isOpen = btn.classList.contains('open');
+        if (isOpen) { closeMobileList(); return; }
+
+        // Open the relevant panel
+        btn.classList.add('open');
+        if (backdrop) backdrop.classList.add('visible');
+
+        if (_sidebarEl?.classList.contains('visible')) {
+            // Surface mode → slide track sidebar up
+            _sidebarEl.classList.add('mob-open');
+            _sidebarEl.style.transform = 'translateY(0)';
+        } else if (_planetListEl) {
+            // System mode → slide planet list in from right
+            _planetListEl.classList.add('mob-open');
+        }
+    });
+
+    // Close on backdrop tap
+    backdrop?.addEventListener('click', closeMobileList);
+
+    // Auto-close track sidebar toggle when region panel opens
+    const origOpen = window.openPOIPanel;
+    if (typeof origOpen === 'function') {
+        window.openPOIPanel = function(...args) {
+            closeMobileList();
+            return origOpen.apply(this, args);
+        };
+    }
+})();
 
 document.getElementById('explorer-btn').addEventListener('click', openSolarSystem);
 document.getElementById('exit-solar').addEventListener('click', () => {

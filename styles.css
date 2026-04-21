@@ -599,6 +599,47 @@ section .glass-card, section .section-title, section .gallery-item {
     transition: opacity 0.3s ease-in;
 }
 
+/* ── Mobile hamburger toggle ── */
+.mobile-list-toggle {
+    display: none; /* hidden on desktop */
+    pointer-events: auto;
+    background: rgba(4,10,28,0.85);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    width: 40px; height: 36px;
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 5px; cursor: pointer;
+    backdrop-filter: blur(12px);
+    transition: border-color 0.2s, background 0.2s;
+    flex-shrink: 0;
+}
+.mobile-list-toggle span {
+    display: block; width: 17px; height: 1.5px;
+    background: rgba(255,255,255,0.75);
+    border-radius: 1px;
+    transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), opacity 0.2s;
+}
+.mobile-list-toggle.open {
+    border-color: rgba(80,160,255,0.5);
+    background: rgba(10,20,50,0.9);
+}
+.mobile-list-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.mobile-list-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.mobile-list-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+    .mobile-list-toggle { display: flex; }
+}
+
+/* ── Mobile overlay backdrop for planet list ── */
+#mobile-list-backdrop {
+    display: none;
+    position: fixed; inset: 0; z-index: 9250;
+    background: rgba(0,0,8,0.55);
+}
+#mobile-list-backdrop.visible { display: block; }
+
 .solar-hud-top {
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -1852,6 +1893,30 @@ body.cursor-hover #cursor-ring {
 #starfield.warp-mode {
     filter: blur(2px) contrast(1.2);
     transition: filter 0.5s ease;
+}
+
+/* ══════════════════════════════════════════════
+   MOBILE — Slide animations pour les panneaux 3D
+   ══════════════════════════════════════════════ */
+
+/* Planet list → right-side drawer on mobile */
+@media (max-width: 768px) {
+    #planet-list {
+        top: 0 !important;
+        bottom: 0 !important;
+        right: 0 !important;
+        width: min(280px, 88vw) !important;
+        max-height: none !important;
+        transform: translateX(100%) !important;
+        opacity: 1 !important;
+        pointer-events: none !important;
+        transition: transform 0.38s cubic-bezier(0.16,1,0.3,1) !important;
+        display: flex !important;
+    }
+    #planet-list.mob-open {
+        transform: translateX(0) !important;
+        pointer-events: auto !important;
+    }
 }
 
 /* ── Scroll to top — mobile only ── */
