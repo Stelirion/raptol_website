@@ -2432,6 +2432,7 @@ function updatePlanetListActive(body) {
 
 function showPlanetList(delay = 0) {
     if (!_planetListEl) return;
+    if (window.innerWidth <= 768) return; // hidden on mobile via CSS, skip JS show
     // Start from hidden position
     _planetListEl.style.display = 'flex';
     _planetListEl.style.opacity = '0';
@@ -2743,14 +2744,14 @@ function exitSurfaceMode() {
 
     /* Track title */
     .rm-track-name {
-        font-size: clamp(20px, 3.2vw, 40px);
+        font-size: clamp(22px, 3.2vw, 40px);
         color: #fff; letter-spacing: 0.03em; line-height: 1;
         margin-bottom: 6px; flex-shrink: 0;
     }
 
     /* Album name */
     .rm-album-name {
-        font-size: clamp(10px, 1.1vw, 13px);
+        font-size: clamp(11px, 1.1vw, 13px);
         letter-spacing: 0.25em; line-height: 1;
         margin-bottom: 8px;
         color: var(--album-color, rgba(120,180,255,0.9));
@@ -2887,6 +2888,97 @@ function exitSurfaceMode() {
     .rp-nav-info {
         font: 11px 'Major Mono Display', monospace; letter-spacing: 0.18em;
         color: rgba(255,255,255,0.35);
+    }
+
+    /* ══════════════════════════════════════════════
+       MOBILE — 3D Explorer (≤ 680px)
+       ══════════════════════════════════════════════ */
+    @media (max-width: 680px) {
+
+        /* ── Region panel: much taller, no height cap ── */
+        #region-panel {
+            height: 82vh;
+            max-height: none;
+            min-height: 0;
+        }
+
+        /* ── Video strip: fixed height so info gets most space ── */
+        .rm-layout .rm-media {
+            height: 200px;
+            max-height: 200px;
+            flex-shrink: 0;
+        }
+
+        /* ── Info panel: tighter padding on small screens ── */
+        .rm-info {
+            padding: 14px 16px 10px 16px;
+        }
+
+        /* ── Track title: readable fixed size ── */
+        .rm-track-name { font-size: 22px !important; }
+
+        /* ── Album name: readable fixed size ── */
+        .rm-album-name { font-size: 11px !important; }
+
+        /* ── Close button: bigger touch target ── */
+        .rp-close {
+            font-size: 24px;
+            padding: 8px 12px;
+            top: 10px; right: 10px;
+        }
+
+        /* ── Tabs: compact ── */
+        .rp-tab { padding: 6px 12px; font-size: 11px; }
+
+        /* ── Text: slightly smaller to fit more content ── */
+        .rp-text { font-size: 12px; line-height: 1.7; }
+
+        /* ── Action buttons: compact ── */
+        .rp-btn { padding: 9px 14px; font-size: 12px; }
+
+        /* ── Nav buttons: bigger touch targets ── */
+        .rp-nav { padding-top: 10px; margin-top: 8px; }
+        .rp-nav-btn { padding: 11px 14px; font-size: 12px; }
+
+        /* ── Track sidebar: full-width bottom sheet instead of left panel ── */
+        #track-sidebar {
+            top: auto !important;
+            bottom: 0;
+            left: 0 !important;
+            right: 0;
+            width: 100% !important;
+            transform: none !important;
+            max-height: 42vh;
+            border-right: none;
+            border-top: 1px solid var(--ac3, rgba(80,160,255,0.18));
+            box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
+        }
+        /* Drag-handle hint on top of bottom sheet */
+        #track-sidebar::before {
+            content: '';
+            display: block;
+            width: 36px; height: 4px;
+            background: rgba(255,255,255,0.18);
+            border-radius: 2px;
+            margin: 10px auto 0;
+            flex-shrink: 0;
+        }
+        /* Compact sidebar header on mobile */
+        .ts-header { padding: 8px 16px 8px; }
+        /* Sidebar rows: slightly more compact */
+        .ts-num  { padding: 11px 8px 11px 14px; }
+        .ts-name { padding: 11px 6px; font-size: 13px; }
+
+        /* ── POI labels: more compact on small screens ── */
+        .poi-tag { padding: 5px 10px; }
+        .poi-name { font-size: 11px; max-width: 120px; }
+        .poi-num  { font-size: 8px; }
+        .poi-line { width: 18px; }
+        .poi-region.active .poi-line,
+        .poi-region:hover  .poi-line { width: 24px; }
+
+        /* ── Spotify bar: slightly shorter ── */
+        .rm-spotify-bar { height: 60px; }
     }
     `;
     document.head.appendChild(s);
