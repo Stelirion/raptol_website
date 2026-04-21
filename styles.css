@@ -1439,9 +1439,9 @@ body.cursor-hover #cursor-ring {
 
     /* ── Solar system HUD ── */
     .solar-hud-top { padding: 0.8rem 1rem; }
-    .exit-solar-btn { font-size: 0.75rem; padding: 0.5rem 1rem; }
-    #solar-status { font-size: 0.6rem; letter-spacing: 1px; }
-    #planet-surface-name { font-size: 0.75rem; }
+    .exit-solar-btn { font-size: 0.65rem; padding: 0.5rem 0.8rem; white-space: nowrap; }
+    #solar-status { display: none; }
+    #planet-surface-name { font-size: 0.9rem; letter-spacing: 2px; white-space: nowrap; width: 100%; }
 
     /* ── Newsletter & streaming ── */
     .contact-card { padding: 1.8rem 1.2rem !important; }
