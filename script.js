@@ -2891,7 +2891,7 @@ function exitSurfaceMode() {
                         <div class="ap-stat-lbl">Albums &amp; EP</div>
                     </div>
                     <div class="ap-stat">
-                        <div class="ap-stat-num">24</div>
+                        <div class="ap-stat-num">26</div>
                         <div class="ap-stat-lbl">Titres</div>
                     </div>
                     <div class="ap-stat">
