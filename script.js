@@ -2226,13 +2226,15 @@ function onSolarClick(event) {
 // 8. ZOOM TO PLANET
 // ─────────────────────────────────────────────
 function zoomToPlanet(body) {
-    // Cancel any in-progress zoom animation
     if (SS._zoomRaf) {
         cancelAnimationFrame(SS._zoomRaf);
         SS._zoomRaf = null;
     }
 
-    SS.controls.enabled = false;
+    if (SS.controls) {
+        SS.controls.enabled = false;
+        SS.controls.minDistance = 0; // Prevent zoom clamp during transition
+    }
 
     // Immediately stop animateSolar from overriding camera target
     SS.state = 'transitioning';
@@ -2539,8 +2541,11 @@ function exitSurfaceMode() {
     SS.focused = null;
     SS.localCameraOffset = null;
 
-    // Restore star-safe minimum zoom distance
-    if (SS.controls) SS.controls.minDistance = 520;
+    // Unlock zoom limits during animation
+    if (SS.controls) {
+        SS.controls.minDistance = 0;
+        SS.controls.maxDistance = 25000;
+    }
 
     // Show planet list again when returning to system view
     showPlanetList();
@@ -2560,8 +2565,6 @@ function exitSurfaceMode() {
     clearPOIOverlay();
     closePOIPanel();
 
-    SS.controls.minDistance = 30;
-    SS.controls.maxDistance = 2200;
     SS.controls.enabled = false;
 
     const startCamPos = SS.camera.position.clone();
@@ -2585,7 +2588,12 @@ function exitSurfaceMode() {
             SS._zoomRaf = null;
             if (container) container.classList.remove('is-zooming');
             SS.state = 'system';
-            SS.controls.enabled = true;
+            if (SS.controls) {
+                // Restore star-safe zoom limits for the global system view
+                SS.controls.minDistance = 520;
+                SS.controls.maxDistance = 25000;
+                SS.controls.enabled = true;
+            }
         }
     };
     SS._zoomRaf = requestAnimationFrame(bk);
