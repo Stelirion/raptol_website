@@ -1993,6 +1993,12 @@ async function initSolar() {
     const throttledHover = throttle(onSolarHover, 50);
     SS.renderer.domElement.addEventListener('click', onSolarClick);
     SS.renderer.domElement.addEventListener('mousemove', throttledHover);
+    SS.renderer.domElement.addEventListener('mouseleave', hidePlanetTooltip);
+
+    // ── Planet list sidebar ──
+    buildPlanetListSidebar();
+    // Show immediately if we're already in 3D mode (non-warp path)
+    if (SYSTEM_STATE.mode === '3D') showPlanetList();
 
     animateSolar();
 }
@@ -2153,6 +2159,27 @@ function getSolarHit(event) {
 }
 
 let hoverBody = null;
+const _tooltipEl    = document.getElementById('planet-tooltip');
+const _tooltipBadge = _tooltipEl?.querySelector('.tooltip-badge');
+const _tooltipTitle = document.getElementById('tooltip-title');
+const _tooltipContent = _tooltipEl?.querySelector('.tooltip-content');
+
+function showPlanetTooltip(body, cx, cy) {
+    if (!_tooltipEl || !body || body.key === 'STAR') { hidePlanetTooltip(); return; }
+    const col = body.data.color || '#00f0ff';
+    _tooltipContent.style.borderColor = col;
+    _tooltipContent.style.boxShadow = `0 0 24px ${col}44, inset 0 0 12px ${col}22`;
+    _tooltipBadge.textContent = (body.data.badge || body.data.type || 'album').toUpperCase();
+    _tooltipTitle.textContent = toTitleCase(body.key);
+    _tooltipEl.style.left = `${cx}px`;
+    _tooltipEl.style.top  = `${cy}px`;
+    _tooltipEl.classList.add('visible');
+}
+
+function hidePlanetTooltip() {
+    _tooltipEl?.classList.remove('visible');
+}
+
 function onSolarHover(event) {
     const rect = SS.renderer.domElement.getBoundingClientRect();
     SS.pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
@@ -2161,10 +2188,22 @@ function onSolarHover(event) {
 
     const hits = SS.raycaster.intersectObjects(SS.interactives);
     const hit = hits.length > 0 ? hits[0].object.userData.body : null;
+    const isFocus = SS.state === 'surface' && hit === SS.focused;
+
     if (hit !== hoverBody) {
         hoverBody = hit;
-        const isFocus = SS.state === 'surface' && hit === SS.focused;
         SS.renderer.domElement.style.cursor = (hit && !isFocus) ? 'pointer' : 'crosshair';
+    }
+
+    // Show tooltip in system mode only (not when zoomed in on a planet)
+    if (hit && !isFocus && SS.state !== 'surface') {
+        // Project planet center to screen
+        const proj = hit.mesh.position.clone().project(SS.camera);
+        const sx = ( proj.x * 0.5 + 0.5) * rect.width  + rect.left;
+        const sy = (-proj.y * 0.5 + 0.5) * rect.height + rect.top;
+        showPlanetTooltip(hit, sx, sy - hit.data.size * 0.5);
+    } else {
+        hidePlanetTooltip();
     }
 }
 
@@ -2199,6 +2238,10 @@ function zoomToPlanet(body) {
     SS.state = 'transitioning';
     SS.focused = null;
     SS.localCameraOffset = null;
+
+    // Highlight in planet list while zooming
+    updatePlanetListActive(body);
+    hidePlanetTooltip();
 
     // Clean up surface UI
     document.getElementById('planet-surface-name').classList.remove('visible');
@@ -2262,6 +2305,123 @@ function zoomToPlanet(body) {
 // ─────────────────────────────────────────────
 // 9. SURFACE MODE UI
 // ─────────────────────────────────────────────
+// ─────────────────────────────────────────────
+// PLANET LIST SIDEBAR (right side)
+// ─────────────────────────────────────────────
+let _planetListEl = null;
+
+function buildPlanetListSidebar() {
+    if (_planetListEl) return;
+
+    // Inject CSS
+    const style = document.createElement('style');
+    style.textContent = `
+    #planet-list {
+        position: fixed; right: 0; top: 50%; transform: translateY(-50%);
+        z-index: 9300; width: 220px;
+        background: rgba(2,6,20,0.88);
+        border-left: 1px solid rgba(255,255,255,0.06);
+        backdrop-filter: blur(16px);
+        display: flex; flex-direction: column;
+        padding: 8px 0;
+        transition: opacity 0.3s, transform 0.3s;
+    }
+    #planet-list.hidden { opacity: 0; pointer-events: none; transform: translateY(-50%) translateX(20px); }
+    .pl-header {
+        font: 7px 'Major Mono Display', monospace; letter-spacing: 0.35em;
+        color: rgba(255,255,255,0.2); padding: 10px 16px 8px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        text-transform: uppercase;
+    }
+    .pl-row {
+        display: flex; align-items: center; gap: 10px;
+        padding: 9px 14px 9px 12px;
+        cursor: pointer; transition: background 0.15s;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+        position: relative;
+    }
+    .pl-row:hover { background: rgba(255,255,255,0.05); }
+    .pl-row.active { background: rgba(255,255,255,0.08); }
+    .pl-dot {
+        width: 8px; height: 8px; border-radius: 50%;
+        flex-shrink: 0; opacity: 0.8;
+        box-shadow: 0 0 6px currentColor;
+    }
+    .pl-info { flex: 1; min-width: 0; }
+    .pl-name {
+        font: 10px 'Major Mono Display', monospace; letter-spacing: 0.06em;
+        color: rgba(255,255,255,0.75); white-space: nowrap;
+        overflow: hidden; text-overflow: ellipsis; line-height: 1.3;
+    }
+    .pl-row:hover .pl-name, .pl-row.active .pl-name { color: #fff; }
+    .pl-badge {
+        font: 7px 'Major Mono Display', monospace; letter-spacing: 0.15em;
+        color: rgba(255,255,255,0.28); margin-top: 2px;
+    }
+    .pl-arrow {
+        font-size: 10px; color: rgba(255,255,255,0.2);
+        flex-shrink: 0; transition: color 0.15s, transform 0.15s;
+    }
+    .pl-row:hover .pl-arrow { color: rgba(255,255,255,0.6); transform: translateX(2px); }
+    @media (max-width: 768px) { #planet-list { display: none; } }
+    `;
+    document.head.appendChild(style);
+
+    // Build DOM
+    const el = document.createElement('div');
+    el.id = 'planet-list';
+    el.style.display = 'none'; // shown via showPlanetList() after warp
+    el.innerHTML = `<div class="pl-header">Navigation</div>`;
+
+    // Only show real albums (not STAR)
+    const listed = SS.bodies.filter(b => b.key !== 'STAR');
+    for (const body of listed) {
+        const row = document.createElement('div');
+        row.className = 'pl-row';
+        row.dataset.key = body.key;
+        const col = body.data.color || '#ffffff';
+        const badge = (body.data.badge || body.data.type || '').toUpperCase();
+        row.innerHTML = `
+            <div class="pl-dot" style="background:${col}; color:${col};"></div>
+            <div class="pl-info">
+                <div class="pl-name">${toTitleCase(body.key)}</div>
+                <div class="pl-badge">${badge}</div>
+            </div>
+            <span class="pl-arrow">›</span>
+        `;
+        row.addEventListener('click', () => {
+            if (SS.state === 'surface') exitSurfaceMode();
+            setTimeout(() => zoomToPlanet(body), SS.state === 'surface' ? 600 : 0);
+        });
+        el.appendChild(row);
+    }
+
+    document.body.appendChild(el);
+    _planetListEl = el;
+}
+
+function updatePlanetListActive(body) {
+    if (!_planetListEl) return;
+    _planetListEl.querySelectorAll('.pl-row').forEach(r => {
+        r.classList.toggle('active', r.dataset.key === (body ? body.key : ''));
+    });
+}
+
+function showPlanetList() {
+    if (!_planetListEl) return;
+    _planetListEl.style.display = 'flex';
+    _planetListEl.style.opacity = '1';
+    _planetListEl.style.pointerEvents = 'auto';
+    _planetListEl.style.transform = 'translateY(-50%) translateX(0)';
+}
+function hidePlanetList() {
+    if (!_planetListEl) return;
+    _planetListEl.style.opacity = '0';
+    _planetListEl.style.pointerEvents = 'none';
+    _planetListEl.style.transform = 'translateY(-50%) translateX(20px)';
+    setTimeout(() => { if (_planetListEl.style.opacity === '0') _planetListEl.style.display = 'none'; }, 320);
+}
+
 // ── Helper: set album-color CSS vars on an element ──
 function setAlbumColorVars(el, hex) {
     const h = (hex || '#5090ff').replace('#','');
@@ -2286,6 +2446,10 @@ function clearAlbumColorVars(el) {
 
 function enterSurfaceMode(body) {
     document.querySelector('.solar-hud-top').classList.add('visible');
+
+    // ── Hide planet list (track sidebar takes over) ──
+    hidePlanetList();
+    hidePlanetTooltip();
 
     // ── Apply planet color theme to all explorer UI elements ──
     const _planetColor = body.data.color || '#5090ff';
@@ -2327,6 +2491,10 @@ function exitSurfaceMode() {
     SS.state = 'transitioning';
     SS.focused = null;
     SS.localCameraOffset = null;
+
+    // Show planet list again when returning to system view
+    showPlanetList();
+    updatePlanetListActive(null);
 
     // Reset planet color theme
     const explorerEl = document.getElementById('solar-system-3d');
@@ -3120,6 +3288,7 @@ function launchSolarWarp(targetKey = null) {
             site.classList.add('hidden');
             site.style.visibility = '';
             SS.controls.enabled   = true;
+            showPlanetList();
 
             if (targetKey) {
                 const body = SS.bodies.find(b => b.key === targetKey);
@@ -3138,6 +3307,8 @@ function closeSolarSystem() {
     canvas2D.style.display = '';   // restore 2D canvas
     canvas2D.style.zIndex  = '';
     tickGalaxy();
+    hidePlanetList();
+    hidePlanetTooltip();
     document.getElementById('site-wrapper').classList.remove('hidden');
     document.getElementById('solar-system-view').classList.add('hidden');
 
