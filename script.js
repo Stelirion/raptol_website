@@ -2901,7 +2901,7 @@ function exitSurfaceMode() {
                 </div>
 
                 <p class="ap-bio">
-                    Ayant commencé la musique en 2017 et lancé ce projet en 2020, RAPTOL est un projet musical qui refuse de s'enfermer dans une seule case. Si ses racines se trouvent dans le metal mélodique et l'électro cinématique, l'objectif est aujourd'hui d'explorer une liberté totale de création. De la puissance du metal à la nostalgie de la synthwave, en passant par des morceaux en italien, chaque titre est pensé comme une expérience immersive. Après avoir posé ses bases avec <em>Virgo</em> et l'album concept <em>Starlight</em>, RAPTOL continue d'évoluer sans barrières stylistiques. L'idée est simple&nbsp;: briser les codes pour ne garder que l'essentiel — l'émotion et la narration.
+                    Ayant commencé la musique en 2017 et lancé ce projet en 2020, RAPTOL est un projet musical qui refuse de s'enfermer dans une seule case. De la puissance du metal à la nostalgie de la synthwave, en passant par des morceaux en italien, chaque titre est pensé comme une expérience immersive. Après avoir posé ses bases avec <em>Virgo</em> et l'album concept <em>Starlight</em>, RAPTOL continue d'évoluer sans barrières stylistiques. L'idée est simple&nbsp;: briser les codes pour ne garder que l'essentiel — l'émotion et la narration.
                 </p>
 
                 <div class="ap-socials">
