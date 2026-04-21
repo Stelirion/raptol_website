@@ -123,7 +123,7 @@ const ALBUM_DATA = {
                 name: "Virgo",
                 duration: "3:15",
                 credits: "",
-                story: "En 2020, Virgo est sortie — et les gens l'ont aimée. Elle a circulé, touché, résonné dans des endroits que Raptol n'avait pas imaginés.\n\nIl aurait pu la laisser vivre. Il a choisi de la faire disparaître. Non par doute, mais par exigence — parce qu'une chanson qui compte autant ne peut pas exister à moitié. Il l'a retirée, retravaillée, attendu qu'elle soit prête à revenir dans la meilleure version d'elle-même.\n\nVirgo parle de solitude choisie. De ce moment rare où l'on arrête de fuir sa propre compagnie, où le vide devient quelque chose de lumineux.",
+                story: "En 2020, Virgo est sortie — et les gens l'ont aimée. Elle a circulé, touché, résonné dans des endroits que je n'avais pas imaginés.\n\nJ'aurais pu la laisser vivre. J'ai choisi de la faire disparaître. Non par doute, mais par exigence — parce qu'une chanson qui compte autant ne peut pas exister à moitié. Je l'ai retirée, retravaillée, attendu qu'elle soit prête à revenir dans la meilleure version d'elle-même.\n\nVirgo parle de solitude choisie. De ce moment rare où l'on arrête de fuir sa propre compagnie, où le vide devient quelque chose de lumineux.",
                 lyrics: "You think you know everything about me but\nI'm sure, i can surprise you\nYou wanna know they say I'm crazy, they say I'm not like that usually\nAnd I cannot stand the way they look at me, I feel so, guilty\nNo I cannot stand the way they hurt my soul\nI feel solo so solo\nI'm the only one who knows the truth\nI feel solo so solo yeah that's how I feel\nAnd I know that I can escape but I don't wanna go far away\nI feel solo so solo\n\nI feel like an empty shell\nI feel like I'm all alone\nI feel I'm just myself\nBut for the first time i don't want nothing else\nI feel alive , like I rise so let me shine from within like I'm the one and only\nSolo\n\nI'm the only one who knows the truth\nI feel solo, so solo yeah that's how I feel\nAnd i know that i can escape but i don't wanna go far away\nI feel solo, solo\n\nI feel solo, so solo that's how I feel\nand I feel solo, so solo that's how I feel\nI feel solo, that's how i feel\nSolo\nso solo, so solo, that's how i feel",
                 clip: "https://www.youtube.com/watch?v=Fax3vYql9tY",
                 spotify: "https://open.spotify.com/track/3r9aGRVmmKoM5DJasDfKuZ",
@@ -132,22 +132,22 @@ const ALBUM_DATA = {
         ]
     },
     "STARLIGHT": {
-        type: "album", badge: "Premier Album",
-        color: "#ffd700", size: 70, orbitRadius: 700,
+        type: "album", badge: "Album",
+        color: "#ffd700", size: 70, orbitRadius: 1050,
         ytPlaylist: "OLAK5uy_nwGxflWW1bDie9GYlo2BcDfMtewDiwtDg",
         listenUrl: "https://distrokid.com/hyperfollow/raptol/starlight",
-        description: "Le premier album. Un voyage épique entre possession, lutte intérieure et rédemption. L'histoire de Raptol face à l'Étoile Rouge. Sorti le 4 mai 2025.",
+        description: "Un voyage épique entre possession, lutte intérieure et rédemption. L'histoire de Raptol face à l'Étoile Rouge. Sorti le 4 mai 2025.",
         tracks: [
-            { ytID:"4KNZSC169oc", name: "The Call",                duration: "2:30", credits: "Voix-off : Aulë", story: "Le commencement de la possession. Raptol est piégé dans les flammes et le silence — et c'est là que l'Étoile Rouge le trouve. Elle descend du ciel, elle l'appelle, elle lui offre une chaleur qui ressemble à de l'espoir. Il ne sait pas encore ce qu'elle est vraiment. Il répond à l'appel. C'est le moment où tout bascule.", lyrics: "when darkness fell,\nand everything was swallowed up by flames,\nonly hope shall remain.\n\nall of us summon our courage,\nto clean up anything left,\nthat was not damaged.\n\nlike deep in the pits of hell,\nI was trapped in jail,\nPraying for salvation.\n\nI wished I could be spotless,\nso i prayed for forgiveness,\nBut I kept staring into nothingness.\n\nDespite our failure,\nDespite their deception,\nI couldn't believe my eyes.\n\nAll of a sudden a shooting star,\ncame down from the sky,\ncalling and beckoning me.\n\nI felt its warmth, deep in my heart,\nIt reminded me an old memory,\nAn echo from the past.\n\nThis story healed my soul,\nThat's why you need to heed the call,\nBehold this is...\nStarlight.", spotify: "https://open.spotify.com/track/5qeLdzgGpiKjxyy18BzeZj", bandcamp: "https://raptol.bandcamp.com/track/the-call" },
-            { ytID:"9Gxb_GYToLY", name: "Black Hole",              duration: "3:06", credits: "Rap : Diego",      story: "La possession s'installe. Raptol voit le monde à travers le filtre de l'Étoile Rouge — trahison partout, faux sourires, vautours. La rage remplace tout le reste. Il ne distingue plus ce qu'il ressentait vraiment de ce que l'Étoile lui fait croire. Il s'enfonce.", lyrics: "J'ai fini par changer, avalé par la nuit, le ciel est tout noir.\nPlein d'humains, mais peu d'espoir autour de moi.\nJ'attendais un merci, maintenant j'ai le sang chaud.\nIls vont savoir ce que ça fait quand il fait froid.\n\nLe sang glacial sur le bitume fait du verglas.\nPauvre de vous, la lumière des gyrophares me fait me donner un spectacle.\nToute la nuit dans mes oreilles, les mêmes problèmes, les mêmes horaires.\nLes mêmes sourires, les mêmes faux, comprends que je sois resté polaire.\n\nDans la misère ou le sommet, dans la journée ou le sommeil,\nJe me fais tromper par les autres, le diable s'amuse avec des sornettes.\n\nLa routine m'a tapé, mais la roue tournera.\nQuand j'serai plus à la merci de ces vautours de race.\n\nIls attendent que l'erreur soit faite, mais l'erreur est humaine.\nEt ces vauriens se gavent.\nMoi, j'ai faim, moi, j'ai froid.\nJ'me sens pas bien en pleine OD, j'rêve que le sang coulera.\nLa fin s'approche pour toi et moi.\n\nPour m'resonner, il s'fait tard.\nJ'vais faire une folie des grands soirs, trou noir.", spotify: "https://open.spotify.com/track/5KNsRujtB01YEHJyRs3488", bandcamp: "https://raptol.bandcamp.com/track/black-hole" },
-            { ytID:"4qbmo2r0gJ4", name: "The Revenge",             duration: "4:12", credits: "Voix : Nïx",       story: "Raptol, possédé par l'Étoile Rouge, s'en prend à une figure toxique de son passé. La rage est réelle, l'envie de détruire aussi — mais au moment de frapper, quelque chose résiste. La possession lui donne la force, pas la liberté. La chanson se termine sans vengeance accomplie : même sous emprise, il y a encore quelque chose en lui qui refuse d'aller jusqu'au bout.", lyrics: "Let's talk about you, the pretty boy.\nYou were toxic, and you still be.\nYou were spreading rumors, maybe your life was too morose.\nYou wanted the fame, but let's be honest, you're just absurd.\nYou don't have to talk shit about my boyfriend, dear.\nYes, I see your text you sent to my friend.\nEveryone can be mean, everyone can be mad,\nEveryone can be cruel sometimes.\nEveryone can have other chances, so here I am to tell you why you can't have them.\n\nWe used to be friends when we were little,\nBut now how you broke him shows me how bad you are.\nI hope I'll never see you again.\nWait, in fact, I kinda want it, so you can see how better than you I am.\nAnd one more thing, you should stop stalking me because,\nYeah, in case you don't know, I see it.\nEveryone can be mean, everyone can be mad,\nEveryone can be cruel sometimes.\nEveryone can have other chances, so here I am to tell you why you can't have them.\n\nI won't get revenge, I'm so over that, so don't worry.\nYou won't have anything.\nYou won't recognize you.\nYou won't know I talk about you.\nYou won't even listen to those lyrics.\nEveryone can be mean, everyone can be mad,\nEveryone can be cruel sometimes.\nEveryone can have other chances, so here I am to tell you why you can't have them.", spotify: "https://open.spotify.com/track/34hH5TtnMX16bWCOpVfFej", bandcamp: "https://raptol.bandcamp.com/track/the-revenge" },
-            { ytID:"D3At2YQuT78", name: "No Mercy",                duration: "3:16", credits: "Instrumental",     story: "La possession est totale. Il n'y a plus de mots — l'Étoile Rouge a pris le contrôle. La musique avance comme une force aveugle, sans merci. C'est le moment le plus sombre de l'album, le fond du gouffre.", lyrics: "", spotify: "https://open.spotify.com/track/40unzt1DXRV73rX972UO6E", bandcamp: "https://raptol.bandcamp.com/track/no-mercy" },
-            { ytID:"wZrdrVuKCOw", name: "The Light",               duration: "1:25", credits: "Voix : Nïx",       story: "Raptol possédé commence à détruire ce qui l'entourait. La lumière ici, c'est ce qu'il était en train de perdre sans s'en rendre compte — une relation, une présence, quelqu'un qui l'aimait et qui finit par s'éloigner. Il est trop sous emprise pour le voir. Mais le récit, lui, le montre clairement.", lyrics: "Should like to be good,\nShould like to be great,\nBut all around her is making girls upset.\nShe's falling in love and now she regrets,\nIf only she knew that it was a bet.\n\nShould not be the light like the girls in the crew,\nAnd stay with the guys even if she needed you.\nShe could do anything just to be with you.\nOn start carrying, but that's overdue,\nShe can't believe it, this cannot be true.\nYou play with her heart and now she hates you.\n\nShe has a lot of dreams, but one thing is sure,\nShe'll never let someone make her fall again.\nRoses are red, violets are blue,\nYou think about her when you are in bed.\nNow you regret cause you love her too,\nBut now she's happy cause she forgets you.", spotify: "https://open.spotify.com/track/5lDH6GCG5wnkk9zbv2e4uh", bandcamp: "https://raptol.bandcamp.com/track/the-light" },
-            { ytID:"MZv-lte9-ik", name: "Tell Me How You Feel Now", duration: "2:51", credits: "",               story: "La première vraie fissure dans la possession. Raptol reprend assez conscience pour voir les dégâts — une relation brisée, quelqu'un qu'il a quitté ou détruit. L'Étoile Rouge perd un peu de son emprise, et ce qui revient en premier c'est la douleur. La question revient en boucle, pas par amour, mais parce qu'il commence à redevenir lui-même.", lyrics: "It's not the first time, yeah I've been broken in my life,\nAnd it feels more like a memory,\nThe anger, the sadness, and worry.\nBut you, I wanna know if you're still the same,\nIf you still think of how it was insane.\nI know I destroyed you, hurt you, and leave you, so...\n\nTell me how you feel now.\nJust give me a sign.\nTell me how you feel now.\nJust give me a sign.\n\nAnd the guy standing by your side,\nIs he better than me, oh why?\nI wanna hit her, oh I'm so mad,\nBut I don't want you to see that.\nAnd you, I wanna know if you're still the same,\nIf you still think of how it was insane.\nI know I destroyed you, hurt you, and left you, so...\n\nTell me how you feel now.\nJust give me a sign.\nTell me how you feel now.\nJust give me a sign.\n\nWhy did you go with her?\nYou just left for no reason,\nI just wanna know how you feel now with this girl,\nBecause me without you, I'm like an empty corpse.", spotify: "https://open.spotify.com/track/1ReprSZkaydzA44A0O3mzd", bandcamp: "https://raptol.bandcamp.com/track/tell-me-how-you-feel-now" },
-            { ytID:"foiAincw9Nc", name: "Neutron Star",            duration: "2:07", credits: "Instrumental",     story: "L'emprise faiblit. Raptol se retrouve seul avec lui-même pour la première fois depuis The Call — sans la rage de l'Étoile Rouge pour remplir le silence. La musique est lourde, dense, comme une gravité qui retient encore. C'est le moment charnière : il peut encore basculer dans un sens ou dans l'autre.", lyrics: "", spotify: "https://open.spotify.com/track/3sP8w8rmLAQfwz7ZDAjdzd", bandcamp: "https://raptol.bandcamp.com/track/neutron-star" },
-            { ytID:"u0tvs87l8dc", name: "Starlight",               duration: "2:04", credits: "",               story: "La libération. Là où The Call était l'Étoile Rouge qui l'appelait dans le noir, Starlight est l'opposé — une lumière qui ne prend pas, qui guide. Raptol comprend qu'il était perdu bien avant la possession, et que c'est cette vulnérabilité que l'Étoile Rouge avait exploitée. L'emprise se brise. Il n'est plus seul.", lyrics: "Before I met you, I was so lost\nAnd no clue what paths will cross.\nThen you showed up, you read my word.\nNow you don't have to say any word.\nI kept thinking, am I good for this?\nAll my fear makes me overthink.\nWhen I wanna give up, you are still there\nAnd you throw my doubts in the air.\n\nYou're the starlight.\nYou are my guide.\nYou gave me the faith, you gave me the strength.\nWhen life is hard I just trust myself.\nI have no regret and no more stress.\nAll I do is to trust myself.\nNo time to spend, no success.\nAll of that cause I trust myself.\nI do not need help, I have you my friend.\nThanks to you I just trust myself.\n\nI became blind, it was in my mind.\nSo hard, I didn't see it behind.\nAll these voices, running through my head.\nSince I know you, I know how to leave them.\nNever believed I was born for this.\nWell, not until I make it.\nIt wasn't my show, but you make me glow.\nSince that day, I'm no longer solo.\n\nYou're the starlight.\nYou are my guide.\nYou gave me the faith, you gave me the strength.\nWhen life is hard I just trust myself.\nI have no regret and no more stress.\nAll I do is to trust myself.\nNo time to spend, no success.\nAll of that cause I trust myself.\nI do not need help, I have you my friend.\nThanks to you I just trust myself.", spotify: "https://open.spotify.com/track/5rz2mycAHJIOax1YJt30IK", bandcamp: "https://raptol.bandcamp.com/track/starlight" },
-            { ytID:"m9V8JCu1A44", name: "Midnight Radiance",       duration: "3:20", credits: "Instrumental",     story: "Raptol émerge de la possession — pas indemne, mais libre. La musique rayonne là où elle étouffait. Ce n'est pas la fin, c'est le premier moment depuis The Call où il respire vraiment.", lyrics: "", spotify: "https://open.spotify.com/track/7rx0tAG2hMHiw3AB7FT6Xm", bandcamp: "https://raptol.bandcamp.com/track/midnight-radiance" },
-            { ytID:"jG3LZvpvey0", name: "Falling Star",            duration: "4:03", credits: "Voix : Nïx",       story: "La boucle se referme. Raptol regarde en arrière — la possession, les dégâts, le sentiment d'être inutile et destructeur que l'Étoile Rouge avait amplifié. Mais une étoile filante apparaît à nouveau, comme au tout début. Cette fois il sait faire la différence. Il l'attrape. Et pour la première fois il peut se retourner vers les autres et dire : vous aussi, vous pouvez trouver la vôtre.", lyrics: "I was mad, here just for the bad, always been so loud, and nothing felt right.\nI felt so useless, always making a mess, I'm called heartless, despite my kindness.\nIt told me those stories, sometimes life's not that happy.\nDon't worry, I'm not lonely, I see it getting closely.\n\nIt falls from the sky, and now she's mine,\nI thought it was too high, but it was not so far,\nI was looking for a sign, and yet it has arrived,\nThere's nothing to hide, it's my falling star.\n\nIt told me those stories, sometimes life's not that happy.\nDon't worry, I'm not lonely, I see it getting closely.\n\nIt falls from the sky, and now she's mine,\nI thought it was too high, but it was not so far,\nI was looking for a sign, and yet it has arrived,\nThere's nothing to hide, it's my falling star.\n\nI hope you will find that thing from the sky,\nYou think that's a lie, cause you can't see it fly,\nYou may not know why, but you can give it a try,\nYou will fall under the charm of the falling star.\n\nIt falls from the sky, and now she's mine,\nI thought it was too high, but it was not so far,\nI was looking for a sign, and yet it has arrived,\nThere's nothing to hide, it's my falling star.", spotify: "https://open.spotify.com/track/5XKMZbfJgAPahP08cVxttr", bandcamp: "https://raptol.bandcamp.com/track/falling-star" }
+            { ytID:"4KNZSC169oc", name: "The Call",                duration: "2:30", credits: "Voix-off : Aulë", story: "Le commencement de la possession. Je suis piégé dans les flammes et le silence — et c'est là que l'Étoile Rouge me trouve. Elle descend du ciel, elle m'appelle, elle m'offre une chaleur qui ressemble à de l'espoir. Je ne sais pas encore ce qu'elle est vraiment. Je réponds à l'appel. C'est le moment où tout bascule.", lyrics: "when darkness fell,\nand everything was swallowed up by flames,\nonly hope shall remain.\n\nall of us summon our courage,\nto clean up anything left,\nthat was not damaged.\n\nlike deep in the pits of hell,\nI was trapped in jail,\nPraying for salvation.\n\nI wished I could be spotless,\nso i prayed for forgiveness,\nBut I kept staring into nothingness.\n\nDespite our failure,\nDespite their deception,\nI couldn't believe my eyes.\n\nAll of a sudden a shooting star,\ncame down from the sky,\ncalling and beckoning me.\n\nI felt its warmth, deep in my heart,\nIt reminded me an old memory,\nAn echo from the past.\n\nThis story healed my soul,\nThat's why you need to heed the call,\nBehold this is...\nStarlight.", spotify: "https://open.spotify.com/track/5qeLdzgGpiKjxyy18BzeZj", bandcamp: "https://raptol.bandcamp.com/track/the-call" },
+            { ytID:"9Gxb_GYToLY", name: "Black Hole",              duration: "3:06", credits: "Rap : Diego",      story: "La possession s'installe. Je vois le monde à travers le filtre de l'Étoile Rouge — trahison partout, faux sourires, vautours. La rage remplace tout le reste. Je ne distingue plus ce que je ressentais vraiment de ce que l'Étoile me fait croire. Je m'enfonce.", lyrics: "J'ai fini par changer, avalé par la nuit, le ciel est tout noir.\nPlein d'humains, mais peu d'espoir autour de moi.\nJ'attendais un merci, maintenant j'ai le sang chaud.\nIls vont savoir ce que ça fait quand il fait froid.\n\nLe sang glacial sur le bitume fait du verglas.\nPauvre de vous, la lumière des gyrophares me fait me donner un spectacle.\nToute la nuit dans mes oreilles, les mêmes problèmes, les mêmes horaires.\nLes mêmes sourires, les mêmes faux, comprends que je sois resté polaire.\n\nDans la misère ou le sommet, dans la journée ou le sommeil,\nJe me fais tromper par les autres, le diable s'amuse avec des sornettes.\n\nLa routine m'a tapé, mais la roue tournera.\nQuand j'serai plus à la merci de ces vautours de race.\n\nIls attendent que l'erreur soit faite, mais l'erreur est humaine.\nEt ces vauriens se gavent.\nMoi, j'ai faim, moi, j'ai froid.\nJ'me sens pas bien en pleine OD, j'rêve que le sang coulera.\nLa fin s'approche pour toi et moi.\n\nPour m'resonner, il s'fait tard.\nJ'vais faire une folie des grands soirs, trou noir.", spotify: "https://open.spotify.com/track/5KNsRujtB01YEHJyRs3488", bandcamp: "https://raptol.bandcamp.com/track/black-hole" },
+            { ytID:"4qbmo2r0gJ4", name: "The Revenge",             duration: "4:12", credits: "Voix : Nïx",       story: "Possédé par l'Étoile Rouge, je m'en prends à une figure toxique de mon passé. La rage est réelle, l'envie de détruire aussi — mais au moment de frapper, quelque chose résiste. La possession me donne la force, pas la liberté. La chanson se termine sans vengeance accomplie : même sous emprise, il y a encore quelque chose en moi qui refuse d'aller jusqu'au bout.", lyrics: "Let's talk about you, the pretty boy.\nYou were toxic, and you still be.\nYou were spreading rumors, maybe your life was too morose.\nYou wanted the fame, but let's be honest, you're just absurd.\nYou don't have to talk shit about my boyfriend, dear.\nYes, I see your text you sent to my friend.\nEveryone can be mean, everyone can be mad,\nEveryone can be cruel sometimes.\nEveryone can have other chances, so here I am to tell you why you can't have them.\n\nWe used to be friends when we were little,\nBut now how you broke him shows me how bad you are.\nI hope I'll never see you again.\nWait, in fact, I kinda want it, so you can see how better than you I am.\nAnd one more thing, you should stop stalking me because,\nYeah, in case you don't know, I see it.\nEveryone can be mean, everyone can be mad,\nEveryone can be cruel sometimes.\nEveryone can have other chances, so here I am to tell you why you can't have them.\n\nI won't get revenge, I'm so over that, so don't worry.\nYou won't have anything.\nYou won't recognize you.\nYou won't know I talk about you.\nYou won't even listen to those lyrics.\nEveryone can be mean, everyone can be mad,\nEveryone can be cruel sometimes.\nEveryone can have other chances, so here I am to tell you why you can't have them.", spotify: "https://open.spotify.com/track/34hH5TtnMX16bWCOpVfFej", bandcamp: "https://raptol.bandcamp.com/track/the-revenge" },
+            { ytID:"D3At2YQuT78", name: "No Mercy",                duration: "3:16", credits: "Instrumental",     story: "La possession est totale. Il n'y a plus de mots — l'Étoile Rouge a pris le contrôle. Je n'existe plus vraiment. La musique avance comme une force aveugle, sans merci. C'est le moment le plus sombre, le fond du gouffre.", lyrics: "", spotify: "https://open.spotify.com/track/40unzt1DXRV73rX972UO6E", bandcamp: "https://raptol.bandcamp.com/track/no-mercy" },
+            { ytID:"wZrdrVuKCOw", name: "The Light",               duration: "1:25", credits: "Voix : Nïx",       story: "Sous l'emprise de l'Étoile Rouge, je commence à détruire ce qui m'entourait. La lumière ici, c'est ce que j'étais en train de perdre sans m'en rendre compte — une relation, une présence, quelqu'un qui m'aimait et qui a fini par s'éloigner. J'étais trop sous emprise pour le voir. En me retournant aujourd'hui, ça me saute aux yeux.", lyrics: "Should like to be good,\nShould like to be great,\nBut all around her is making girls upset.\nShe's falling in love and now she regrets,\nIf only she knew that it was a bet.\n\nShould not be the light like the girls in the crew,\nAnd stay with the guys even if she needed you.\nShe could do anything just to be with you.\nOn start carrying, but that's overdue,\nShe can't believe it, this cannot be true.\nYou play with her heart and now she hates you.\n\nShe has a lot of dreams, but one thing is sure,\nShe'll never let someone make her fall again.\nRoses are red, violets are blue,\nYou think about her when you are in bed.\nNow you regret cause you love her too,\nBut now she's happy cause she forgets you.", spotify: "https://open.spotify.com/track/5lDH6GCG5wnkk9zbv2e4uh", bandcamp: "https://raptol.bandcamp.com/track/the-light" },
+            { ytID:"MZv-lte9-ik", name: "Tell Me How You Feel Now", duration: "2:51", credits: "",               story: "La première vraie fissure dans la possession. Je reprends assez conscience pour voir les dégâts — une relation brisée, quelqu'un que j'ai quitté ou détruit. L'Étoile Rouge perd un peu de son emprise, et ce qui revient en premier c'est la douleur. La question revient en boucle, pas par amour, mais parce que je commence à redevenir moi-même.", lyrics: "It's not the first time, yeah I've been broken in my life,\nAnd it feels more like a memory,\nThe anger, the sadness, and worry.\nBut you, I wanna know if you're still the same,\nIf you still think of how it was insane.\nI know I destroyed you, hurt you, and leave you, so...\n\nTell me how you feel now.\nJust give me a sign.\nTell me how you feel now.\nJust give me a sign.\n\nAnd the guy standing by your side,\nIs he better than me, oh why?\nI wanna hit her, oh I'm so mad,\nBut I don't want you to see that.\nAnd you, I wanna know if you're still the same,\nIf you still think of how it was insane.\nI know I destroyed you, hurt you, and left you, so...\n\nTell me how you feel now.\nJust give me a sign.\nTell me how you feel now.\nJust give me a sign.\n\nWhy did you go with her?\nYou just left for no reason,\nI just wanna know how you feel now with this girl,\nBecause me without you, I'm like an empty corpse.", spotify: "https://open.spotify.com/track/1ReprSZkaydzA44A0O3mzd", bandcamp: "https://raptol.bandcamp.com/track/tell-me-how-you-feel-now" },
+            { ytID:"foiAincw9Nc", name: "Neutron Star",            duration: "2:07", credits: "Instrumental",     story: "L'emprise faiblit. Je me retrouve seul avec moi-même pour la première fois depuis The Call — sans la rage de l'Étoile Rouge pour remplir le silence. La musique est lourde, dense, comme une gravité qui retient encore. C'est le moment charnière : je peux encore basculer dans un sens ou dans l'autre.", lyrics: "", spotify: "https://open.spotify.com/track/3sP8w8rmLAQfwz7ZDAjdzd", bandcamp: "https://raptol.bandcamp.com/track/neutron-star" },
+            { ytID:"u0tvs87l8dc", name: "Starlight",               duration: "2:04", credits: "",               story: "La libération. Là où The Call était l'Étoile Rouge qui m'appelait dans le noir, Starlight est l'opposé — une lumière qui ne prend pas, qui guide. Je comprends que j'étais perdu bien avant la possession, et que c'est cette vulnérabilité que l'Étoile Rouge avait exploitée. L'emprise se brise. Je ne suis plus seul.", lyrics: "Before I met you, I was so lost\nAnd no clue what paths will cross.\nThen you showed up, you read my word.\nNow you don't have to say any word.\nI kept thinking, am I good for this?\nAll my fear makes me overthink.\nWhen I wanna give up, you are still there\nAnd you throw my doubts in the air.\n\nYou're the starlight.\nYou are my guide.\nYou gave me the faith, you gave me the strength.\nWhen life is hard I just trust myself.\nI have no regret and no more stress.\nAll I do is to trust myself.\nNo time to spend, no success.\nAll of that cause I trust myself.\nI do not need help, I have you my friend.\nThanks to you I just trust myself.\n\nI became blind, it was in my mind.\nSo hard, I didn't see it behind.\nAll these voices, running through my head.\nSince I know you, I know how to leave them.\nNever believed I was born for this.\nWell, not until I make it.\nIt wasn't my show, but you make me glow.\nSince that day, I'm no longer solo.\n\nYou're the starlight.\nYou are my guide.\nYou gave me the faith, you gave me the strength.\nWhen life is hard I just trust myself.\nI have no regret and no more stress.\nAll I do is to trust myself.\nNo time to spend, no success.\nAll of that cause I trust myself.\nI do not need help, I have you my friend.\nThanks to you I just trust myself.", spotify: "https://open.spotify.com/track/5rz2mycAHJIOax1YJt30IK", bandcamp: "https://raptol.bandcamp.com/track/starlight" },
+            { ytID:"m9V8JCu1A44", name: "Midnight Radiance",       duration: "3:20", credits: "Instrumental",     story: "J'émerge de la possession — pas indemne, mais libre. La musique rayonne là où elle étouffait. Ce n'est pas la fin, c'est le premier moment depuis The Call où je respire vraiment.", lyrics: "", spotify: "https://open.spotify.com/track/7rx0tAG2hMHiw3AB7FT6Xm", bandcamp: "https://raptol.bandcamp.com/track/midnight-radiance" },
+            { ytID:"jG3LZvpvey0", name: "Falling Star",            duration: "4:03", credits: "Voix : Nïx",       story: "La boucle se referme. Je regarde en arrière — la possession, les dégâts, le sentiment d'être inutile et destructeur que l'Étoile Rouge avait amplifié. Mais une étoile filante apparaît à nouveau, comme au tout début. Cette fois je sais faire la différence. Je l'attrape. Et pour la première fois je peux me retourner vers les autres et dire : vous aussi, vous pouvez trouver la vôtre.", lyrics: "I was mad, here just for the bad, always been so loud, and nothing felt right.\nI felt so useless, always making a mess, I'm called heartless, despite my kindness.\nIt told me those stories, sometimes life's not that happy.\nDon't worry, I'm not lonely, I see it getting closely.\n\nIt falls from the sky, and now she's mine,\nI thought it was too high, but it was not so far,\nI was looking for a sign, and yet it has arrived,\nThere's nothing to hide, it's my falling star.\n\nIt told me those stories, sometimes life's not that happy.\nDon't worry, I'm not lonely, I see it getting closely.\n\nIt falls from the sky, and now she's mine,\nI thought it was too high, but it was not so far,\nI was looking for a sign, and yet it has arrived,\nThere's nothing to hide, it's my falling star.\n\nI hope you will find that thing from the sky,\nYou think that's a lie, cause you can't see it fly,\nYou may not know why, but you can give it a try,\nYou will fall under the charm of the falling star.\n\nIt falls from the sky, and now she's mine,\nI thought it was too high, but it was not so far,\nI was looking for a sign, and yet it has arrived,\nThere's nothing to hide, it's my falling star.", spotify: "https://open.spotify.com/track/5XKMZbfJgAPahP08cVxttr", bandcamp: "https://raptol.bandcamp.com/track/falling-star" }
         ]
     },
     "THE REVENGE": {
@@ -160,7 +160,7 @@ const ALBUM_DATA = {
                 name: "The Revenge",
                 duration: "4:12",
                 credits: "Voix : Nïx",
-                story: "Raptol affronte une figure toxique de son passé — quelqu'un qui avait autrefois un pouvoir destructeur sur ceux qui l'entouraient. Des pauses de guitare électrique entrecoupées de synthétiseurs, avec une rupture au piano qui crée un moment de vulnérabilité avant de replonger dans les ténèbres. Malgré tout, le protagoniste choisit de ne pas se laisser consumer par la vengeance.",
+                story: "J'affronte une figure toxique de mon passé — quelqu'un qui avait autrefois un pouvoir destructeur sur ceux qui m'entouraient. Des pauses de guitare électrique entrecoupées de synthétiseurs, avec une rupture au piano qui crée un moment de vulnérabilité avant de replonger dans les ténèbres. Malgré tout, je choisis de ne pas me laisser consumer par la vengeance.",
                 lyrics: "",
                 clip: "https://youtu.be/4qbmo2r0gJ4",
                 spotify: "https://open.spotify.com/track/34vROsj9cclzeMj08OmJcO",
@@ -170,25 +170,25 @@ const ALBUM_DATA = {
     },
     "ULONIA": {
         type: "album", badge: "Album",
-        color: "#00ff88", size: 80, orbitRadius: 1050,
+        color: "#00ff88", size: 80, orbitRadius: 700,
         ytPlaylist: "OLAK5uy_lOmsuK6znx70xBvvBOSFS_7HVutS-86fU",
         listenUrl: "https://open.spotify.com/artist/5iZwGnQHKkWgjg9ygj",
         description: "Découverte d'une civilisation oubliée dans les profondeurs minérales.",
         tracks: [
-            { ytID:"ZNFiO3rpm5w", name: "Legend of Gennaro",     duration: "", credits: "Voix-off", lyrics: "The legend I am about to tell you\nbegins in a small village in Scotland\ncalled Pittenweem.\n\nGennaro,\na young man like any other,\ntook his boat and set out to sea as usual\nto go and do some fishing.\n\nWhen he had finished,\nhe started to head for his harbour\nso that he could return home,\n\nbut the sky darkened,\nand Gennaro could not see\nwhere he was heading to.\n\nSuddenly\na strong light appeared directly\nfrom the sky above him\nand he fainted.\n\nWhen he woke up,\nGennaro found himself in a place\nthat was unlike anything\nhe knew on earth,\n\nthe grass was dark blue,\nthe sky was red\nand the climate was humid.\n\nAll at once,\nhe saw a figure in the distance\napproaching him.\n\nAs it approached, he saw clearly\nthat it was not a human\nbut a creature from which\nhe could not determine the origin.\n\nThis creature approached Gennaro\nand explained to him\nthat he had been kidnapped by Xonyar,\nan evil monster who collects human souls\nto increase his power,\n\nand that there was only one way out:\nto travel through the wastelands\nto find Xonyar's hideout\nand strike him down\nin order to recover his soul.\n\nGennaro decided to brave the challenge\nand set out to find Xonyar's hideout\nin order to strike him down\nand recover his soul.", story: "Introduction de l'album. Une voix-off pose le décor : Gennaro, jeune pêcheur écossais du village de Pittenweem, disparaît en mer dans une lumière aveuglante. Il se réveille dans un monde inconnu — l'herbe bleue, le ciel rouge, un air lourd et humide. Une créature étrange lui révèle la vérité : il a été kidnappé par Xonyar, un monstre qui collecte les âmes humaines pour accroître sa puissance. Il n'existe qu'une seule issue — traverser les terres dévastées, trouver le repaire de Xonyar et le vaincre pour récupérer son âme. Gennaro accepte le défi.", spotify: "https://open.spotify.com/artist/5iZwGnQHKkWgjg9ygj", bandcamp: "https://raptol.bandcamp.com/track/legend-of-gennaro" },
-            { ytID:"yPVqk73TrYw", name: "The Start",             duration: "", credits: "Instrumental", lyrics: "", story: "La narration s'achève. Gennaro se retrouve seul face à un horizon infini de terres inconnues sous un ciel cramoisi. La créature lui a indiqué une direction — c'est tout. Aucune arme, aucune carte, aucune certitude. Seulement la nécessité d'avancer. Il pose un premier pas sur l'herbe bleue sombre, et le voyage commence. Va-t-il survivre assez longtemps pour même apercevoir le domaine de Xonyar ?" },
-            { ytID:"Uq4VQMX2tx4", name: "Confusion",             duration: "", credits: "Instrumental", lyrics: "", story: "Le paysage se dérobe sans cesse sous les pieds de Gennaro. Sous le ciel rouge, les chemins semblent se refermer sur eux-mêmes, les distances sont impossibles à évaluer, et l'air humide joue des tours à l'esprit. Il commence à douter — avance-t-il vraiment, ou tourne-t-il en rond depuis des heures ? Ce monde obéit à des règles qu'il ne comprend pas. Est-il condamné à errer sans fin dans ce labyrinthe alien, ou existe-t-il un chemin à travers le chaos ?" },
-            { ytID:"So71NFBV0hU", name: "Lake of Lost Souls",    duration: "", credits: "Instrumental", lyrics: "", story: "Gennaro atteint le bord d'un lac immense aux eaux noires comme le vide. La créature l'avait prévenu : les âmes capturées par Xonyar dérivent ici, piégées entre deux mondes. Des murmures montent des profondeurs — des voix qui implorent Gennaro de s'arrêter, de se reposer, de les rejoindre dans leur sommeil éternel. La traversée semble impossible. Trouvera-t-il la force de longer le lac des âmes perdues sans se laisser consumer par leur appel ?" },
-            { ytID:"QSNL1EW6Dho", name: "Determination",         duration: "", credits: "Instrumental", lyrics: "", story: "Épuisé, transi, loin de tout ce qu'il connaît, Gennaro s'effondre. Le poids de la mission l'écrase. La créature, son village, la mer d'Écosse — tout cela semble appartenir à une autre vie. Mais quelque chose refuse de s'éteindre au fond de lui — la mémoire de ce qu'il est, de ce que Xonyar lui a volé. Il se relève. La partie la plus sombre du voyage l'attend peut-être encore, mais Gennaro a pris sa décision : il n'abandonnera pas." },
-            { ytID:"WgNRW8CoZms", name: "Bravery",               duration: "", credits: "Instrumental", lyrics: "", story: "Les premiers gardiens de Xonyar font leur apparition — des créatures monstrueuses qui patrouillent les terres dévastées. Gennaro n'a aucune arme, aucune armure, aucune expérience du combat. Seulement du courage. Il leur fait face quand même. Débordé et à court de forces, il s'en sort de justesse — mais il sait désormais que le chemin vers Xonyar exigera bien plus que de la bravoure. Le danger n'a fait que commencer." },
-            { ytID:"BcSkQ4o-i_8", name: "The Fortress",          duration: "", credits: "Instrumental", lyrics: "", story: "À l'horizon cramoisi, une forteresse colossale de pierre noire se dresse au-dessus du paysage alien. C'est le repaire de Xonyar — l'endroit où les âmes volées sont gardées prisonnières. Elle est entourée de défenses en couches successives, et aucun passage évident n'apparaît. Gennaro fixe la forteresse depuis le lointain, stupéfait par sa démesure. Comment un simple pêcheur pourrait-il jamais briser une telle citadelle ?" },
-            { ytID:"r1cPYTxQJ_g", name: "Maze",                  duration: "", credits: "Instrumental", lyrics: "", story: "Entre Gennaro et la forteresse s'étend un labyrinthe sans fin — des couloirs de cristal et de pierre qui s'étendent dans toutes les directions, vivants de pièges et de faux-semblants. Des heures passent. Peut-être des jours. Les murs semblent se déplacer. Chaque carrefour ressemble au précédent. Quelque part au centre de ce dédale se trouve la salle du trône où siège Xonyar. Gennaro y arrivera-t-il, ou s'égarera-t-il dans ces couloirs de cristal jusqu'à épuisement total ?" },
-            { ytID:"79IaSgGX2JE", name: "Xonyar",                duration: "", credits: "Instrumental", lyrics: "", story: "Après ce qui semble une éternité, Gennaro émerge dans une vaste salle du trône. Et là, entouré d'orbes flottants de lumière volée — chacun une âme piégée — se trouve Xonyar. Le monstre tourne lentement son regard vers lui. L'air devient glacial. Des milliers d'âmes l'observent en silence. Gennaro a enfin trouvé Xonyar — mais il est seul, sans arme, et totalement impréparé à ce qui se tient devant lui." },
-            { ytID:"eXfH7g8nZj8", name: "Critical State",        duration: "", credits: "Instrumental", lyrics: "", story: "La confrontation est brève et brutale. Xonyar écrase Gennaro avec une facilité déconcertante, le projetant sur la pierre froide de la forteresse. Le corps cède. La conscience s'efface. Gennaro gît immobile sur le sol, plus proche de la mort que jamais. La créature, qui l'avait suivi de loin, le récupère de justesse avant que Xonyar ne l'achève. Dans cet état critique, inconscient et vaincu, une question plane sur tout : est-ce la fin de l'histoire de Gennaro ?" },
-            { ytID:"fPQLqJazQtg", name: "Gennaro's Training",    duration: "", credits: "Instrumental", lyrics: "", story: "Gennaro se réveille dans le repaire de la créature, à peine vivant. La préparation sérieuse commence : la créature lui enseigne la discipline, le contrôle, comment canaliser l'énergie de ce monde alien en force. Chaque exercice dépasse les limites de ce que Gennaro croyait possible. Mais pour la première fois depuis qu'il a ouvert les yeux dans ce monde, il commence à entrevoir une chance réelle. L'entraînement est impitoyable — mais est-ce suffisant pour affronter Xonyar ?" },
-            { ytID:"JYi3fOIgW7s", name: "Gennaro's Training II", duration: "", credits: "Instrumental", lyrics: "", story: "Les séances s'intensifient. Gennaro repousse chaque limite, forgant corps et esprit en quelque chose capable d'affronter Xonyar. La créature lui révèle enfin la seule faiblesse du monstre — un bref instant de vulnérabilité dans le combat, une fenêtre infime qu'il faudra saisir au bon moment. Gennaro a tout absorbé. Son regard a changé. Il est prêt. Le combat final l'attend." },
-            { ytID:"l4CzZM6RLqo", name: "Final Battle",          duration: "", credits: "Instrumental", lyrics: "", story: "Gennaro retourne dans la forteresse et affronte Xonyar pour la dernière fois. Le combat est long et dévastateur. Chaque technique apprise, chaque gramme de détermination, chaque cicatrice gagnée sur le chemin — tout converge vers cet instant unique. La forteresse tremble. Les orbes d'âmes volées scintillent dans la pénombre. Le destin de Gennaro et de chaque âme piégée dans cette salle du trône repose sur ce seul moment." },
-            { ytID:"PiCHg_u6-6s", name: "Outer Wilds",           duration: "", credits: "Instrumental", lyrics: "", story: "La forteresse s'effondre. Les âmes volées sont libérées, se dispersant comme de la lumière dans le ciel alien. Gennaro se tient dans les décombres, son propre âme enfin rendue, entière. Il retrouve son chemin à travers le labyrinthe, longe le lac, traverse les terres dévastées — et, d'une manière impossible à expliquer, revient à la surface. La mer d'Écosse l'attend quelque part au-delà de l'horizon. Il est libre.", spotify: "https://open.spotify.com/artist/5iZwGnQHKkWgjg9ygj", bandcamp: "https://raptol.bandcamp.com/track/outer-wilds" }
+            { ytID:"ZNFiO3rpm5w", name: "Legend of Gennaro",     duration: "", credits: "Voix-off", lyrics: "The legend I am about to tell you\nbegins in a small village in Scotland\ncalled Pittenweem.\n\nGennaro,\na young man like any other,\ntook his boat and set out to sea as usual\nto go and do some fishing.\n\nWhen he had finished,\nhe started to head for his harbour\nso that he could return home,\n\nbut the sky darkened,\nand Gennaro could not see\nwhere he was heading to.\n\nSuddenly\na strong light appeared directly\nfrom the sky above him\nand he fainted.\n\nWhen he woke up,\nGennaro found himself in a place\nthat was unlike anything\nhe knew on earth,\n\nthe grass was dark blue,\nthe sky was red\nand the climate was humid.\n\nAll at once,\nhe saw a figure in the distance\napproaching him.\n\nAs it approached, he saw clearly\nthat it was not a human\nbut a creature from which\nhe could not determine the origin.\n\nThis creature approached Gennaro\nand explained to him\nthat he had been kidnapped by Xonyar,\nan evil monster who collects human souls\nto increase his power,\n\nand that there was only one way out:\nto travel through the wastelands\nto find Xonyar's hideout\nand strike him down\nin order to recover his soul.\n\nGennaro decided to brave the challenge\nand set out to find Xonyar's hideout\nin order to strike him down\nand recover his soul.", story: "Je m'appelle Gennaro. Je suis pêcheur dans le village de Pittenweem, en Écosse. Un soir en mer, une lumière aveuglante est descendue du ciel et je me suis réveillé dans un monde que je ne reconnaissais pas — l'herbe bleue sombre, le ciel rouge, un air lourd et humide. Une créature étrange m'a révélé la vérité : j'ai été kidnappé par Xonyar, un monstre qui collecte les âmes humaines pour accroître sa puissance. Il n'existe qu'une seule issue — traverser les terres dévastées, trouver son repaire et le vaincre pour récupérer mon âme. J'accepte le défi.", spotify: "https://open.spotify.com/artist/5iZwGnQHKkWgjg9ygj", bandcamp: "https://raptol.bandcamp.com/track/legend-of-gennaro" },
+            { ytID:"yPVqk73TrYw", name: "The Start",             duration: "", credits: "Instrumental", lyrics: "", story: "Me voilà seul face à un horizon infini de terres inconnues sous un ciel cramoisi. La créature m'a indiqué une direction — c'est tout. Aucune arme, aucune carte, aucune certitude. Seulement la nécessité d'avancer. Je pose un premier pas sur l'herbe bleue sombre, et le voyage commence. Vais-je survivre assez longtemps pour même apercevoir le domaine de Xonyar ?" },
+            { ytID:"Uq4VQMX2tx4", name: "Confusion",             duration: "", credits: "Instrumental", lyrics: "", story: "Le paysage se dérobe sans cesse sous mes pieds. Sous le ciel rouge, les chemins semblent se refermer sur eux-mêmes, les distances sont impossibles à évaluer, et l'air humide joue des tours à mon esprit. Je commence à douter — est-ce que j'avance vraiment, ou est-ce que je tourne en rond depuis des heures ? Ce monde obéit à des règles que je ne comprends pas. Suis-je condamné à errer sans fin dans ce labyrinthe alien, ou existe-t-il un chemin à travers le chaos ?" },
+            { ytID:"So71NFBV0hU", name: "Lake of Lost Souls",    duration: "", credits: "Instrumental", lyrics: "", story: "J'atteins le bord d'un lac immense aux eaux noires comme le vide. La créature m'avait prévenu : les âmes capturées par Xonyar dérivent ici, piégées entre deux mondes. Des murmures montent des profondeurs — des voix qui m'implorent de m'arrêter, de me reposer, de les rejoindre dans leur sommeil éternel. La traversée semble impossible. Vais-je trouver la force de longer ce lac sans me laisser consumer par leur appel ?" },
+            { ytID:"QSNL1EW6Dho", name: "Determination",         duration: "", credits: "Instrumental", lyrics: "", story: "Épuisé, transi, loin de tout ce que je connais, je m'effondre. Le poids de la mission m'écrase. La créature, mon village, la mer d'Écosse — tout cela semble appartenir à une autre vie. Mais quelque chose refuse de s'éteindre au fond de moi — la mémoire de ce que je suis, de ce que Xonyar m'a volé. Je me relève. La partie la plus sombre du voyage m'attend peut-être encore, mais ma décision est prise : je n'abandonnerai pas." },
+            { ytID:"WgNRW8CoZms", name: "Bravery",               duration: "", credits: "Instrumental", lyrics: "", story: "Les premiers gardiens de Xonyar font leur apparition — des créatures monstrueuses qui patrouillent les terres dévastées. Je n'ai aucune arme, aucune armure, aucune expérience du combat. Seulement du courage. Je leur fais face quand même. Débordé et à court de forces, je m'en sors de justesse — mais je sais désormais que le chemin vers Xonyar exigera bien plus que de la bravoure. Le danger n'a fait que commencer." },
+            { ytID:"BcSkQ4o-i_8", name: "The Fortress",          duration: "", credits: "Instrumental", lyrics: "", story: "À l'horizon cramoisi, une forteresse colossale de pierre noire se dresse au-dessus du paysage alien. C'est le repaire de Xonyar — l'endroit où les âmes volées sont gardées prisonnières. Elle est entourée de défenses en couches successives, et aucun passage évident n'apparaît. Je la fixe depuis le lointain, stupéfait par sa démesure. Comment un simple pêcheur comme moi pourrait-il jamais briser une telle citadelle ?" },
+            { ytID:"r1cPYTxQJ_g", name: "Maze",                  duration: "", credits: "Instrumental", lyrics: "", story: "Entre la forteresse et moi s'étend un labyrinthe sans fin — des couloirs de cristal et de pierre qui s'étendent dans toutes les directions, vivants de pièges et de faux-semblants. Des heures passent. Peut-être des jours. Les murs semblent se déplacer. Chaque carrefour ressemble au précédent. Quelque part au centre de ce dédale se trouve la salle du trône où siège Xonyar. Vais-je y arriver, ou m'égarer dans ces couloirs jusqu'à épuisement total ?" },
+            { ytID:"79IaSgGX2JE", name: "Xonyar",                duration: "", credits: "Instrumental", lyrics: "", story: "Après ce qui semble une éternité, j'émerge dans une vaste salle du trône. Et là, entouré d'orbes flottants de lumière volée — chacun une âme piégée — se trouve Xonyar. Le monstre tourne lentement son regard vers moi. L'air devient glacial. Des milliers d'âmes m'observent en silence. J'ai enfin trouvé Xonyar — mais je suis seul, sans arme, et totalement impréparé à ce qui se tient devant moi." },
+            { ytID:"eXfH7g8nZj8", name: "Critical State",        duration: "", credits: "Instrumental", lyrics: "", story: "La confrontation est brève et brutale. Xonyar m'écrase avec une facilité déconcertante, me projetant sur la pierre froide de la forteresse. Mon corps cède. Ma conscience s'efface. Je gis immobile sur le sol, plus proche de la mort que jamais. La créature, qui m'avait suivi de loin, me récupère de justesse avant que Xonyar ne m'achève. Dans cet état critique, inconscient et vaincu, une question plane : est-ce la fin ?" },
+            { ytID:"fPQLqJazQtg", name: "Gennaro's Training",    duration: "", credits: "Instrumental", lyrics: "", story: "Je me réveille dans le repaire de la créature, à peine vivant. La préparation sérieuse commence : elle m'enseigne la discipline, le contrôle, comment canaliser l'énergie de ce monde alien en force. Chaque exercice dépasse les limites de ce que je croyais possible. Mais pour la première fois depuis que j'ai ouvert les yeux dans ce monde, je commence à entrevoir une chance réelle. L'entraînement est impitoyable — mais est-ce suffisant pour affronter Xonyar ?" },
+            { ytID:"JYi3fOIgW7s", name: "Gennaro's Training II", duration: "", credits: "Instrumental", lyrics: "", story: "Les séances s'intensifient. Je repousse chaque limite, forgeant corps et esprit en quelque chose capable d'affronter Xonyar. La créature me révèle enfin la seule faiblesse du monstre — un bref instant de vulnérabilité dans le combat, une fenêtre infime qu'il faudra saisir au bon moment. J'ai tout absorbé. Mon regard a changé. Je suis prêt. Le combat final m'attend." },
+            { ytID:"l4CzZM6RLqo", name: "Final Battle",          duration: "", credits: "Instrumental", lyrics: "", story: "Je retourne dans la forteresse et j'affronte Xonyar pour la dernière fois. Le combat est long et dévastateur. Chaque technique apprise, chaque gramme de détermination, chaque cicatrice gagnée sur le chemin — tout converge vers cet instant unique. La forteresse tremble. Les orbes d'âmes volées scintillent dans la pénombre. Mon destin et celui de chaque âme piégée dans cette salle reposent sur ce seul moment." },
+            { ytID:"PiCHg_u6-6s", name: "Outer Wilds",           duration: "", credits: "Instrumental", lyrics: "", story: "La forteresse s'effondre. Les âmes volées sont libérées, se dispersant comme de la lumière dans le ciel alien. Je me tiens dans les décombres, mon propre âme enfin rendue, entière. Je retrouve mon chemin à travers le labyrinthe, je longe le lac, je traverse les terres dévastées — et, d'une manière impossible à expliquer, je reviens à la surface. La mer d'Écosse m'attend quelque part au-delà de l'horizon. Je suis libre.", spotify: "https://open.spotify.com/artist/5iZwGnQHKkWgjg9ygj", bandcamp: "https://raptol.bandcamp.com/track/outer-wilds" }
         ]
     }
 };
@@ -1859,7 +1859,7 @@ async function initSolar() {
     SS.controls = new THREE.OrbitControls(SS.camera, SS.renderer.domElement);
     SS.controls.enableDamping  = true;
     SS.controls.dampingFactor  = 0.06;
-    SS.controls.minDistance    = 30;
+    SS.controls.minDistance    = 520; // can't enter the star (radius ~380, buffer 140)
     SS.controls.maxDistance    = 25000;
 
     // Lights
@@ -2318,51 +2318,61 @@ function buildPlanetListSidebar() {
     style.textContent = `
     #planet-list {
         position: fixed; right: 0; top: 50%; transform: translateY(-50%);
-        z-index: 9300; width: 220px;
-        background: rgba(2,6,20,0.88);
-        border-left: 1px solid rgba(255,255,255,0.06);
-        backdrop-filter: blur(16px);
+        z-index: 9300; width: 240px;
+        background: rgba(2,6,20,0.92);
+        border-left: 1px solid rgba(255,255,255,0.10);
+        backdrop-filter: blur(20px);
         display: flex; flex-direction: column;
-        padding: 8px 0;
+        padding: 6px 0;
         transition: opacity 0.3s, transform 0.3s;
+        box-shadow: -8px 0 40px rgba(0,0,0,0.4);
     }
     #planet-list.hidden { opacity: 0; pointer-events: none; transform: translateY(-50%) translateX(20px); }
     .pl-header {
-        font: 7px 'Major Mono Display', monospace; letter-spacing: 0.35em;
-        color: rgba(255,255,255,0.2); padding: 10px 16px 8px;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+        font: 9px 'Major Mono Display', monospace; letter-spacing: 0.3em;
+        color: rgba(255,255,255,0.35); padding: 12px 18px 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
         text-transform: uppercase;
     }
+    .pl-section {
+        font: 8px 'Major Mono Display', monospace; letter-spacing: 0.28em;
+        color: rgba(255,255,255,0.28); text-transform: uppercase;
+        padding: 10px 18px 6px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        margin-top: 4px;
+    }
+    .pl-section:first-child { margin-top: 0; }
     .pl-row {
-        display: flex; align-items: center; gap: 10px;
-        padding: 9px 14px 9px 12px;
+        display: flex; align-items: center; gap: 12px;
+        padding: 12px 16px 12px 14px;
         cursor: pointer; transition: background 0.15s;
-        border-bottom: 1px solid rgba(255,255,255,0.03);
+        border-bottom: 1px solid rgba(255,255,255,0.04);
         position: relative;
     }
-    .pl-row:hover { background: rgba(255,255,255,0.05); }
-    .pl-row.active { background: rgba(255,255,255,0.08); }
+    .pl-row:hover { background: rgba(255,255,255,0.06); }
+    .pl-row.active { background: rgba(255,255,255,0.10); border-left: 2px solid currentColor; padding-left: 12px; }
     .pl-dot {
-        width: 8px; height: 8px; border-radius: 50%;
-        flex-shrink: 0; opacity: 0.8;
-        box-shadow: 0 0 6px currentColor;
+        width: 10px; height: 10px; border-radius: 50%;
+        flex-shrink: 0; opacity: 0.9;
+        box-shadow: 0 0 8px currentColor;
     }
     .pl-info { flex: 1; min-width: 0; }
     .pl-name {
-        font: 10px 'Major Mono Display', monospace; letter-spacing: 0.06em;
-        color: rgba(255,255,255,0.75); white-space: nowrap;
+        font: 13px 'Major Mono Display', monospace; letter-spacing: 0.04em;
+        color: rgba(255,255,255,0.80); white-space: nowrap;
         overflow: hidden; text-overflow: ellipsis; line-height: 1.3;
     }
     .pl-row:hover .pl-name, .pl-row.active .pl-name { color: #fff; }
     .pl-badge {
-        font: 7px 'Major Mono Display', monospace; letter-spacing: 0.15em;
-        color: rgba(255,255,255,0.28); margin-top: 2px;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 10px; letter-spacing: 0.05em;
+        color: rgba(255,255,255,0.38); margin-top: 3px;
     }
     .pl-arrow {
-        font-size: 10px; color: rgba(255,255,255,0.2);
+        font-size: 12px; color: rgba(255,255,255,0.25);
         flex-shrink: 0; transition: color 0.15s, transform 0.15s;
     }
-    .pl-row:hover .pl-arrow { color: rgba(255,255,255,0.6); transform: translateX(2px); }
+    .pl-row:hover .pl-arrow { color: rgba(255,255,255,0.7); transform: translateX(3px); }
     @media (max-width: 768px) { #planet-list { display: none; } }
     `;
     document.head.appendChild(style);
@@ -2371,30 +2381,43 @@ function buildPlanetListSidebar() {
     const el = document.createElement('div');
     el.id = 'planet-list';
     el.style.display = 'none'; // shown via showPlanetList() after warp
-    el.innerHTML = `<div class="pl-header">Navigation</div>`;
 
-    // Only show real albums (not STAR)
-    const listed = SS.bodies.filter(b => b.key !== 'STAR');
-    for (const body of listed) {
-        const row = document.createElement('div');
-        row.className = 'pl-row';
-        row.dataset.key = body.key;
-        const col = body.data.color || '#ffffff';
-        const badge = (body.data.badge || body.data.type || '').toUpperCase();
-        row.innerHTML = `
-            <div class="pl-dot" style="background:${col}; color:${col};"></div>
-            <div class="pl-info">
-                <div class="pl-name">${toTitleCase(body.key)}</div>
-                <div class="pl-badge">${badge}</div>
-            </div>
-            <span class="pl-arrow">›</span>
-        `;
-        row.addEventListener('click', () => {
-            if (SS.state === 'surface') exitSurfaceMode();
-            setTimeout(() => zoomToPlanet(body), SS.state === 'surface' ? 600 : 0);
-        });
-        el.appendChild(row);
-    }
+    // Only show real bodies (not STAR), split albums vs singles
+    const listed = SS.bodies.filter(b => b.key !== 'STAR' && !b.data.parentName);
+    const albums  = listed.filter(b => b.data.type === 'album');
+    const singles = listed.filter(b => b.data.type !== 'album');
+
+    const addSection = (label, bodies) => {
+        if (!bodies.length) return;
+        const sec = document.createElement('div');
+        sec.className = 'pl-section';
+        sec.textContent = label;
+        el.appendChild(sec);
+
+        for (const body of bodies) {
+            const row = document.createElement('div');
+            row.className = 'pl-row';
+            row.dataset.key = body.key;
+            const col = body.data.color || '#ffffff';
+            const badge = (body.data.badge || '').toUpperCase();
+            row.innerHTML = `
+                <div class="pl-dot" style="background:${col}; color:${col};"></div>
+                <div class="pl-info">
+                    <div class="pl-name">${toTitleCase(body.key)}</div>
+                    <div class="pl-badge">${badge}</div>
+                </div>
+                <span class="pl-arrow">›</span>
+            `;
+            row.addEventListener('click', () => {
+                if (SS.state === 'surface') exitSurfaceMode();
+                setTimeout(() => zoomToPlanet(body), SS.state === 'surface' ? 600 : 0);
+            });
+            el.appendChild(row);
+        }
+    };
+
+    addSection('Albums', albums);
+    addSection('Singles', singles);
 
     document.body.appendChild(el);
     _planetListEl = el;
@@ -2407,12 +2430,24 @@ function updatePlanetListActive(body) {
     });
 }
 
-function showPlanetList() {
+function showPlanetList(delay = 0) {
     if (!_planetListEl) return;
+    // Start from hidden position
     _planetListEl.style.display = 'flex';
-    _planetListEl.style.opacity = '1';
-    _planetListEl.style.pointerEvents = 'auto';
-    _planetListEl.style.transform = 'translateY(-50%) translateX(0)';
+    _planetListEl.style.opacity = '0';
+    _planetListEl.style.pointerEvents = 'none';
+    _planetListEl.style.transform = 'translateY(-50%) translateX(24px)';
+    _planetListEl.style.transition = 'none';
+    // Force reflow so the starting state registers before the transition
+    void _planetListEl.offsetWidth;
+    _planetListEl.style.transition = 'opacity 0.45s cubic-bezier(0.16,1,0.3,1), transform 0.45s cubic-bezier(0.16,1,0.3,1)';
+    const apply = () => {
+        _planetListEl.style.opacity = '1';
+        _planetListEl.style.pointerEvents = 'auto';
+        _planetListEl.style.transform = 'translateY(-50%) translateX(0)';
+    };
+    if (delay > 0) setTimeout(apply, delay);
+    else requestAnimationFrame(apply);
 }
 function hidePlanetList() {
     if (!_planetListEl) return;
@@ -2478,6 +2513,9 @@ function enterSurfaceMode(body) {
     }, 400);
 
     buildPOIMarkers(body);
+
+    // Allow closer zoom on planet surface (planet radius = body.data.size)
+    if (SS.controls) SS.controls.minDistance = Math.max(body.data.size * 1.3, 40);
 }
 
 function exitSurfaceMode() {
@@ -2491,6 +2529,9 @@ function exitSurfaceMode() {
     SS.state = 'transitioning';
     SS.focused = null;
     SS.localCameraOffset = null;
+
+    // Restore star-safe minimum zoom distance
+    if (SS.controls) SS.controls.minDistance = 520;
 
     // Show planet list again when returning to system view
     showPlanetList();
@@ -2549,10 +2590,11 @@ function exitSurfaceMode() {
     s.textContent = `
     /* ── Region labels ── */
     .poi-region {
-        position: fixed; pointer-events: none;
+        position: fixed; left: 0; top: 0; pointer-events: none;
         display: flex; align-items: center; gap: 0;
-        opacity: 0; transition: opacity 0.25s ease;
-        transform: translate(-50%, -50%);
+        opacity: 0;
+        /* No CSS transition — updated every render frame, must snap instantly */
+        will-change: transform, opacity;
         user-select: none;
     }
     .poi-region.visible { pointer-events: auto; }
@@ -2561,7 +2603,6 @@ function exitSurfaceMode() {
         background: var(--ac6, rgba(120,200,255,0.7));
         flex-shrink: 0;
         box-shadow: 0 0 6px var(--ac5, rgba(100,200,255,0.5));
-        transition: all 0.2s;
     }
     .poi-region.active .poi-dot, .poi-region:hover .poi-dot {
         background: #fff;
@@ -2572,7 +2613,6 @@ function exitSurfaceMode() {
         width: 28px; height: 1px;
         background: linear-gradient(to right, var(--ac5, rgba(100,190,255,0.5)), var(--ac2, rgba(100,190,255,0.15)));
         flex-shrink: 0;
-        transition: width 0.2s;
     }
     .poi-region.active .poi-line, .poi-region:hover .poi-line {
         width: 36px;
@@ -2580,251 +2620,273 @@ function exitSurfaceMode() {
     }
     .poi-tag {
         display: flex; flex-direction: column;
-        padding: 5px 10px;
-        background: rgba(4, 10, 28, 0.82);
-        border: 1px solid var(--ac2, rgba(80,170,255,0.18));
+        padding: 7px 13px;
+        background: rgba(4, 10, 28, 0.88);
+        border: 1px solid var(--ac3, rgba(80,170,255,0.22));
         border-left: none;
         cursor: pointer;
-        transition: all 0.2s;
-        backdrop-filter: blur(8px);
+        backdrop-filter: blur(12px);
     }
     .poi-region:hover .poi-tag, .poi-region.active .poi-tag {
-        background: rgba(8, 18, 38, 0.92);
-        border-color: var(--ac4, rgba(100,200,255,0.38));
+        background: rgba(8, 18, 42, 0.95);
+        border-color: var(--ac5, rgba(100,200,255,0.5));
     }
     .poi-num {
-        font: 8px 'Major Mono Display', monospace;
-        letter-spacing: 0.2em; color: var(--ac5, rgba(80,180,255,0.6));
-        line-height: 1.2;
+        font: 9px 'Major Mono Display', monospace;
+        letter-spacing: 0.18em; color: var(--album-color, rgba(80,180,255,0.7));
+        line-height: 1.3;
     }
     .poi-name {
-        font: 11px 'Major Mono Display', monospace;
-        letter-spacing: 0.05em; color: rgba(220,235,255,0.9);
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 13px; font-weight: 600;
+        letter-spacing: 0.01em; color: rgba(230,240,255,0.95);
         line-height: 1.3; white-space: nowrap;
-        max-width: 140px; overflow: hidden; text-overflow: ellipsis;
+        max-width: 160px; overflow: hidden; text-overflow: ellipsis;
     }
     .poi-region.active .poi-name { color: #fff; }
 
-    /* ── Modal backdrop ── */
+    /* ── Backdrop — light veil, not full blur ── */
     #rp-backdrop {
         position: fixed; inset: 0; z-index: 19999;
-        background: rgba(1,3,12,0.82);
-        backdrop-filter: blur(12px);
-        display: none; align-items: center; justify-content: center;
-        padding: 24px;
+        background: rgba(0,0,8,0.55);
+        display: none; align-items: flex-end; justify-content: stretch;
     }
 
-    /* ── Modal window ── */
+    /* ── DRAWER — slides up from bottom ── */
     #region-panel {
-        position: relative;
-        width: 100%; max-width: 960px;
-        max-height: 90vh;
-        background: linear-gradient(135deg, rgba(4,9,28,0.98) 0%, rgba(6,14,40,0.96) 100%);
-        border: 1px solid var(--ac2, rgba(80,160,255,0.14));
-        border-radius: 4px;
-        box-shadow: 0 32px 80px rgba(0,0,20,0.9), 0 0 0 1px var(--ac1, rgba(60,120,255,0.06)), inset 0 1px 0 var(--ac1, rgba(100,180,255,0.08));
+        position: relative; width: 100%;
+        height: 46vh; min-height: 300px; max-height: 520px;
+        background: rgba(3,5,15,0.97);
+        /* Angled cut top-left */
+        clip-path: polygon(48px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 48px);
         display: flex; flex-direction: column;
         overflow: hidden;
-        animation: rpFadeIn 0.3s cubic-bezier(0.16,1,0.3,1) both;
+        animation: rpSlideUp 0.38s cubic-bezier(0.16,1,0.3,1) both;
         font-family: 'Major Mono Display', monospace;
+        /* Glowing top edge in planet color */
+        box-shadow: 0 -1px 0 0 var(--album-color, #5090ff),
+                    0 -4px 40px var(--ac2, rgba(80,160,255,0.18)),
+                    inset 0 1px 0 var(--ac1, rgba(255,255,255,0.04));
     }
-    @keyframes rpFadeIn {
-        from { opacity: 0; transform: scale(0.93) translateY(16px); }
-        to   { opacity: 1; transform: scale(1) translateY(0); }
+    @keyframes rpSlideUp {
+        from { transform: translateY(100%); opacity: 0.4; }
+        to   { transform: translateY(0);    opacity: 1; }
     }
 
-    /* ── Close button ── */
+    /* Track-number watermark behind everything */
+    #region-panel::before {
+        content: attr(data-tracknum);
+        position: absolute; right: -0.05em; bottom: -0.22em;
+        font: 900 28vh 'Major Mono Display', monospace;
+        color: var(--album-color, #5090ff);
+        opacity: 0.04; pointer-events: none; line-height: 1;
+        letter-spacing: -0.05em; user-select: none;
+    }
+
+    /* Diagonal accent line (top-left cut decoration) */
+    #region-panel::after {
+        content: '';
+        position: absolute; top: 0; left: 0;
+        width: 50px; height: 50px;
+        background: linear-gradient(135deg, var(--album-color, #5090ff) 0%, transparent 60%);
+        opacity: 0.35; pointer-events: none;
+    }
+
+    /* ── Close — top-right, minimal ── */
     .rp-close {
-        position: absolute; top: 18px; right: 20px; z-index: 10;
-        background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-        color: rgba(255,255,255,0.45); width: 32px; height: 32px;
-        border-radius: 50%; font-size: 18px; line-height: 1;
-        cursor: pointer; display: flex; align-items: center; justify-content: center;
-        transition: all 0.2s;
+        position: absolute; top: 14px; right: 18px; z-index: 10;
+        background: none; border: none; color: rgba(255,255,255,0.25);
+        font-size: 20px; line-height: 1; cursor: pointer;
+        transition: color 0.2s; padding: 4px 8px; letter-spacing: 0;
+        font-family: sans-serif;
     }
-    .rp-close:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.25); }
+    .rp-close:hover { color: #fff; }
 
-    /* ── Layout: video mode = left+right / audio mode = single column ── */
+    /* ── Layout: video left / info right ── */
     .rm-layout {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        min-height: 0; flex: 1;
+        display: grid; grid-template-columns: 42% 1fr;
+        flex: 1; min-height: 0; overflow: hidden;
     }
-    .rm-layout.audio-only {
-        grid-template-columns: 1fr;
-    }
+    .rm-layout.audio-only { grid-template-columns: 1fr; }
     .rm-layout.audio-only .rm-media { display: none; }
     @media (max-width: 680px) {
         .rm-layout { grid-template-columns: 1fr; }
-        .rm-layout .rm-media { min-height: 200px; }
+        .rm-layout .rm-media { max-height: 35vw; }
     }
 
-    /* ── Media panel (left — YouTube only) ── */
+    /* ── Video panel ── */
     .rm-media {
         position: relative; background: #000;
-        display: flex; align-items: center; justify-content: center;
-        min-height: 300px;
-        border-right: 1px solid var(--ac1, rgba(80,160,255,0.1));
+        display: flex; align-items: stretch;
         overflow: hidden;
+        /* matching diagonal clip on left side */
+        clip-path: polygon(0 48px, 48px 0, 100% 0, 100% 100%, 0 100%);
     }
-    .rm-media iframe {
-        width: 100%; height: 100%; min-height: 300px;
-        border: none; display: block;
-    }
+    .rm-media iframe { width: 100%; height: 100%; border: none; display: block; min-height: 0; }
 
     /* ── Info panel ── */
     .rm-info {
         display: flex; flex-direction: column;
-        padding: 36px 36px 28px;
-        overflow-y: auto; max-height: 90vh;
+        padding: 20px 28px 14px 24px;
+        overflow-y: auto; position: relative;
+        border-left: 1px solid var(--ac1, rgba(255,255,255,0.06));
+        scrollbar-width: thin; scrollbar-color: var(--ac2, rgba(255,255,255,0.08)) transparent;
     }
 
-    /* ── Spotify bar (inside info panel) ── */
+    /* Spotify bar */
     .rm-spotify-bar {
-        width: 100%; height: 80px;
-        border-radius: 3px; overflow: hidden;
-        margin-bottom: 24px; flex-shrink: 0;
-        border: 1px solid rgba(29,185,84,0.15);
+        width: 100%; height: 72px; border-radius: 2px; overflow: hidden;
+        margin-bottom: 14px; flex-shrink: 0;
+        border: 1px solid rgba(29,185,84,0.12);
     }
-    .rm-spotify-bar iframe {
-        width: 100%; height: 100%; border: none; display: block;
-    }
+    .rm-spotify-bar iframe { width: 100%; height: 100%; border: none; display: block; }
 
-    /* Track title — HUGE */
+    /* Track title */
     .rm-track-name {
-        font-size: clamp(28px, 4vw, 48px);
-        color: #fff; letter-spacing: 0.04em; line-height: 1;
-        margin-bottom: 10px;
+        font-size: clamp(20px, 3.2vw, 40px);
+        color: #fff; letter-spacing: 0.03em; line-height: 1;
+        margin-bottom: 6px; flex-shrink: 0;
     }
 
-    /* Album name — below, smaller, planet-colored */
+    /* Album name */
     .rm-album-name {
-        font-size: clamp(13px, 1.8vw, 18px);
-        letter-spacing: 0.16em; line-height: 1;
-        margin-bottom: 14px;
+        font-size: clamp(10px, 1.1vw, 13px);
+        letter-spacing: 0.25em; line-height: 1;
+        margin-bottom: 8px;
         color: var(--album-color, rgba(120,180,255,0.9));
-        text-shadow: 0 0 24px var(--ac4, rgba(80,140,255,0.3));
+        text-shadow: 0 0 20px var(--ac4, rgba(80,140,255,0.25));
     }
 
-    /* Meta row: duration · credits */
+    /* Meta */
     .rm-meta {
-        font-size: 9px; letter-spacing: 0.2em;
-        color: var(--ac4, rgba(140,190,255,0.4));
-        margin-bottom: 24px;
-        display: flex; flex-wrap: wrap; gap: 0 12px; align-items: center;
+        font-size: 8px; letter-spacing: 0.18em;
+        color: rgba(255,255,255,0.22);
+        margin-bottom: 12px; flex-shrink: 0;
+        display: flex; flex-wrap: wrap; gap: 0 10px; align-items: center;
     }
-    .rm-meta-sep { opacity: 0.3; }
+    .rm-meta-sep { opacity: 0.25; }
 
-    /* Divider */
+    /* Divider — accent line */
     .rm-divider {
-        height: 1px; background: var(--ac1, rgba(80,140,255,0.12));
-        margin-bottom: 20px;
+        height: 1px;
+        background: linear-gradient(to right, var(--album-color, #5090ff), transparent);
+        opacity: 0.25; margin-bottom: 12px; flex-shrink: 0;
     }
 
-    /* Tabs */
+    /* Tabs — pill style, clearly distinct */
     .rp-tabs {
-        display: flex; gap: 0; margin-bottom: 16px;
-        border-bottom: 1px solid var(--ac1, rgba(60,140,255,0.1));
+        display: flex; gap: 6px; margin-bottom: 12px; flex-shrink: 0;
     }
     .rp-tab {
-        background: none; border: none; color: rgba(255,255,255,0.28);
-        font: 9px 'Major Mono Display', monospace; letter-spacing: 0.2em;
-        padding: 6px 16px 5px; cursor: pointer;
-        border-bottom: 2px solid transparent; margin-bottom: -1px;
+        background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10);
+        color: rgba(255,255,255,0.45);
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+        padding: 7px 16px; cursor: pointer; border-radius: 20px;
         transition: all 0.18s;
     }
-    .rp-tab.active { color: var(--album-color, rgba(120,200,255,0.9)); border-bottom-color: var(--ac5, rgba(100,190,255,0.6)); }
-    .rp-tab:hover:not(.active) { color: rgba(255,255,255,0.55); }
+    .rp-tab.active {
+        background: var(--ac2, rgba(80,160,255,0.15));
+        border-color: var(--album-color, #5090ff);
+        color: #fff;
+    }
+    .rp-tab:hover:not(.active) { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.7); }
 
-    /* Tab text */
+    /* Text body */
     .rp-text {
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         font-size: 13px; line-height: 1.8;
-        color: rgba(200,215,230,0.75);
-        flex: 1; margin-bottom: 24px;
-        white-space: pre-line;
+        color: rgba(210,220,235,0.75);
+        flex: 1; min-height: 0; overflow-y: auto;
+        white-space: pre-line; margin-bottom: 12px;
+        scrollbar-width: thin; scrollbar-color: var(--ac1, rgba(255,255,255,0.06)) transparent;
     }
 
-    /* Action buttons */
-    .rp-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; }
+    /* Action buttons — pill style */
+    .rp-actions { display: flex; flex-wrap: wrap; gap: 8px; flex-shrink: 0; }
     .rp-btn {
-        flex: 1 1 calc(50% - 4px); min-width: 110px;
-        padding: 10px 12px; border: 1px solid;
-        font: 8px 'Major Mono Display', monospace; letter-spacing: 0.13em;
-        cursor: pointer; transition: all 0.2s; border-radius: 2px;
-        text-align: center; display: flex; align-items: center; justify-content: center; gap: 5px;
+        padding: 10px 20px; border: 1px solid;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
+        cursor: pointer; transition: all 0.18s; border-radius: 24px;
+        display: flex; align-items: center; justify-content: center; gap: 6px;
+        white-space: nowrap;
     }
-    .rp-btn.rp-listen { background: var(--ac1, rgba(0,200,255,0.07)); border-color: var(--ac3, rgba(0,200,255,0.25)); color: var(--album-color, rgba(80,220,255,0.9)); }
-    .rp-btn.rp-listen:hover { background: var(--ac2, rgba(0,200,255,0.15)); border-color: var(--ac5, rgba(0,220,255,0.5)); color: #fff; }
-    .rp-btn.rp-clip { background: rgba(220,40,40,0.07); border-color: rgba(220,40,40,0.2); color: rgba(255,110,110,0.85); }
-    .rp-btn.rp-clip:hover { background: rgba(220,40,40,0.15); border-color: rgba(255,80,80,0.45); color: #ff5555; }
+    .rp-btn.rp-listen { background: var(--ac2, rgba(0,200,255,0.10)); border-color: var(--ac4, rgba(0,200,255,0.35)); color: var(--album-color, rgba(80,220,255,1)); }
+    .rp-btn.rp-listen:hover { background: var(--ac3, rgba(0,200,255,0.18)); color: #fff; border-color: var(--ac6, rgba(0,200,255,0.6)); }
+    .rp-btn.rp-clip { background: rgba(200,30,30,0.08); border-color: rgba(200,30,30,0.28); color: rgba(255,120,120,0.9); }
+    .rp-btn.rp-clip:hover { background: rgba(200,30,30,0.18); color: #ff7777; border-color: rgba(255,80,80,0.5); }
 
     /* ── Tracklist sidebar ── */
     #track-sidebar {
         position: fixed; left: 0; top: 50%; transform: translateY(-50%);
-        z-index: 9400; width: 260px;
-        background: rgba(2,6,20,0.90);
-        border-right: 1px solid var(--ac2, rgba(80,160,255,0.12));
-        backdrop-filter: blur(14px);
+        z-index: 9400; width: 280px;
+        background: rgba(2,6,20,0.92);
+        border-right: 1px solid var(--ac3, rgba(80,160,255,0.18));
+        backdrop-filter: blur(20px);
         max-height: 80vh; overflow-y: auto; overflow-x: hidden;
         display: none; flex-direction: column;
+        box-shadow: 8px 0 40px rgba(0,0,0,0.4);
         scrollbar-width: thin; scrollbar-color: var(--ac3, rgba(80,160,255,0.2)) transparent;
     }
     #track-sidebar.visible { display: flex; }
     .ts-header {
-        font: 8px 'Major Mono Display', monospace; letter-spacing: 0.3em;
-        color: var(--ac5, rgba(80,160,255,0.5)); padding: 14px 16px 10px;
-        border-bottom: 1px solid var(--ac1, rgba(80,160,255,0.08));
-        flex-shrink: 0;
+        font: 9px 'Major Mono Display', monospace; letter-spacing: 0.3em;
+        color: var(--ac5, rgba(80,160,255,0.6)); padding: 16px 18px 12px;
+        border-bottom: 1px solid var(--ac2, rgba(80,160,255,0.10));
+        flex-shrink: 0; text-transform: uppercase;
     }
     .ts-row {
         display: flex; align-items: center; gap: 0;
-        padding: 0; border-bottom: 1px solid var(--ac1, rgba(80,160,255,0.05));
+        padding: 0; border-bottom: 1px solid var(--ac1, rgba(80,160,255,0.06));
         transition: background 0.15s;
         cursor: pointer;
     }
-    .ts-row:hover { background: var(--ac1, rgba(80,160,255,0.06)); }
-    .ts-row.active { background: var(--ac2, rgba(80,160,255,0.1)); }
+    .ts-row:hover { background: var(--ac1, rgba(80,160,255,0.07)); }
+    .ts-row.active { background: var(--ac2, rgba(80,160,255,0.13)); border-left: 2px solid var(--album-color, #5090ff); }
     .ts-row.active .ts-name { color: #fff; }
-    .ts-row.active .ts-num { color: var(--ac6, rgba(120,200,255,0.7)); }
+    .ts-row.active .ts-num { color: var(--album-color, rgba(120,200,255,1)); }
     .ts-num {
-        font: 8px 'Major Mono Display', monospace; letter-spacing: 0.15em;
-        color: var(--ac4, rgba(80,160,255,0.35)); width: 34px; flex-shrink: 0;
-        text-align: right; padding: 11px 8px 11px 14px;
+        font: 10px 'Major Mono Display', monospace; letter-spacing: 0.12em;
+        color: var(--ac4, rgba(80,160,255,0.45)); width: 38px; flex-shrink: 0;
+        text-align: right; padding: 14px 8px 14px 16px;
         pointer-events: none;
     }
     .ts-name {
-        font: 10px 'Major Mono Display', monospace; letter-spacing: 0.06em;
-        color: rgba(200,215,235,0.7); flex: 1;
-        padding: 11px 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        pointer-events: none;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 13px; font-weight: 500;
+        color: rgba(210,225,245,0.82); flex: 1;
+        padding: 14px 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        pointer-events: none; letter-spacing: 0.01em;
     }
     .ts-open {
-        flex-shrink: 0; width: 36px; height: 100%; min-height: 36px;
+        flex-shrink: 0; width: 42px; height: 100%; min-height: 42px;
         background: none; border: none; border-left: 1px solid var(--ac1, rgba(80,160,255,0.08));
-        color: var(--ac4, rgba(120,180,255,0.4)); cursor: pointer;
+        color: var(--ac4, rgba(120,180,255,0.5)); cursor: pointer;
         display: flex; align-items: center; justify-content: center;
-        font-size: 13px; transition: all 0.15s;
+        font-size: 15px; transition: all 0.15s;
     }
-    .ts-open:hover { background: var(--ac2, rgba(80,160,255,0.12)); color: var(--album-color, rgba(160,210,255,0.9)); }
+    .ts-open:hover { background: var(--ac2, rgba(80,160,255,0.14)); color: var(--album-color, rgba(160,210,255,0.9)); }
 
     /* ── Prev / Next nav in modal ── */
     .rp-nav {
         display: flex; align-items: center; justify-content: space-between;
-        padding-top: 16px; margin-top: 8px;
-        border-top: 1px solid var(--ac1, rgba(80,140,255,0.08));
+        padding-top: 14px; margin-top: 10px;
+        border-top: 1px solid var(--ac1, rgba(80,140,255,0.10));
     }
     .rp-nav-btn {
-        background: var(--ac1, rgba(80,160,255,0.06)); border: 1px solid var(--ac2, rgba(80,160,255,0.15));
-        color: var(--ac5, rgba(140,200,255,0.6)); font: 10px 'Major Mono Display', monospace;
-        letter-spacing: 0.1em; padding: 8px 14px; cursor: pointer; border-radius: 2px;
+        background: var(--ac1, rgba(80,160,255,0.07)); border: 1px solid var(--ac3, rgba(80,160,255,0.22));
+        color: rgba(255,255,255,0.7);
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 13px; font-weight: 500;
+        letter-spacing: 0.02em; padding: 9px 18px; cursor: pointer; border-radius: 22px;
         transition: all 0.18s;
     }
-    .rp-nav-btn:hover:not(:disabled) { background: var(--ac2, rgba(80,160,255,0.14)); color: #fff; border-color: var(--ac4, rgba(100,180,255,0.4)); }
-    .rp-nav-btn:disabled { opacity: 0.2; cursor: default; }
+    .rp-nav-btn:hover { background: var(--ac2, rgba(80,160,255,0.15)); color: #fff; border-color: var(--ac5, rgba(100,180,255,0.5)); }
+    .rp-nav-btn.hidden { visibility: hidden; }
     .rp-nav-info {
-        font: 8px 'Major Mono Display', monospace; letter-spacing: 0.2em;
-        color: var(--ac4, rgba(120,180,255,0.4));
+        font: 11px 'Major Mono Display', monospace; letter-spacing: 0.18em;
+        color: rgba(255,255,255,0.35);
     }
     `;
     document.head.appendChild(s);
@@ -3047,13 +3109,14 @@ function updatePOIOverlay() {
         }
     }
 
-    // 3. Apply to DOM
+    // 3. Apply to DOM — use transform (GPU layer) instead of left/top to avoid layout jitter
+    //    Round to whole pixels to prevent sub-pixel trembling
     for (const { m, sx, sy, opacity } of computed) {
         const s = m.el.style;
         s.opacity       = opacity;
         s.pointerEvents = opacity > 0.15 ? 'auto' : 'none';
-        s.left = `${sx}px`;
-        s.top  = `${sy}px`;
+        // translate so the center of the label sits at (sx, sy)
+        s.transform = `translate(${Math.round(sx)}px, ${Math.round(sy)}px) translate(-50%, -50%)`;
         m.el.classList.toggle('active', m.idx === activePOIIdx);
     }
 }
@@ -3191,9 +3254,14 @@ function openPOIPanel(body, idx) {
     const prevBtn = _rpBackdrop.querySelector('#rp-prev');
     const nextBtn = _rpBackdrop.querySelector('#rp-next');
     const navInfo = _rpBackdrop.querySelector('#rp-nav-info');
-    if (prevBtn) prevBtn.disabled = idx === 0;
-    if (nextBtn) nextBtn.disabled = idx === total - 1;
+    const navEl = _rpBackdrop.querySelector('.rp-nav');
+    if (navEl) navEl.style.display = total <= 1 ? 'none' : 'flex';
+    if (prevBtn) prevBtn.classList.toggle('hidden', idx === 0);
+    if (nextBtn) nextBtn.classList.toggle('hidden', idx === total - 1);
     if (navInfo) navInfo.textContent = `${String(idx + 1).padStart(2,'0')} / ${String(total).padStart(2,'0')}`;
+
+    // ── Track-number watermark ──
+    _rpPanel.setAttribute('data-tracknum', String(idx + 1).padStart(2, '0'));
 
     // ── Open modal ──
     _rpBackdrop.style.display = 'flex';
@@ -3288,7 +3356,7 @@ function launchSolarWarp(targetKey = null) {
             site.classList.add('hidden');
             site.style.visibility = '';
             SS.controls.enabled   = true;
-            showPlanetList();
+            showPlanetList(200); // slight delay so it slides in after the scene reveals
 
             if (targetKey) {
                 const body = SS.bodies.find(b => b.key === targetKey);
@@ -3369,7 +3437,11 @@ window.addEventListener('resize', () => {
             pct = 100;
             clearInterval(iv);
             if (bar) bar.style.width = '100%';
-            setTimeout(() => { if (screen) screen.classList.add('hidden'); }, 300);
+            setTimeout(() => {
+            if (screen) screen.classList.add('hidden');
+            // Pre-warm the 3D scene so "Exploration 3D" click is instant
+            initSolar();
+        }, 300);
         } else {
             if (bar) bar.style.width = pct + '%';
         }
