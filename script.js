@@ -3956,6 +3956,13 @@ function closeSolarSystem() {
     }
 })();
 
+// ── À propos card → ouvre le panneau artiste ──
+const aboutBtn = document.getElementById('about-open-btn');
+if (aboutBtn) {
+    aboutBtn.addEventListener('click', () => openArtistPanel());
+    aboutBtn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openArtistPanel(); });
+}
+
 document.getElementById('explorer-btn').addEventListener('click', openSolarSystem);
 document.getElementById('exit-solar').addEventListener('click', () => {
     const btn = document.getElementById('exit-solar');

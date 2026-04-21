@@ -1003,6 +1003,97 @@ section .glass-card, section .section-title, section .gallery-item {
     -webkit-text-fill-color: transparent;
 }
 
+/* ====== À PROPOS ====== */
+.about-section {
+    padding: 4rem 2rem 6rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-card {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    min-height: 320px;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s;
+}
+.about-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(255,140,0,0.15), 0 0 0 1px rgba(255,140,0,0.2);
+}
+
+.about-card-photo {
+    position: relative;
+    overflow: hidden;
+}
+.about-card-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    filter: saturate(1.1);
+}
+.about-card:hover .about-card-photo img { transform: scale(1.04); }
+.about-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, transparent 60%, rgba(6,8,18,0.95) 100%),
+                linear-gradient(to top, rgba(6,8,18,0.5) 0%, transparent 50%);
+}
+
+.about-card-content {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 2.5rem 2.5rem 2.5rem 2rem;
+}
+
+.about-card-label {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 0.6rem; letter-spacing: 4px;
+    color: rgba(255,140,0,0.7);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+.about-card-name {
+    font-family: 'Major Mono Display', monospace;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: #fff; line-height: 1; letter-spacing: -1px;
+    margin: 0 0 1rem;
+    text-shadow: 0 0 40px rgba(255,120,0,0.3);
+}
+.about-card-bio {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.9rem; line-height: 1.7;
+    color: rgba(210,220,235,0.7);
+    margin: 0 0 1.5rem;
+}
+.about-card-cta {
+    margin-top: auto;
+}
+.about-card-btn {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 0.65rem; letter-spacing: 3px;
+    color: rgba(255,140,0,0.85);
+    text-transform: uppercase;
+    transition: color 0.2s, letter-spacing 0.2s;
+}
+.about-card:hover .about-card-btn {
+    color: rgba(255,160,60,1);
+    letter-spacing: 4px;
+}
+
+@media (max-width: 768px) {
+    .about-section { padding: 3rem 1.2rem 4rem; }
+    .about-card { grid-template-columns: 1fr; }
+    .about-card-photo { height: 220px; }
+    .about-card-overlay {
+        background: linear-gradient(to top, rgba(6,8,18,0.9) 0%, transparent 60%);
+    }
+    .about-card-content { padding: 1.8rem 1.5rem; }
+    .about-card-name { font-size: 1.8rem; }
+}
+
 /* ====== CONTACT/NEWSLETTER ====== */
 .contact-section {
     min-height: 80vh;
