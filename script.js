@@ -1652,9 +1652,8 @@ class SpaceBody {
         this.mesh.userData.body = this;
         SS.scene.add(this.mesh);
 
-        if (data.type !== 'star') {
-            SS.interactives.push(this.mesh);
-        }
+        // All bodies are interactive; star opens artist panel, planets zoom
+        SS.interactives.push(this.mesh);
 
         if (parentBody) {
             this.orbitLine = makeOrbitLine(data.orbitRadius, data.color);
@@ -2165,7 +2164,7 @@ const _tooltipTitle = document.getElementById('tooltip-title');
 const _tooltipContent = _tooltipEl?.querySelector('.tooltip-content');
 
 function showPlanetTooltip(body, cx, cy) {
-    if (!_tooltipEl || !body || body.key === 'STAR') { hidePlanetTooltip(); return; }
+    if (!_tooltipEl || !body || body.data.type === 'star') { hidePlanetTooltip(); return; }
     const col = body.data.color || '#00f0ff';
     _tooltipContent.style.borderColor = col;
     _tooltipContent.style.boxShadow = `0 0 24px ${col}44, inset 0 0 12px ${col}22`;
@@ -2192,6 +2191,7 @@ function onSolarHover(event) {
 
     if (hit !== hoverBody) {
         hoverBody = hit;
+        // Star gets a special 'pointer' cursor + hint
         SS.renderer.domElement.style.cursor = (hit && !isFocus) ? 'pointer' : 'crosshair';
     }
 
@@ -2216,7 +2216,9 @@ function onSolarClick(event) {
     const hits = SS.raycaster.intersectObjects(SS.interactives);
     if (hits.length > 0) {
         const body = hits[0].object.userData.body;
-        if (body && body !== SS.focused) {
+        if (body && body.data.type === 'star') {
+            openArtistPanel();
+        } else if (body && body !== SS.focused) {
             zoomToPlanet(body);
         }
     }
@@ -2602,6 +2604,387 @@ function exitSurfaceMode() {
         }
     };
     SS._zoomRaf = requestAnimationFrame(bk);
+}
+
+// ─────────────────────────────────────────────
+// 9b. ARTIST PANEL — triggered by clicking the sun
+// ─────────────────────────────────────────────
+(function initArtistPanel() {
+
+    // ── Inject CSS ──
+    const s = document.createElement('style');
+    s.textContent = `
+    #artist-panel-overlay {
+        position: fixed; inset: 0; z-index: 99999;
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.55s cubic-bezier(0.16,1,0.3,1);
+        background: radial-gradient(ellipse at 50% 60%, rgba(255,120,0,0.08) 0%, rgba(3,4,10,0.92) 55%);
+        backdrop-filter: blur(18px);
+    }
+    #artist-panel-overlay.open {
+        opacity: 1; pointer-events: auto;
+    }
+
+    #artist-panel {
+        position: relative;
+        width: min(94vw, 1080px);
+        max-height: 92vh;
+        overflow-y: auto;
+        background: linear-gradient(135deg, rgba(12,14,28,0.98) 0%, rgba(6,8,18,0.99) 100%);
+        border: 1px solid rgba(255,140,0,0.2);
+        border-radius: 20px;
+        box-shadow:
+            0 0 0 1px rgba(255,140,0,0.08),
+            0 0 80px rgba(255,100,0,0.15),
+            0 0 200px rgba(255,60,0,0.08),
+            inset 0 0 80px rgba(255,80,0,0.04);
+        transform: translateY(40px) scale(0.97);
+        transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255,140,0,0.3) transparent;
+    }
+    #artist-panel-overlay.open #artist-panel {
+        transform: translateY(0) scale(1);
+    }
+
+    .ap-close {
+        position: absolute; top: 1.5rem; right: 1.5rem;
+        width: 40px; height: 40px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 50%;
+        color: rgba(255,255,255,0.6);
+        font-size: 1.1rem; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.25s ease;
+        z-index: 10;
+        font-family: sans-serif;
+    }
+    .ap-close:hover {
+        background: rgba(255,100,0,0.2);
+        border-color: rgba(255,140,0,0.5);
+        color: #fff;
+        transform: scale(1.1);
+    }
+
+    .ap-hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 420px;
+        border-radius: 20px 20px 0 0;
+        overflow: hidden;
+    }
+
+    .ap-photo-col {
+        position: relative;
+        overflow: hidden;
+    }
+    .ap-photo-col img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+        filter: saturate(1.1) contrast(1.05);
+    }
+    .ap-photo-col::after {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(to right, transparent 70%, rgba(6,8,18,0.99) 100%),
+                    linear-gradient(to top, rgba(6,8,18,0.6) 0%, transparent 40%);
+    }
+
+    .ap-identity-col {
+        display: flex; flex-direction: column;
+        justify-content: center;
+        padding: 3rem 3rem 3rem 2.5rem;
+        background: transparent;
+    }
+
+    .ap-label {
+        font-family: 'Major Mono Display', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 5px;
+        color: rgba(255,140,0,0.7);
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    .ap-name {
+        font-family: 'Major Mono Display', monospace;
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        color: #fff;
+        line-height: 1;
+        letter-spacing: -1px;
+        text-shadow: 0 0 60px rgba(255,120,0,0.4);
+        margin-bottom: 0.5rem;
+    }
+
+    .ap-genre {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.85rem;
+        color: rgba(255,140,0,0.8);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+    }
+
+    .ap-stats {
+        display: flex; gap: 2rem;
+        margin-bottom: 2.5rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid rgba(255,140,0,0.1);
+    }
+    .ap-stat { text-align: center; }
+    .ap-stat-num {
+        font-family: 'Major Mono Display', monospace;
+        font-size: 1.8rem; color: #fff;
+        line-height: 1;
+    }
+    .ap-stat-lbl {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.65rem;
+        color: rgba(255,255,255,0.35);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-top: 0.3rem;
+    }
+
+    .ap-bio {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        line-height: 1.75;
+        color: rgba(255,255,255,0.65);
+        margin-bottom: 2.5rem;
+    }
+
+    .ap-socials {
+        display: flex; gap: 0.8rem; flex-wrap: wrap;
+    }
+    .ap-social-btn {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        padding: 0.5rem 1.1rem;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 50px;
+        color: rgba(255,255,255,0.65);
+        font-size: 0.75rem;
+        font-family: 'Inter', sans-serif;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: all 0.25s ease;
+        cursor: pointer;
+    }
+    .ap-social-btn:hover {
+        background: rgba(255,120,0,0.15);
+        border-color: rgba(255,140,0,0.5);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(255,100,0,0.2);
+    }
+
+    .ap-body {
+        padding: 3rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        border-top: 1px solid rgba(255,140,0,0.08);
+    }
+
+    .ap-section-title {
+        font-family: 'Major Mono Display', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 4px;
+        color: rgba(255,140,0,0.6);
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+    }
+
+    .ap-disco-list {
+        list-style: none; padding: 0; margin: 0;
+        display: flex; flex-direction: column; gap: 1rem;
+    }
+    .ap-disco-item {
+        display: flex; align-items: center; gap: 1rem;
+        padding: 0.8rem 1rem;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 10px;
+        transition: all 0.25s ease;
+        text-decoration: none;
+    }
+    .ap-disco-item:hover {
+        background: rgba(255,120,0,0.08);
+        border-color: rgba(255,140,0,0.2);
+        transform: translateX(4px);
+    }
+    .ap-disco-cover {
+        width: 42px; height: 42px; border-radius: 6px;
+        object-fit: cover; flex-shrink: 0;
+    }
+    .ap-disco-info { flex: 1; overflow: hidden; }
+    .ap-disco-name {
+        font-family: 'Inter', sans-serif; font-size: 0.85rem;
+        font-weight: 600; color: #fff;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .ap-disco-meta {
+        font-size: 0.7rem; color: rgba(255,255,255,0.35);
+        letter-spacing: 1px; margin-top: 2px;
+    }
+
+    .ap-quote-block {
+        padding: 2rem;
+        background: rgba(255,120,0,0.04);
+        border-left: 3px solid rgba(255,140,0,0.4);
+        border-radius: 0 10px 10px 0;
+        margin-bottom: 1.5rem;
+    }
+    .ap-quote {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        font-style: italic;
+        line-height: 1.8;
+        color: rgba(255,255,255,0.7);
+    }
+    .ap-quote-author {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        color: rgba(255,140,0,0.5);
+        text-transform: uppercase;
+        margin-top: 0.8rem;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        #artist-panel { width: 96vw; max-height: 96vh; }
+        .ap-hero { grid-template-columns: 1fr; min-height: auto; }
+        .ap-photo-col { height: 260px; }
+        .ap-identity-col { padding: 2rem 1.5rem; }
+        .ap-name { font-size: 2rem; }
+        .ap-body { grid-template-columns: 1fr; padding: 1.5rem; gap: 1.5rem; }
+        .ap-stats { gap: 1rem; }
+    }
+    `;
+    document.head.appendChild(s);
+
+    // ── Build HTML ──
+    const overlay = document.createElement('div');
+    overlay.id = 'artist-panel-overlay';
+    overlay.innerHTML = `
+    <div id="artist-panel" role="dialog" aria-label="Profil Artiste">
+        <button class="ap-close" id="ap-close-btn" aria-label="Fermer">✕</button>
+
+        <div class="ap-hero">
+            <div class="ap-photo-col">
+                <img src="images/raptol_artist.jpg" alt="Raptol — Photo artiste" onerror="this.style.background='radial-gradient(circle,rgba(255,100,0,0.3),#03040a)';this.style.minHeight='420px';">
+            </div>
+            <div class="ap-identity-col">
+                <div class="ap-label">◉ Système Stellaire · Artiste</div>
+                <div class="ap-name">RAPTOL</div>
+                <div class="ap-genre">Death Metal Mélodique</div>
+
+                <div class="ap-stats">
+                    <div class="ap-stat">
+                        <div class="ap-stat-num">3</div>
+                        <div class="ap-stat-lbl">Albums & EP</div>
+                    </div>
+                    <div class="ap-stat">
+                        <div class="ap-stat-num">13+</div>
+                        <div class="ap-stat-lbl">Titres</div>
+                    </div>
+                    <div class="ap-stat">
+                        <div class="ap-stat-num">2020</div>
+                        <div class="ap-stat-lbl">Depuis</div>
+                    </div>
+                </div>
+
+                <p class="ap-bio">
+                    RAPTOL est un projet de death metal mélodique né en 2020, à la croisée de la puissance brute et de la narration émotionnelle. Chaque release est une constellation — un espace sonore où la douleur, la possession et la libération coexistent. De&nbsp;<em>Virgo</em>&nbsp;à l'odyssée concept de&nbsp;<em>Starlight</em>, jusqu'au nouveau singles&nbsp;<em>Darkest Dreams</em>, RAPTOL construit un univers aussi vaste que le vide entre les étoiles.
+                </p>
+
+                <div class="ap-socials">
+                    <a href="https://open.spotify.com/artist/5iZwGnQHKkWgjg9yCFm9um" target="_blank" class="ap-social-btn">Spotify</a>
+                    <a href="https://www.youtube.com/@Raptol" target="_blank" class="ap-social-btn">YouTube</a>
+                    <a href="https://music.apple.com/fr/artist/raptol/1503556593" target="_blank" class="ap-social-btn">Apple Music</a>
+                    <a href="https://raptol.bandcamp.com" target="_blank" class="ap-social-btn">Bandcamp</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="ap-body">
+            <div>
+                <div class="ap-section-title">◈ Discographie</div>
+                <ul class="ap-disco-list">
+                    <li>
+                        <a class="ap-disco-item" href="#" onclick="closeArtistPanel();document.querySelector('[data-album=\\'DARKEST DREAMS\\']')?.click();return false;">
+                            <img class="ap-disco-cover" src="images/Darkest_Dreams.png" alt="Darkest Dreams">
+                            <div class="ap-disco-info">
+                                <div class="ap-disco-name">Darkest Dreams</div>
+                                <div class="ap-disco-meta">Single · 2026</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ap-disco-item" href="#" onclick="closeArtistPanel();document.querySelector('[data-album=STARLIGHT]')?.click();return false;">
+                            <img class="ap-disco-cover" src="images/Cover Starlight.png" alt="Starlight">
+                            <div class="ap-disco-info">
+                                <div class="ap-disco-name">Starlight</div>
+                                <div class="ap-disco-meta">Album · 2025 · 10 titres</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ap-disco-item" href="#" onclick="closeArtistPanel();document.querySelector('[data-album=VIRGO]')?.click();return false;">
+                            <img class="ap-disco-cover" src="images/cover virgo.jpg" alt="Virgo">
+                            <div class="ap-disco-info">
+                                <div class="ap-disco-name">Virgo</div>
+                                <div class="ap-disco-meta">Single · 2020 / Re-release</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ap-disco-item" href="#" onclick="closeArtistPanel();document.querySelector('[data-album=ULONIA]')?.click();return false;">
+                            <img class="ap-disco-cover" src="images/cover ulonia.jpg" alt="Ulonia">
+                            <div class="ap-disco-info">
+                                <div class="ap-disco-name">Ulonia</div>
+                                <div class="ap-disco-meta">Album · Concept</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="ap-section-title">◈ À propos</div>
+                <div class="ap-quote-block">
+                    <div class="ap-quote">
+                        "La lumière la plus difficile à trouver, c'est celle qu'on a appris à ne pas mériter."
+                    </div>
+                    <div class="ap-quote-author">— Raptol, Darkest Dreams</div>
+                </div>
+                <p class="ap-bio" style="margin:0;">
+                    Architecte de ses propres univers, RAPTOL ne se contente pas d'écrire des chansons — il construit des récits. Chaque album est une planète : Starlight raconte la possession et la libération à travers dix morceaux d'une intensité crescendo. Ulonia explore la géographie émotionnelle. Et maintenant, Darkest Dreams plonge dans les rêves les plus sombres de l'âme humaine.
+                </p>
+            </div>
+        </div>
+    </div>
+    `;
+    document.body.appendChild(overlay);
+
+    // ── Close handlers ──
+    document.getElementById('ap-close-btn').addEventListener('click', closeArtistPanel);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeArtistPanel(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeArtistPanel(); });
+
+})();
+
+function openArtistPanel() {
+    document.getElementById('artist-panel-overlay')?.classList.add('open');
+}
+function closeArtistPanel() {
+    document.getElementById('artist-panel-overlay')?.classList.remove('open');
 }
 
 // ─────────────────────────────────────────────
