@@ -548,6 +548,9 @@ section .glass-card, section .section-title, section .gallery-item {
     opacity: 0;
     pointer-events: none;
 }
+.solar-system-view.hidden * {
+    pointer-events: none !important;
+}
 
 /* Cinematic Warp Flash */
 .warp-flash {
@@ -599,7 +602,7 @@ section .glass-card, section .section-title, section .gallery-item {
     transition: opacity 0.3s ease-in;
 }
 
-/* ── Mobile hamburger toggle ── */
+/* ── Mobile list toggle (was hamburger) ── */
 .mobile-list-toggle {
     display: none; /* hidden on desktop */
     pointer-events: auto;
@@ -607,26 +610,20 @@ section .glass-card, section .section-title, section .gallery-item {
     border: 1px solid rgba(255,255,255,0.15);
     border-radius: 8px;
     width: 40px; height: 36px;
-    flex-direction: column;
     align-items: center; justify-content: center;
-    gap: 5px; cursor: pointer;
+    cursor: pointer;
     backdrop-filter: blur(12px);
     transition: border-color 0.2s, background 0.2s;
     flex-shrink: 0;
+    color: rgba(255,255,255,0.75);
 }
-.mobile-list-toggle span {
-    display: block; width: 17px; height: 1.5px;
-    background: rgba(255,255,255,0.75);
-    border-radius: 1px;
-    transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), opacity 0.2s;
-}
+.mobile-list-toggle .icon-close { display: none; }
 .mobile-list-toggle.open {
     border-color: rgba(80,160,255,0.5);
     background: rgba(10,20,50,0.9);
 }
-.mobile-list-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.mobile-list-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.mobile-list-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mobile-list-toggle.open .icon-list { display: none; }
+.mobile-list-toggle.open .icon-close { display: block; }
 
 @media (max-width: 768px) {
     .mobile-list-toggle { display: flex; }
