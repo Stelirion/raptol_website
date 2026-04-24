@@ -101,10 +101,11 @@ const ALBUM_DATA = {
     "DARKEST DREAMS": {
         type: "single", badge: "Nouveau Single",
         color: "#e8000a", color2: "#3d0000", size: 45, orbitRadius: 1750,
-        listenUrl: "",
+        listenUrl: "https://distrokid.com/hyperfollow/raptol/darkest-dreams",
         description: "Le nouveau single. Death metal mélodique.",
         tracks: [
             {
+                ytID: "XWSBWOjRi88",
                 name: "Darkest Dreams",
                 duration: "",
                 credits: "",
