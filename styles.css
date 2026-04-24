@@ -332,7 +332,7 @@ section .glass-card, section .section-title, section .gallery-item {
 
 .hologram-screen-wrapper {
     width: 100%;
-    max-width: 480px;
+    max-width: 800px;
     perspective: 1200px; /* Gives the 3D effect depth */
     margin: 0 auto 5rem;
 }
