@@ -1500,11 +1500,13 @@ body.cursor-hover #cursor-ring {
     .hologram-screen {
         transform: none !important;
         transition: box-shadow 0.4s ease;
+        padding: 0;
     }
     .hologram-screen-wrapper {
-        padding: 0 1rem;
+        padding: 0;
         margin-bottom: 1.5rem;
         max-width: 100%;
+        width: 100%;
     }
     .button-group { flex-direction: column; width: 100%; max-width: 320px; }
     .btn-primary, .btn-secondary { width: 100%; text-align: center; }
