@@ -4117,6 +4117,77 @@ window.addEventListener('resize', () => {
     }
 })();
 
+// ── Easter egg: le coureur de l'espace ──
+(function initSpaceRunner() {
+    // Inject CSS keyframe
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes space-run {
+            from { transform: translateX(-160px); }
+            to   { transform: translateX(calc(100vw + 160px)); }
+        }
+        #space-runner {
+            display: none;
+            position: fixed;
+            z-index: 99997;
+            pointer-events: none;
+        }
+        #space-runner img {
+            height: 90px;
+            image-rendering: auto;
+            filter: drop-shadow(0 0 8px rgba(0,200,255,0.4));
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Create element
+    const runner = document.createElement('div');
+    runner.id = 'space-runner';
+    runner.innerHTML = '<img src="images/romain1.png" alt="">';
+    document.body.appendChild(runner);
+
+    const img = runner.querySelector('img');
+    const FRAMES = ['images/romain1.png', 'images/romain%202.png'];
+
+    function run() {
+        // Random vertical position (20% to 65% from bottom)
+        const bottom = 20 + Math.random() * 45;
+        runner.style.bottom = bottom + '%';
+        runner.style.display = 'block';
+        runner.style.animation = 'none';
+        void runner.offsetWidth; // force reflow
+
+        // Alternate frames to simulate running
+        let frame = 0;
+        img.src = FRAMES[0];
+        const sprite = setInterval(() => {
+            frame = (frame + 1) % 2;
+            img.src = FRAMES[frame];
+        }, 100);
+
+        // Launch run animation (1.5s = very fast)
+        runner.style.animation = 'space-run 1.5s linear forwards';
+
+        // Cleanup after crossing screen
+        setTimeout(() => {
+            runner.style.display = 'none';
+            runner.style.animation = 'none';
+            clearInterval(sprite);
+            scheduleNext();
+        }, 1600);
+    }
+
+    function scheduleNext() {
+        // Next appearance: 3 to 9 minutes
+        const delay = (180 + Math.random() * 360) * 1000;
+        setTimeout(run, delay);
+    }
+
+    // First appearance: 1 to 3 minutes after load
+    const firstDelay = (60 + Math.random() * 120) * 1000;
+    setTimeout(run, firstDelay);
+})();
+
 // ── Attribution: Planet textures from Solar System Scope (CC BY 4.0) ──
 // https://www.solarsystemscope.com/textures/
 
