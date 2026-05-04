@@ -1776,7 +1776,8 @@ class SpaceBody {
                     new THREE.TextureLoader().load('images/Florian.jpg', res, undefined, rej)
                 );
                 this.mesh.material = new THREE.MeshStandardMaterial({
-                    map: tex, roughness: 0.65, metalness: 0.05
+                    map: tex, roughness: 0.65, metalness: 0.05,
+                    transparent: true, opacity: 0 // révélé à l'entrée en surface
                 });
                 this._addSecretGlow();
                 return;
@@ -2024,9 +2025,11 @@ async function initSolar() {
         SS.bodies.push(body);
     }
 
-    // Easter egg secret — point fixe quelque part dans l'espace, pas d'orbite
+    // Easter egg secret — point fixe, mesh invisible (raycasting only), sprite = glow
     const florian = new SpaceBody('FLORIAN', ALBUM_DATA['FLORIAN'], null);
-    florian.mesh.position.set(8500, 2200, -6000); // position fixe, loin dans le vide
+    florian.mesh.position.set(8500, 2200, -6000);
+    florian.mesh.material.transparent = true;
+    florian.mesh.material.opacity = 0; // invisible jusqu'au zoom
     SS.bodies.push(florian);
 
     const starlight = SS.bodies.find(b => b.key === 'STARLIGHT');
@@ -2543,6 +2546,9 @@ function clearAlbumColorVars(el) {
 function enterSurfaceMode(body) {
     document.querySelector('.solar-hud-top').classList.add('visible');
 
+    // Révéler la planète Florian au zoom
+    if (body.key === 'FLORIAN') body.mesh.material.opacity = 1;
+
     // ── Hide planet list (track sidebar takes over) ──
     hidePlanetList();
     hidePlanetTooltip();
@@ -2584,6 +2590,10 @@ function enterSurfaceMode(body) {
 }
 
 function exitSurfaceMode() {
+    // Re-cacher la planète Florian au retour
+    const florianBody = SS.bodies?.find(b => b.key === 'FLORIAN');
+    if (florianBody) florianBody.mesh.material.opacity = 0;
+
     // Reset mobile hamburger state
     document.getElementById('mobile-list-toggle')?.classList.remove('open');
     document.getElementById('mobile-list-backdrop')?.classList.remove('visible');
