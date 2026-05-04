@@ -191,6 +191,19 @@ const ALBUM_DATA = {
             { ytID:"l4CzZM6RLqo", name: "Final Battle",          duration: "", credits: "Instrumental", lyrics: "", story: "Je retourne dans la forteresse et j'affronte Xonyar pour la dernière fois. Le combat est long et dévastateur. Chaque technique apprise, chaque gramme de détermination, chaque cicatrice gagnée sur le chemin — tout converge vers cet instant unique. La forteresse tremble. Les orbes d'âmes volées scintillent dans la pénombre. Mon destin et celui de chaque âme piégée dans cette salle reposent sur ce seul moment." },
             { ytID:"PiCHg_u6-6s", name: "Outer Wilds",           duration: "", credits: "Instrumental", lyrics: "", story: "La forteresse s'effondre. Les âmes volées sont libérées, se dispersant comme de la lumière dans le ciel alien. Je me tiens dans les décombres, mon propre âme enfin rendue, entière. Je retrouve mon chemin à travers le labyrinthe, je longe le lac, je traverse les terres dévastées — et, d'une manière impossible à expliquer, je reviens à la surface. La mer d'Écosse m'attend quelque part au-delà de l'horizon. Je suis libre.", spotify: "https://open.spotify.com/artist/5iZwGnQHKkWgjg9ygj", bandcamp: "https://raptol.bandcamp.com/track/outer-wilds" }
         ]
+    },
+
+    // ── Easter egg secret ──
+    "FLORIAN": {
+        type: 'easter_egg',
+        badge: '???',
+        color: '#cc00ff',
+        color2: '#1a0030',
+        size: 70,
+        orbitRadius: 11000,
+        listenUrl: '',
+        description: '',
+        tracks: []
     }
 };
 
@@ -1759,6 +1772,16 @@ class SpaceBody {
             case 'THE REVENGE':     shader = TheRevengeShader;     break;
             case 'VIRGO':           shader = VirgoShader;          break;
             case 'DARKEST DREAMS':  shader = DarkestDreamsShader;  break;
+            case 'FLORIAN': {
+                const tex = await new Promise((res, rej) =>
+                    new THREE.TextureLoader().load('images/Florian.jpg', res, undefined, rej)
+                );
+                this.mesh.material = new THREE.MeshStandardMaterial({
+                    map: tex, roughness: 0.65, metalness: 0.05
+                });
+                this._addSecretGlow();
+                return;
+            }
             default:
                 this.mesh.material = new THREE.MeshStandardMaterial({ color: new THREE.Color(data.color) });
                 return;
@@ -1774,6 +1797,30 @@ class SpaceBody {
         if (this.key === 'STARLIGHT') {
             this._addRings();
         }
+    }
+
+    _addSecretGlow() {
+        // Glow sprite visible de loin — étoile mystérieuse violette
+        const canvas = document.createElement('canvas');
+        canvas.width = canvas.height = 256;
+        const ctx = canvas.getContext('2d');
+        const g = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+        g.addColorStop(0,   'rgba(220,0,255,1)');
+        g.addColorStop(0.2, 'rgba(180,0,255,0.6)');
+        g.addColorStop(0.5, 'rgba(100,0,200,0.2)');
+        g.addColorStop(1,   'rgba(0,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, 256, 256);
+        const tex = new THREE.CanvasTexture(canvas);
+        const mat = new THREE.SpriteMaterial({
+            map: tex,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+            transparent: true
+        });
+        const sprite = new THREE.Sprite(mat);
+        sprite.scale.set(600, 600, 1); // grand — visible depuis le système solaire
+        this.mesh.add(sprite);
     }
 
     _addRings() {
@@ -1977,6 +2024,11 @@ async function initSolar() {
         const body = new SpaceBody(key, ALBUM_DATA[key], star);
         SS.bodies.push(body);
     }
+
+    // Easter egg secret — très loin, orbite ultra-lente
+    const florian = new SpaceBody('FLORIAN', ALBUM_DATA['FLORIAN'], star);
+    florian.orbitSpeed = 0.00015;
+    SS.bodies.push(florian);
 
     const starlight = SS.bodies.find(b => b.key === 'STARLIGHT');
     const revengeData = { ...ALBUM_DATA['THE REVENGE'], orbitRadius: 240, size: 28 };
@@ -2391,8 +2443,8 @@ function buildPlanetListSidebar() {
     el.id = 'planet-list';
     el.style.display = 'none'; // shown via showPlanetList() after warp
 
-    // Only show real bodies (not STAR), split albums vs singles
-    const listed = SS.bodies.filter(b => b.key !== 'STAR' && !b.data.parentName);
+    // Only show real bodies (not STAR, not easter eggs), split albums vs singles
+    const listed = SS.bodies.filter(b => b.key !== 'STAR' && !b.data.parentName && b.data.type !== 'easter_egg');
     const albums  = listed.filter(b => b.data.type === 'album');
     const singles = listed.filter(b => b.data.type !== 'album');
 
@@ -2508,11 +2560,15 @@ function enterSurfaceMode(body) {
     const nameEl = document.getElementById('planet-surface-name');
     const nameText = body.data.type === 'album'
         ? `${toTitleCase(body.data.badge)} • ${toTitleCase(body.key)}`
+        : body.data.type === 'easter_egg'
+        ? toTitleCase(body.key)
         : toTitleCase(body.key);
     nameEl.innerHTML = nameText + '<span id="planet-surface-subtitle"></span>';
 
     document.getElementById('planet-surface-subtitle').textContent = body.data.type === 'album'
         ? `${body.data.tracks.length} morceaux`
+        : body.data.type === 'easter_egg'
+        ? 'Planète inconnue'
         : 'Single';
 
     setTimeout(() => nameEl.classList.add('visible'), 100);
