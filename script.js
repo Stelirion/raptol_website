@@ -4155,13 +4155,20 @@ window.addEventListener('resize', () => {
         return setInterval(() => {
             frame = (frame + 1) % 2;
             img.src = FRAMES[frame];
-        }, 100);
+        }, 120);
+    }
+
+    function resetImg() {
+        img.style.transition    = 'none';
+        img.style.transform     = 'none';
+        img.style.transformOrigin = 'bottom center';
     }
 
     function run() {
         // Random vertical position
         runner.style.bottom = (20 + Math.random() * 45) + '%';
         runner.style.display = 'block';
+        resetImg();
 
         // Point d'arrêt aléatoire (25% à 65% de la largeur)
         const stopPct = 25 + Math.random() * 40;
@@ -4180,30 +4187,42 @@ window.addEventListener('resize', () => {
         runner.style.transform  = `translateX(${stopX}px)`;
 
         setTimeout(() => {
-            // ── Phase 2 : pause ──
+            // ── Phase 2a : stop, pose statique ──
             clearInterval(sprite);
-            img.src = FRAMES[0]; // pose statique
+            img.src = FRAMES[0];
             runner.style.transition = 'none';
 
-            const pauseDur = 800 + Math.random() * 1200; // 0.8s à 2s
-
+            // ── Phase 2b : il regarde l'écran (zoom depuis les pieds) ──
             setTimeout(() => {
-                // ── Phase 3 : repart vers la droite ──
-                const dist3 = window.innerWidth - stopX + 160;
-                const dur3  = dist3 / speed;
+                img.style.transformOrigin = 'bottom center';
+                img.style.transition = 'transform 0.45s ease-out';
+                img.style.transform  = 'scale(2.8)';
 
-                sprite = startSprite();
-                runner.style.transition = `transform ${dur3}s linear`;
-                runner.style.transform  = `translateX(${window.innerWidth + 160}px)`;
-
+                // ── Phase 2c : il se tire vite (dézoom éclair) ──
                 setTimeout(() => {
-                    runner.style.display    = 'none';
-                    runner.style.transition = 'none';
-                    clearInterval(sprite);
-                    scheduleNext();
-                }, dur3 * 1000 + 100);
+                    img.style.transition = 'transform 0.08s ease-in';
+                    img.style.transform  = 'scale(1)';
 
-            }, pauseDur);
+                    setTimeout(() => {
+                        // ── Phase 3 : repart en courant ──
+                        resetImg();
+                        const dist3 = window.innerWidth - stopX + 160;
+                        const dur3  = dist3 / speed;
+
+                        sprite = startSprite();
+                        runner.style.transition = `transform ${dur3}s linear`;
+                        runner.style.transform  = `translateX(${window.innerWidth + 160}px)`;
+
+                        setTimeout(() => {
+                            runner.style.display    = 'none';
+                            runner.style.transition = 'none';
+                            clearInterval(sprite);
+                            scheduleNext();
+                        }, dur3 * 1000 + 100);
+
+                    }, 100); // délai après dézoom avant de courir
+                }, 1100); // durée du regard (1.1s)
+            }, 250); // petit délai avant de commencer à grossir
 
         }, dur1 * 1000);
     }
