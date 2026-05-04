@@ -199,7 +199,7 @@ const ALBUM_DATA = {
         badge: '???',
         color: '#cc00ff',
         color2: '#1a0030',
-        size: 70,
+        size: 55,
         listenUrl: '',
         description: '',
         tracks: []
@@ -1818,7 +1818,7 @@ class SpaceBody {
             transparent: true
         });
         const sprite = new THREE.Sprite(mat);
-        sprite.scale.set(80, 80, 1); // taille d'une étoile normale
+        sprite.scale.set(15, 15, 1); // petit point lumineux
         this.mesh.add(sprite);
     }
 
