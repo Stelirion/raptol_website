@@ -1800,28 +1800,21 @@ class SpaceBody {
     }
 
     _addSecretGlow() {
-        // Glow sprite visible de loin — étoile mystérieuse violette
-        const canvas = document.createElement('canvas');
-        canvas.width = canvas.height = 256;
-        const ctx = canvas.getContext('2d');
-        const g = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
-        g.addColorStop(0,   'rgba(220,0,255,1)');
-        g.addColorStop(0.2, 'rgba(180,0,255,0.6)');
-        g.addColorStop(0.5, 'rgba(100,0,200,0.2)');
-        g.addColorStop(1,   'rgba(0,0,0,0)');
-        ctx.fillStyle = g;
-        ctx.fillRect(0, 0, 256, 256);
-        const tex = new THREE.CanvasTexture(canvas);
-        const mat = new THREE.SpriteMaterial({
-            map: tex,
+        // Point fixe en pixels, comme les étoiles du fond, mais violet et plus lumineux
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0, 0, 0]), 3));
+        const mat = new THREE.PointsMaterial({
+            color: 0xcc44ff,
+            size: 5,
+            sizeAttenuation: false, // taille fixe en pixels quelle que soit la distance
             blending: THREE.AdditiveBlending,
             depthWrite: false,
-            transparent: true
+            transparent: true,
+            opacity: 1
         });
-        const sprite = new THREE.Sprite(mat);
-        sprite.scale.set(30, 30, 1);
-        this.mesh.add(sprite);
-        this._secretGlowSprite = sprite; // référence pour le scintillement
+        const point = new THREE.Points(geo, mat);
+        this.mesh.add(point);
+        this._secretGlowSprite = point;
     }
 
     _addRings() {
@@ -2028,7 +2021,7 @@ async function initSolar() {
 
     // Easter egg secret — point fixe, mesh invisible (raycasting only), sprite = glow
     const florian = new SpaceBody('FLORIAN', ALBUM_DATA['FLORIAN'], null);
-    florian.mesh.position.set(8500, 2200, -6000);
+    florian.mesh.position.set(3800, 900, -3200);
     florian.mesh.material.transparent = true;
     florian.mesh.material.opacity = 0; // invisible jusqu'au zoom
     SS.bodies.push(florian);
@@ -2129,9 +2122,7 @@ function animateSolar() {
             }
         } else if (body.key === 'FLORIAN' && body._secretGlowSprite) {
             // Scintillement doux pour que le point se distingue des étoiles fixes
-            const pulse = 0.7 + Math.abs(Math.sin(time * 1.8)) * 0.6;
-            const sz = 30 * pulse;
-            body._secretGlowSprite.scale.set(sz, sz, 1);
+            body._secretGlowSprite.material.opacity = 0.6 + Math.abs(Math.sin(time * 1.8)) * 0.4;
         } else {
             // Update planet shader uniforms each frame
             if (body.planetUniforms) {
