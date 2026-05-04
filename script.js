@@ -1818,7 +1818,7 @@ class SpaceBody {
             transparent: true
         });
         const sprite = new THREE.Sprite(mat);
-        sprite.scale.set(600, 600, 1); // grand — visible depuis le système solaire
+        sprite.scale.set(80, 80, 1); // taille d'une étoile normale
         this.mesh.add(sprite);
     }
 
