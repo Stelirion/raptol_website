@@ -4147,7 +4147,7 @@ window.addEventListener('resize', () => {
     document.body.appendChild(runner);
 
     const img = runner.querySelector('img');
-    const FRAMES = ['images/romain1.png', 'images/romain%202.png'];
+    const FRAMES = ['images/romain1.png', 'images/romain 2.png'];
 
     function run() {
         // Random vertical position (20% to 65% from bottom)
@@ -4177,16 +4177,16 @@ window.addEventListener('resize', () => {
         }, 1600);
     }
 
-    const onServer = ['raptol.fr', 'www.raptol.fr'].includes(window.location.hostname);
+    const isProd = ['raptol.fr', 'www.raptol.fr'].includes(window.location.hostname);
 
     function scheduleNext() {
-        // Sur le serveur : boucle rapide (2s). En local : 3-9 minutes
-        const delay = onServer ? 2000 : (180 + Math.random() * 360) * 1000;
+        // En test (localhost) : boucle rapide (2s). En prod : 3-9 minutes
+        const delay = isProd ? (180 + Math.random() * 360) * 1000 : 2000;
         setTimeout(run, delay);
     }
 
-    // Première apparition : immédiate sur le serveur, 1-3 min en local
-    const firstDelay = onServer ? 500 : (60 + Math.random() * 120) * 1000;
+    // Première apparition : immédiate en test, 1-3 min en prod
+    const firstDelay = isProd ? (60 + Math.random() * 120) * 1000 : 0;
     setTimeout(run, firstDelay);
 })();
 
