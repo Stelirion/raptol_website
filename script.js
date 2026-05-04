@@ -200,7 +200,6 @@ const ALBUM_DATA = {
         color: '#cc00ff',
         color2: '#1a0030',
         size: 70,
-        orbitRadius: 11000,
         listenUrl: '',
         description: '',
         tracks: []
@@ -2025,9 +2024,9 @@ async function initSolar() {
         SS.bodies.push(body);
     }
 
-    // Easter egg secret — très loin, orbite ultra-lente
-    const florian = new SpaceBody('FLORIAN', ALBUM_DATA['FLORIAN'], star);
-    florian.orbitSpeed = 0.00015;
+    // Easter egg secret — point fixe quelque part dans l'espace, pas d'orbite
+    const florian = new SpaceBody('FLORIAN', ALBUM_DATA['FLORIAN'], null);
+    florian.mesh.position.set(8500, 2200, -6000); // position fixe, loin dans le vide
     SS.bodies.push(florian);
 
     const starlight = SS.bodies.find(b => b.key === 'STARLIGHT');
