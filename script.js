@@ -1819,8 +1819,9 @@ class SpaceBody {
             transparent: true
         });
         const sprite = new THREE.Sprite(mat);
-        sprite.scale.set(15, 15, 1); // petit point lumineux
+        sprite.scale.set(30, 30, 1);
         this.mesh.add(sprite);
+        this._secretGlowSprite = sprite; // référence pour le scintillement
     }
 
     _addRings() {
@@ -2126,6 +2127,11 @@ function animateSolar() {
                     layer.sprite.scale.set(sz, sz, 1);
                 }
             }
+        } else if (body.key === 'FLORIAN' && body._secretGlowSprite) {
+            // Scintillement doux pour que le point se distingue des étoiles fixes
+            const pulse = 0.7 + Math.abs(Math.sin(time * 1.8)) * 0.6;
+            const sz = 30 * pulse;
+            body._secretGlowSprite.scale.set(sz, sz, 1);
         } else {
             // Update planet shader uniforms each frame
             if (body.planetUniforms) {
