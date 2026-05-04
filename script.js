@@ -4177,14 +4177,16 @@ window.addEventListener('resize', () => {
         }, 1600);
     }
 
+    const onServer = ['raptol.fr', 'www.raptol.fr'].includes(window.location.hostname);
+
     function scheduleNext() {
-        // Next appearance: 3 to 9 minutes
-        const delay = (180 + Math.random() * 360) * 1000;
+        // Sur le serveur : boucle rapide (2s). En local : 3-9 minutes
+        const delay = onServer ? 2000 : (180 + Math.random() * 360) * 1000;
         setTimeout(run, delay);
     }
 
-    // First appearance: 1 to 3 minutes after load
-    const firstDelay = (60 + Math.random() * 120) * 1000;
+    // Première apparition : immédiate sur le serveur, 1-3 min en local
+    const firstDelay = onServer ? 500 : (60 + Math.random() * 120) * 1000;
     setTimeout(run, firstDelay);
 })();
 
