@@ -194,7 +194,7 @@ const ALBUM_DATA = {
     },
 
     // ── Easter egg secret ──
-    "FLORIAN": {
+    "PITOUAN": {
         type: 'easter_egg',
         badge: '???',
         color: '#cc00ff',
@@ -1771,9 +1771,9 @@ class SpaceBody {
             case 'THE REVENGE':     shader = TheRevengeShader;     break;
             case 'VIRGO':           shader = VirgoShader;          break;
             case 'DARKEST DREAMS':  shader = DarkestDreamsShader;  break;
-            case 'FLORIAN': {
+            case 'PITOUAN': {
                 const tex = await new Promise((res, rej) =>
-                    new THREE.TextureLoader().load('images/Florian.jpg', res, undefined, rej)
+                    new THREE.TextureLoader().load('images/Pitouan.jpg', res, undefined, rej)
                 );
                 this.mesh.material = new THREE.MeshStandardMaterial({
                     map: tex, roughness: 0.65, metalness: 0.05,
@@ -2020,11 +2020,11 @@ async function initSolar() {
     }
 
     // Easter egg secret — point fixe, mesh invisible (raycasting only), sprite = glow
-    const florian = new SpaceBody('FLORIAN', ALBUM_DATA['FLORIAN'], null);
-    florian.mesh.position.set(3800, 900, -3200);
-    florian.mesh.material.transparent = true;
-    florian.mesh.material.opacity = 0; // invisible jusqu'au zoom
-    SS.bodies.push(florian);
+    const pitouan = new SpaceBody('PITOUAN', ALBUM_DATA['PITOUAN'], null);
+    pitouan.mesh.position.set(3800, 900, -3200);
+    pitouan.mesh.material.transparent = true;
+    pitouan.mesh.material.opacity = 0; // invisible jusqu'au zoom
+    SS.bodies.push(pitouan);
 
     const starlight = SS.bodies.find(b => b.key === 'STARLIGHT');
     const revengeData = { ...ALBUM_DATA['THE REVENGE'], orbitRadius: 240, size: 28 };
@@ -2120,7 +2120,7 @@ function animateSolar() {
                     layer.sprite.scale.set(sz, sz, 1);
                 }
             }
-        } else if (body.key === 'FLORIAN' && body._secretGlowSprite) {
+        } else if (body.key === 'PITOUAN' && body._secretGlowSprite) {
             // Scintillement doux pour que le point se distingue des étoiles fixes
             body._secretGlowSprite.material.opacity = 0.6 + Math.abs(Math.sin(time * 1.8)) * 0.4;
         } else {
@@ -2543,8 +2543,8 @@ function clearAlbumColorVars(el) {
 function enterSurfaceMode(body) {
     document.querySelector('.solar-hud-top').classList.add('visible');
 
-    // Révéler la planète Florian au zoom
-    if (body.key === 'FLORIAN') body.mesh.material.opacity = 1;
+    // Révéler la planète Pitouan au zoom
+    if (body.key === 'PITOUAN') body.mesh.material.opacity = 1;
 
     // ── Hide planet list (track sidebar takes over) ──
     hidePlanetList();
@@ -2587,9 +2587,9 @@ function enterSurfaceMode(body) {
 }
 
 function exitSurfaceMode() {
-    // Re-cacher la planète Florian au retour
-    const florianBody = SS.bodies?.find(b => b.key === 'FLORIAN');
-    if (florianBody) florianBody.mesh.material.opacity = 0;
+    // Re-cacher la planète Pitouan au retour
+    const pitouanBody = SS.bodies?.find(b => b.key === 'PITOUAN');
+    if (pitouanBody) pitouanBody.mesh.material.opacity = 0;
 
     // Reset mobile hamburger state
     document.getElementById('mobile-list-toggle')?.classList.remove('open');
