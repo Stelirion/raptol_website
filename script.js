@@ -4230,13 +4230,13 @@ window.addEventListener('resize', () => {
     const isProd = ['raptol.fr', 'www.raptol.fr'].includes(window.location.hostname);
 
     function scheduleNext() {
-        // En test (localhost) : boucle rapide (2s). En prod : 3-9 minutes
-        const delay = isProd ? (180 + Math.random() * 360) * 1000 : 2000;
+        // En prod : 45-120 min. En local : 3s
+        const delay = isProd ? (2700 + Math.random() * 4500) * 1000 : 3000;
         setTimeout(run, delay);
     }
 
-    // Première apparition : immédiate en test, 1-3 min en prod
-    const firstDelay = isProd ? (60 + Math.random() * 120) * 1000 : 0;
+    // Première apparition : 20-45 min en prod, immédiate en local
+    const firstDelay = isProd ? (1200 + Math.random() * 1500) * 1000 : 0;
     setTimeout(run, firstDelay);
 })();
 
