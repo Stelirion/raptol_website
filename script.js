@@ -4149,32 +4149,63 @@ window.addEventListener('resize', () => {
     const img = runner.querySelector('img');
     const FRAMES = ['images/romain1.png', 'images/romain 2.png'];
 
-    function run() {
-        // Random vertical position (20% to 65% from bottom)
-        const bottom = 20 + Math.random() * 45;
-        runner.style.bottom = bottom + '%';
-        runner.style.display = 'block';
-        runner.style.animation = 'none';
-        void runner.offsetWidth; // force reflow
-
-        // Alternate frames to simulate running
+    function startSprite() {
         let frame = 0;
         img.src = FRAMES[0];
-        const sprite = setInterval(() => {
+        return setInterval(() => {
             frame = (frame + 1) % 2;
             img.src = FRAMES[frame];
         }, 100);
+    }
 
-        // Launch run animation (1.5s = very fast)
-        runner.style.animation = 'space-run 1.5s linear forwards';
+    function run() {
+        // Random vertical position
+        runner.style.bottom = (20 + Math.random() * 45) + '%';
+        runner.style.display = 'block';
 
-        // Cleanup after crossing screen
+        // Point d'arrêt aléatoire (25% à 65% de la largeur)
+        const stopPct = 25 + Math.random() * 40;
+        const stopX   = window.innerWidth * stopPct / 100;
+        const speed   = 900; // px/s
+
+        // ── Phase 1 : arrivée depuis la gauche ──
+        const dist1 = stopX + 160;
+        const dur1  = dist1 / speed;
+        runner.style.transition = 'none';
+        runner.style.transform  = 'translateX(-160px)';
+        void runner.offsetWidth;
+
+        let sprite = startSprite();
+        runner.style.transition = `transform ${dur1}s linear`;
+        runner.style.transform  = `translateX(${stopX}px)`;
+
         setTimeout(() => {
-            runner.style.display = 'none';
-            runner.style.animation = 'none';
+            // ── Phase 2 : pause ──
             clearInterval(sprite);
-            scheduleNext();
-        }, 1600);
+            img.src = FRAMES[0]; // pose statique
+            runner.style.transition = 'none';
+
+            const pauseDur = 800 + Math.random() * 1200; // 0.8s à 2s
+
+            setTimeout(() => {
+                // ── Phase 3 : repart vers la droite ──
+                const dist3 = window.innerWidth - stopX + 160;
+                const dur3  = dist3 / speed;
+
+                sprite = startSprite();
+                runner.style.transition = `transform ${dur3}s linear`;
+                runner.style.transform  = `translateX(${window.innerWidth + 160}px)`;
+
+                setTimeout(() => {
+                    runner.style.display    = 'none';
+                    runner.style.transition = 'none';
+                    clearInterval(sprite);
+                    scheduleNext();
+                }, dur3 * 1000 + 100);
+
+            }, pauseDur);
+
+        }, dur1 * 1000);
     }
 
     const isProd = ['raptol.fr', 'www.raptol.fr'].includes(window.location.hostname);
