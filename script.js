@@ -2170,9 +2170,12 @@ function animateSolar() {
         }
     }
 
-    // Scintillement Pitouan
+    // Pitouan — visible seulement quand on est assez dézoomé
     if (SS.pitouanPoint) {
-        SS.pitouanPoint.material.opacity = 0.6 + Math.abs(Math.sin(time * 1.8)) * 0.4;
+        const camDist = SS.camera.position.length();
+        const visible = camDist > 4000;
+        SS.pitouanPoint.visible = visible;
+        if (visible) SS.pitouanPoint.material.opacity = 0.6 + Math.abs(Math.sin(time * 1.8)) * 0.4;
     }
     if (SS.pitouanPlanet) {
         SS.pitouanPlanet.rotation.y += 0.003;
