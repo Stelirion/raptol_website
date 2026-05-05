@@ -2023,7 +2023,11 @@ async function initSolar() {
     const pitouan = new SpaceBody('PITOUAN', ALBUM_DATA['PITOUAN'], null);
     pitouan.mesh.position.set(3800, 900, -3200);
     pitouan.mesh.material.transparent = true;
-    pitouan.mesh.material.opacity = 0; // invisible jusqu'au zoom
+    pitouan.mesh.material.opacity = 0;
+    // Retirer du raycast général pour ne pas bloquer les clics sur les autres planètes
+    const pitouanIdx = SS.interactives.indexOf(pitouan.mesh);
+    if (pitouanIdx !== -1) SS.interactives.splice(pitouanIdx, 1);
+    SS.secretBodies = [pitouan]; // raycast séparé
     SS.bodies.push(pitouan);
 
     const starlight = SS.bodies.find(b => b.key === 'STARLIGHT');
@@ -2272,6 +2276,13 @@ function onSolarClick(event) {
             openArtistPanel();
         } else if (body && body !== SS.focused) {
             zoomToPlanet(body);
+        }
+    } else if (SS.secretBodies?.length) {
+        // Vérifier le click sur les corps secrets (ex: Pitouan)
+        const secretHits = SS.raycaster.intersectObjects(SS.secretBodies.map(b => b.mesh));
+        if (secretHits.length > 0) {
+            const body = secretHits[0].object.userData.body;
+            if (body && body !== SS.focused) zoomToPlanet(body);
         }
     }
 }
