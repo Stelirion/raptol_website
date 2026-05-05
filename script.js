@@ -2173,7 +2173,7 @@ function animateSolar() {
     // Pitouan — visible seulement quand on est assez dézoomé
     if (SS.pitouanPoint) {
         const camDist = SS.camera.position.length();
-        const visible = camDist > 4000;
+        const visible = camDist > 7000;
         SS.pitouanPoint.visible = visible;
         if (visible) SS.pitouanPoint.material.opacity = 0.6 + Math.abs(Math.sin(time * 1.8)) * 0.4;
     }
