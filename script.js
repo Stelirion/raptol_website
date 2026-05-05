@@ -4290,12 +4290,11 @@ window.addEventListener('resize', () => {
         }, dur1 * 1000);
     }
 
-    const isProd = ['raptol.fr', 'www.raptol.fr'].includes(window.location.hostname);
+    // Mode rapide UNIQUEMENT sur localhost — partout ailleurs c'est rare
+    const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
 
-    // Toutes les 30s, 4% de chance de déclencher (en prod)
-    // En local : toutes les 3s, 100%
-    const CHECK_INTERVAL = isProd ? 30000 : 3000;
-    const TRIGGER_CHANCE = isProd ? 0.04 : 1;
+    const CHECK_INTERVAL = isLocal ? 3000 : 30000;
+    const TRIGGER_CHANCE = isLocal ? 1 : 0.04;
     let running = false;
 
     function scheduleNext() {
@@ -4309,7 +4308,7 @@ window.addEventListener('resize', () => {
         }, CHECK_INTERVAL);
     }
 
-    // Premier check après 5s (peut arriver direct)
+    // Premier check : immédiat en local, 5s ailleurs
     setTimeout(() => {
         if (Math.random() < TRIGGER_CHANCE) {
             running = true;
@@ -4317,7 +4316,7 @@ window.addEventListener('resize', () => {
         } else {
             scheduleNext();
         }
-    }, isProd ? 5000 : 0);
+    }, isLocal ? 0 : 5000);
 })();
 
 // ── Attribution: Planet textures from Solar System Scope (CC BY 4.0) ──
