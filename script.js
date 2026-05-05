@@ -2372,13 +2372,25 @@ let _planetListEl = null;
 function initPitouanSecret() {
     const POS = new THREE.Vector3(3800, 900, -3200);
 
-    // Point lumineux violet fixe en pixels
+    // Texture circulaire pour éviter le carré par défaut
+    const starCanvas = document.createElement('canvas');
+    starCanvas.width = starCanvas.height = 32;
+    const sCtx = starCanvas.getContext('2d');
+    const grad = sCtx.createRadialGradient(16,16,0, 16,16,16);
+    grad.addColorStop(0,   'rgba(220,120,255,1)');
+    grad.addColorStop(0.3, 'rgba(180,60,255,0.6)');
+    grad.addColorStop(1,   'rgba(0,0,0,0)');
+    sCtx.fillStyle = grad;
+    sCtx.fillRect(0,0,32,32);
+    const starTex = new THREE.CanvasTexture(starCanvas);
+
+    // Sprite (taille fixe en pixels via sizeAttenuation:false)
     const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0,0,0]), 3));
     const mat = new THREE.PointsMaterial({
-        color: 0xcc44ff, size: 5, sizeAttenuation: false,
+        map: starTex, size: 6, sizeAttenuation: false,
         blending: THREE.AdditiveBlending, depthWrite: false,
-        transparent: true, opacity: 1
+        transparent: true, opacity: 1, alphaTest: 0.01
     });
     const point = new THREE.Points(geo, mat);
     point.position.copy(POS);
