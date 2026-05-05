@@ -1771,17 +1771,6 @@ class SpaceBody {
             case 'THE REVENGE':     shader = TheRevengeShader;     break;
             case 'VIRGO':           shader = VirgoShader;          break;
             case 'DARKEST DREAMS':  shader = DarkestDreamsShader;  break;
-            case 'PITOUAN': {
-                const tex = await new Promise((res, rej) =>
-                    new THREE.TextureLoader().load('images/Pitouan.jpg', res, undefined, rej)
-                );
-                this.mesh.material = new THREE.MeshStandardMaterial({
-                    map: tex, roughness: 0.65, metalness: 0.05,
-                    transparent: true, opacity: 0 // révélé à l'entrée en surface
-                });
-                this._addSecretGlow();
-                return;
-            }
             default:
                 this.mesh.material = new THREE.MeshStandardMaterial({ color: new THREE.Color(data.color) });
                 return;
@@ -2020,15 +2009,8 @@ async function initSolar() {
     }
 
     // Easter egg secret — point fixe, mesh invisible (raycasting only), sprite = glow
-    const pitouan = new SpaceBody('PITOUAN', ALBUM_DATA['PITOUAN'], null);
-    pitouan.mesh.position.set(3800, 900, -3200);
-    pitouan.mesh.material.transparent = true;
-    pitouan.mesh.material.opacity = 0;
-    // Retirer du raycast général pour ne pas bloquer les clics sur les autres planètes
-    const pitouanIdx = SS.interactives.indexOf(pitouan.mesh);
-    if (pitouanIdx !== -1) SS.interactives.splice(pitouanIdx, 1);
-    SS.secretBodies = [pitouan]; // raycast séparé
-    SS.bodies.push(pitouan);
+    // ── Pitouan easter egg — objet standalone, hors SpaceBody ──
+    initPitouanSecret();
 
     const starlight = SS.bodies.find(b => b.key === 'STARLIGHT');
     const revengeData = { ...ALBUM_DATA['THE REVENGE'], orbitRadius: 240, size: 28 };
@@ -2124,9 +2106,7 @@ function animateSolar() {
                     layer.sprite.scale.set(sz, sz, 1);
                 }
             }
-        } else if (body.key === 'PITOUAN' && body._secretGlowSprite) {
-            // Scintillement doux pour que le point se distingue des étoiles fixes
-            body._secretGlowSprite.material.opacity = 0.6 + Math.abs(Math.sin(time * 1.8)) * 0.4;
+        } else if (false) { // placeholder supprimé
         } else {
             // Update planet shader uniforms each frame
             if (body.planetUniforms) {
@@ -2188,6 +2168,14 @@ function animateSolar() {
                 );
             }
         }
+    }
+
+    // Scintillement Pitouan
+    if (SS.pitouanPoint) {
+        SS.pitouanPoint.material.opacity = 0.6 + Math.abs(Math.sin(time * 1.8)) * 0.4;
+    }
+    if (SS.pitouanPlanet) {
+        SS.pitouanPlanet.rotation.y += 0.003;
     }
 
     SS.renderer.render(SS.scene, SS.camera);
@@ -2277,13 +2265,10 @@ function onSolarClick(event) {
         } else if (body && body !== SS.focused) {
             zoomToPlanet(body);
         }
-    } else if (SS.secretBodies?.length) {
-        // Vérifier le click sur les corps secrets (ex: Pitouan)
-        const secretHits = SS.raycaster.intersectObjects(SS.secretBodies.map(b => b.mesh));
-        if (secretHits.length > 0) {
-            const body = secretHits[0].object.userData.body;
-            if (body && body !== SS.focused) zoomToPlanet(body);
-        }
+    } else if (SS.pitouanHit) {
+        // Vérifier le click sur Pitouan (hitbox dédiée)
+        const pHits = SS.raycaster.intersectObject(SS.pitouanHit);
+        if (pHits.length > 0) zoomToPitouanSecret();
     }
 }
 
@@ -2380,6 +2365,99 @@ function zoomToPlanet(body) {
 // PLANET LIST SIDEBAR (right side)
 // ─────────────────────────────────────────────
 let _planetListEl = null;
+
+// ─────────────────────────────────────────────
+// PITOUAN — easter egg standalone (hors SpaceBody)
+// ─────────────────────────────────────────────
+function initPitouanSecret() {
+    const POS = new THREE.Vector3(3800, 900, -3200);
+
+    // Point lumineux violet fixe en pixels
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0,0,0]), 3));
+    const mat = new THREE.PointsMaterial({
+        color: 0xcc44ff, size: 5, sizeAttenuation: false,
+        blending: THREE.AdditiveBlending, depthWrite: false,
+        transparent: true, opacity: 1
+    });
+    const point = new THREE.Points(geo, mat);
+    point.position.copy(POS);
+    SS.scene.add(point);
+
+    // Sphère invisible pour le raycast (petite, ne bloque pas les autres)
+    const hitGeo = new THREE.SphereGeometry(40, 8, 8);
+    const hitMat = new THREE.MeshBasicMaterial({ visible: false });
+    const hitMesh = new THREE.Mesh(hitGeo, hitMat);
+    hitMesh.position.copy(POS);
+    hitMesh.userData.isPitouan = true;
+    SS.scene.add(hitMesh);
+    SS.pitouanHit = hitMesh;
+    SS.pitouanPoint = point;
+
+    // Scintillement dans la boucle de rendu
+    SS.pitouanTime = 0;
+
+    // Planète (visible seulement au zoom)
+    const loader = new THREE.TextureLoader();
+    loader.load('images/Florian.jpg', tex => {
+        const pGeo = new THREE.SphereGeometry(55, 48, 36);
+        const pMat = new THREE.MeshStandardMaterial({
+            map: tex, roughness: 0.65, metalness: 0.05,
+            transparent: true, opacity: 0
+        });
+        const planet = new THREE.Mesh(pGeo, pMat);
+        planet.position.copy(POS);
+        planet.userData.isPitouan = true;
+        SS.scene.add(planet);
+        SS.pitouanPlanet = planet;
+    });
+}
+
+function zoomToPitouanSecret() {
+    if (!SS.pitouanHit) return;
+    const target = SS.pitouanHit.position.clone();
+    const offset = new THREE.Vector3(0, 30, 150);
+    const camTarget = target.clone().add(offset);
+
+    if (SS.controls) { SS.controls.enabled = false; SS.controls.minDistance = 0; }
+    SS.state = 'transitioning';
+
+    const startPos = SS.camera.position.clone();
+    const startLook = SS.controls ? SS.controls.target.clone() : new THREE.Vector3();
+    const dur = 2.5;
+    let elapsed = 0;
+    let last = performance.now();
+
+    function tick() {
+        const now = performance.now();
+        elapsed += (now - last) / 1000;
+        last = now;
+        const t = Math.min(elapsed / dur, 1);
+        const e = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+        SS.camera.position.lerpVectors(startPos, camTarget, e);
+        if (SS.controls) SS.controls.target.lerpVectors(startLook, target, e);
+        SS.camera.lookAt(target);
+        if (t < 1) {
+            SS._zoomRaf = requestAnimationFrame(tick);
+        } else {
+            SS.state = 'surface';
+            if (SS.controls) { SS.controls.enabled = true; SS.controls.minDistance = 80; }
+            if (SS.pitouanPlanet) SS.pitouanPlanet.material.opacity = 1;
+            // Afficher HUD minimal
+            document.querySelector('.solar-hud-top')?.classList.add('visible');
+            const nameEl = document.getElementById('planet-surface-name');
+            if (nameEl) {
+                nameEl.innerHTML = 'Pitouan<span id="planet-surface-subtitle"> • Planète inconnue</span>';
+                setTimeout(() => nameEl.classList.add('visible'), 100);
+            }
+            setTimeout(() => {
+                const btn = document.getElementById('exit-solar');
+                if (btn) { btn.textContent = '← Retour Orbite'; btn.dataset.state = 'surface'; }
+            }, 400);
+        }
+    }
+    SS._zoomRaf = requestAnimationFrame(tick);
+}
 
 function buildPlanetListSidebar() {
     if (_planetListEl) return;
@@ -2554,9 +2632,6 @@ function clearAlbumColorVars(el) {
 function enterSurfaceMode(body) {
     document.querySelector('.solar-hud-top').classList.add('visible');
 
-    // Révéler la planète Pitouan au zoom
-    if (body.key === 'PITOUAN') body.mesh.material.opacity = 1;
-
     // ── Hide planet list (track sidebar takes over) ──
     hidePlanetList();
     hidePlanetTooltip();
@@ -2599,8 +2674,7 @@ function enterSurfaceMode(body) {
 
 function exitSurfaceMode() {
     // Re-cacher la planète Pitouan au retour
-    const pitouanBody = SS.bodies?.find(b => b.key === 'PITOUAN');
-    if (pitouanBody) pitouanBody.mesh.material.opacity = 0;
+    if (SS.pitouanPlanet) SS.pitouanPlanet.material.opacity = 0;
 
     // Reset mobile hamburger state
     document.getElementById('mobile-list-toggle')?.classList.remove('open');
