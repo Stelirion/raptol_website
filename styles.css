@@ -2,16 +2,17 @@
 
 /* ====== GLOBAL VARIABLES ====== */
 :root {
-    --bg-color: #060000;
-    --text-primary: #f0e8e8;
-    --text-secondary: #9a7070;
-    --accent-cyan: #e8000a;
-    --accent-purple: #7a0000;
-    --accent-pink: #ff2233;
-    --accent-blue: #3d0000;
+    --bg-color: #080603;
+    --text-primary: #fff3d8;
+    --text-secondary: #c6aa76;
+    --accent-cyan: #efb84b;
+    --accent-cyan-rgb: 239, 184, 75;
+    --accent-purple: #a36b28;
+    --accent-pink: #ffe0a0;
+    --accent-blue: #4b2f12;
 
-    --glass-bg: rgba(18, 0, 0, 0.55);
-    --glass-border: rgba(255, 30, 30, 0.08);
+    --glass-bg: rgba(22, 15, 6, 0.58);
+    --glass-border: rgba(255, 205, 110, 0.12);
     --glass-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.85);
 
     --font-heading: 'Outfit', sans-serif;
@@ -49,6 +50,11 @@ body {
     overflow-x: hidden;
     line-height: 1.7;
     padding-bottom: 90px;
+}
+
+/* Recoloration du logo source rouge pour l'identité visuelle Stella Polare. */
+#logoCanvas, #loadingLogoCanvas, #mobLogoCanvas, #footerLogoCanvas {
+    filter: brightness(0) saturate(100%) invert(87%) sepia(34%) saturate(620%) hue-rotate(358deg) brightness(103%) contrast(94%) drop-shadow(0 0 10px rgba(255, 216, 139, 0.26));
 }
 
 /* Scrollbar */
@@ -358,6 +364,81 @@ section .glass-card, section .section-title, section .gallery-item {
     border-color: rgba(0, 229, 255, 0.6);
 }
 
+/* ====== STELLA POLARE — RELEASE TEASER ====== */
+.release-teaser .badge {
+    color: #ffd46f;
+    border-color: rgba(255, 196, 74, 0.58);
+    background: rgba(255, 179, 38, 0.09);
+    box-shadow: 0 0 28px rgba(255, 185, 52, 0.22), inset 0 0 16px rgba(255, 214, 113, 0.08);
+}
+
+.release-wordmark {
+    width: min(760px, 92vw);
+    margin: 0 0 1rem;
+    background: none;
+    color: inherit;
+    -webkit-text-fill-color: initial;
+    animation: none;
+}
+
+.release-wordmark img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(255, 196, 80, 0.36));
+}
+
+.release-date {
+    margin: 1.8rem 0 0;
+    color: #ffdc84;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.release-teaser-action {
+    margin-top: 1.5rem;
+}
+
+.release-teaser-action .btn-secondary {
+    border-color: rgba(255, 203, 111, 0.46);
+    color: #ffe0a0;
+    background: rgba(255, 189, 71, 0.08);
+}
+
+.release-teaser-action .btn-secondary:hover {
+    background: rgba(255, 189, 71, 0.16);
+    box-shadow: 0 0 24px rgba(255, 191, 67, 0.16);
+}
+
+.release-cover-wrapper {
+    max-width: 600px;
+}
+
+.release-cover-frame {
+    padding: 0;
+    overflow: hidden;
+    border-color: rgba(255, 198, 76, 0.45);
+    box-shadow: 0 0 72px rgba(255, 184, 48, 0.14), 0 0 130px rgba(122, 73, 0, 0.16), inset 0 0 45px rgba(255, 213, 112, 0.12);
+}
+
+.release-cover {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.upcoming-label {
+    font-size: 0.8rem;
+    color: #ffdc84;
+}
+
+.album-card-upcoming {
+    box-shadow: 0 0 32px rgba(255, 190, 64, 0.15);
+}
+
 
 .badge {
     display: inline-block;
@@ -387,7 +468,7 @@ section .glass-card, section .section-title, section .gallery-item {
     font-weight: 900;
     margin-bottom: 1.5rem;
     letter-spacing: 0.04em;
-    background: linear-gradient(90deg, #fff0f0 0%, #ff1a1a 18%, #8b0000 38%, #ff0000 55%, #4a0000 74%, #ff2020 90%, #fff0f0 100%);
+    background: linear-gradient(90deg, #fff7e2 0%, #ffd36e 18%, #a86a1e 38%, #ffe29a 55%, #754514 74%, #edb950 90%, #fff7e2 100%);
     background-size: 400% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -400,9 +481,9 @@ section .glass-card, section .section-title, section .gallery-item {
 }
 
 @keyframes glowPulseText {
-    0%   { filter: drop-shadow(0 0 8px rgba(220,0,0,0.55)) drop-shadow(0 0 28px rgba(160,0,0,0.3)); }
-    40%  { filter: drop-shadow(0 0 20px rgba(255,0,0,0.9)) drop-shadow(0 0 60px rgba(180,0,0,0.5)); }
-    100% { filter: drop-shadow(0 0 8px rgba(220,0,0,0.55)) drop-shadow(0 0 28px rgba(160,0,0,0.3)); }
+    0%   { filter: drop-shadow(0 0 8px rgba(255,197,86,0.55)) drop-shadow(0 0 28px rgba(168,103,27,0.3)); }
+    40%  { filter: drop-shadow(0 0 20px rgba(255,218,138,0.9)) drop-shadow(0 0 60px rgba(220,153,46,0.5)); }
+    100% { filter: drop-shadow(0 0 8px rgba(255,197,86,0.55)) drop-shadow(0 0 28px rgba(168,103,27,0.3)); }
 }
 
 .subtitle {
@@ -460,7 +541,7 @@ section .glass-card, section .section-title, section .gallery-item {
 
 .btn-primary:hover {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 10px 30px rgba(232, 0, 10, 0.5);
+    box-shadow: 0 10px 30px rgba(239, 184, 75, 0.5);
 }
 
 .btn-primary:hover::before {

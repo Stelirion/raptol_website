@@ -98,6 +98,23 @@ const TEXTURE_MAP = {
 // 1. DATA
 // ─────────────────────────────────────────────
 const ALBUM_DATA = {
+    "STELLA POLARE": {
+        type: "single", badge: "Prochain Single · 3 Août",
+        color: "#f6bd45", color2: "#6b3e08", size: 58, orbitRadius: 2050,
+        listenUrl: "",
+        description: "Quand la personne qui te guidait s’éloigne, qui éclaire la suite ?",
+        tracks: [
+            {
+                name: "Stella Polare",
+                duration: "3:41",
+                credits: "Composition, arrangement, mix, master, paroles : Raptol · Voix : Chiara A.",
+                story: "Quand la personne qui te guidait s’éloigne, qui éclaire la suite ?",
+                clip: "https://www.youtube.com/watch?v=xCuZa19puRM",
+                teaser: true,
+                lyrics: "Il tempo è un ladro,\nNon credevo facesse così.\nGuardo i tuoi occhi smarriti,\nDicono sia meglio così,\nMa ti ho persa di più.\nMentre tu scivoli via.\n\nQuando sarai lontana,\nChi salverà quest'anima smarrita?\nChi mi sosterrà nei dubbi,\nMentre le tue mani sanno tutto di me.\n\nTra noi nessuna nuvola,\nStelle che si capivano in silenzio.\nEri la mia stella polare,\nChi mi farà luce adesso?\nOra che nel buio guido te.\n\nQuando sarai lontana,\nChi salverà quest'anima smarrita?\nChi mi sosterrà nei dubbi,\nMentre le tue mani sanno tutto di me.\n\nVolevo tenerti al sicuro,\nMa le mie mani sono impotenti.\nUna scelta obbligata,\nMa farò di tutto,\nPer farti luce in questa nuova vita.\n\nAdesso che te ne sei andata,\nPiange in silenzio quest'anima smarrita.\nNessuno mi guida nei dubbi,\nMa il calore delle tue mani vive in me."
+            }
+        ]
+    },
     "DARKEST DREAMS": {
         type: "single", badge: "Nouveau Single",
         color: "#e8000a", color2: "#3d0000", size: 45, orbitRadius: 1750,
@@ -330,6 +347,7 @@ class Star2D {
 }
 
 const PLANET_DEFS = [
+    { name: 'STELLA POLARE',  color: '#f6bd45', color2: '#6b3e08', type: 'radiant', minR: 16, maxR: 30 },
     { name: 'DARKEST DREAMS', color: '#e8000a', color2: '#1a0000', type: 'lava',    minR: 14, maxR: 26 },
     { name: 'VIRGO',          color: '#00f0ff', color2: '#0044aa', type: 'gas',     minR: 12, maxR: 24 },
     { name: 'STARLIGHT',      color: '#ffd700', color2: '#cc5500', type: 'ringed',  minR: 22, maxR: 40 },
@@ -1305,6 +1323,42 @@ const VirgoShader = {
     `
 };
 
+// ── STELLA POLARE: radiant golden guide world — polar light and a celestial halo ──
+const StellaPolareShader = {
+    vertexShader: PLANET_VERT,
+    fragmentShader: `
+        uniform float uTime;
+        uniform vec3 uCameraPos;
+        varying vec3 vWorldNormal;
+        varying vec3 vWorldPos;
+        varying vec3 vLocalDir;
+        ${NOISE_GLSL}
+
+        void main() {
+            vec3 n = normalize(vWorldNormal);
+            vec3 v = normalize(uCameraPos - vWorldPos);
+            vec3 lightDir = normalize(-vWorldPos);
+            float diffuse = max(dot(n, lightDir), 0.0);
+            float broadNoise = clamp(0.5 + 0.5 * fbm(vLocalDir * 2.2 + vec3(0.0, uTime * 0.025, 0.0)), 0.0, 1.0);
+            float fineNoise = clamp(0.5 + 0.5 * fbm(vLocalDir * 7.0 - vec3(uTime * 0.035, 0.0, 0.0)), 0.0, 1.0);
+            float polar = smoothstep(0.38, 0.95, abs(vLocalDir.y));
+            float polarPulse = 0.5 + 0.5 * sin(uTime * 0.9 + fineNoise * 9.0);
+            float longitude = atan(vLocalDir.z, vLocalDir.x);
+            float aurora = pow(max(0.0, sin(longitude * 3.0 + vLocalDir.y * 7.0 - uTime * 1.15)), 12.0) * polar;
+            float rim = pow(1.0 - max(dot(n, v), 0.0), 3.0);
+
+            vec3 amber = vec3(0.37, 0.16, 0.025);
+            vec3 gold = vec3(0.95, 0.57, 0.12);
+            vec3 starlight = vec3(1.0, 0.89, 0.55);
+            vec3 surface = mix(amber, gold, 0.38 + broadNoise * 0.48);
+            surface = mix(surface, starlight, polar * (0.34 + polarPulse * 0.22));
+            surface *= 0.62 + diffuse * 0.70;
+            surface += starlight * (rim * 0.72 + polar * 0.17 + aurora * 0.48);
+            gl_FragColor = vec4(surface, 1.0);
+        }
+    `
+};
+
 // ── Ring shader for Starlight ──
 const RingShader = {
     vertexShader: `
@@ -1771,6 +1825,7 @@ class SpaceBody {
             case 'THE REVENGE':     shader = TheRevengeShader;     break;
             case 'VIRGO':           shader = VirgoShader;          break;
             case 'DARKEST DREAMS':  shader = DarkestDreamsShader;  break;
+            case 'STELLA POLARE':   shader = StellaPolareShader;   break;
             default:
                 this.mesh.material = new THREE.MeshStandardMaterial({ color: new THREE.Color(data.color) });
                 return;
@@ -1785,6 +1840,60 @@ class SpaceBody {
         // Add Saturn-style rings to Starlight
         if (this.key === 'STARLIGHT') {
             this._addRings();
+        }
+
+        if (this.key === 'STELLA POLARE') {
+            const glow = new THREE.Sprite(new THREE.SpriteMaterial({
+                map: buildSoftSpriteTexture('rgba(255,190,65,1.0)'),
+                color: 0xffe3a3,
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                opacity: 0.48,
+                depthWrite: false,
+            }));
+            const glowSize = data.size * 3.45;
+            glow.scale.set(glowSize, glowSize, 1);
+            this.mesh.add(glow);
+
+            // Two incomplete orbital trails, like a travelling beam rather than a Saturn ring.
+            const makeTrail = (radiusX, radiusY, start, end, opacity) => {
+                const curve = new THREE.EllipseCurve(0, 0, radiusX, radiusY, start, end, false, 0);
+                const points = curve.getPoints(96).map(p => new THREE.Vector3(p.x, p.y, 0));
+                const trail = new THREE.Line(
+                    new THREE.BufferGeometry().setFromPoints(points),
+                    new THREE.LineBasicMaterial({
+                        color: 0xffe4a6,
+                        transparent: true,
+                        opacity,
+                        blending: THREE.AdditiveBlending,
+                        depthWrite: false,
+                    })
+                );
+                return trail;
+            };
+            const outerTrail = makeTrail(data.size * 1.95, data.size * 0.70, -0.42, Math.PI * 1.18, 0.86);
+            outerTrail.rotation.set(0.62, 0.24, -0.40);
+            this.mesh.add(outerTrail);
+
+            const innerTrail = makeTrail(data.size * 1.62, data.size * 0.52, Math.PI * 0.58, Math.PI * 2.03, 0.44);
+            innerTrail.rotation.set(0.62, 0.24, -0.40);
+            this.mesh.add(innerTrail);
+
+            // A small beacon above the north pole makes the planet recognisable at a glance.
+            const beacon = new THREE.Sprite(new THREE.SpriteMaterial({
+                map: buildSoftSpriteTexture('rgba(255,239,180,1.0)'),
+                color: 0xfff1c4,
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                opacity: 0.9,
+                depthWrite: false,
+            }));
+            const beaconSize = data.size * 0.50;
+            beacon.scale.set(beaconSize, beaconSize, 1);
+            beacon.position.set(0, data.size * 1.10, 0);
+            this.mesh.add(beacon);
+
+            this.stellaEffects = { glow, outerTrail, innerTrail, beacon, glowSize, beaconSize };
         }
     }
 
@@ -1863,7 +1972,7 @@ class SpaceBody {
                 this.orbitLine.position.copy(parentPos);
             }
         }
-        this.mesh.rotation.y += 0.003;
+        this.mesh.rotation.y += this.key === 'STELLA POLARE' ? 0.0065 : 0.003;
     }
 }
 
@@ -2002,7 +2111,7 @@ async function initSolar() {
     star.mesh.position.set(0, 0, 0);
     SS.bodies.push(star);
 
-    const bodyOrder = ['STARLIGHT', 'ULONIA', 'VIRGO', 'DARKEST DREAMS'];
+    const bodyOrder = ['STELLA POLARE', 'STARLIGHT', 'ULONIA', 'VIRGO', 'DARKEST DREAMS'];
     for (const key of bodyOrder) {
         const body = new SpaceBody(key, ALBUM_DATA[key], star);
         SS.bodies.push(body);
@@ -2115,6 +2224,19 @@ function animateSolar() {
             }
             if (body.ringUniforms) {
                 body.ringUniforms.uTime.value = shaderTime;
+            }
+            if (body.stellaEffects) {
+                const fx = body.stellaEffects;
+                const pulse = 1.0 + Math.sin(time * 1.45) * 0.075;
+                fx.glow.scale.set(fx.glowSize * pulse, fx.glowSize * pulse, 1);
+                fx.glow.material.opacity = 0.40 + Math.sin(time * 1.45) * 0.10;
+                fx.outerTrail.rotation.z += 0.0026;
+                fx.innerTrail.rotation.z -= 0.0038;
+                fx.outerTrail.material.opacity = 0.64 + Math.sin(time * 1.1) * 0.20;
+                fx.innerTrail.material.opacity = 0.30 + Math.cos(time * 1.4) * 0.16;
+                const beaconPulse = 1.0 + Math.sin(time * 2.4) * 0.16;
+                fx.beacon.scale.set(fx.beaconSize * beaconPulse, fx.beaconSize * beaconPulse, 1);
+                fx.beacon.material.opacity = 0.70 + Math.sin(time * 2.4) * 0.20;
             }
         }
     }
@@ -3081,6 +3203,15 @@ function exitSurfaceMode() {
                 <div class="ap-section-title">◈ Discographie</div>
                 <ul class="ap-disco-list">
                     <li>
+                        <a class="ap-disco-item" href="#" onclick="closeArtistPanel();document.querySelector('[data-album=\\'STELLA POLARE\\']')?.click();return false;">
+                            <img class="ap-disco-cover" src="images/stella-polare.jpg" alt="Stella Polare">
+                            <div class="ap-disco-info">
+                                <div class="ap-disco-name">Stella Polare</div>
+                                <div class="ap-disco-meta">Single · 3 août 2026 · Prochainement</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
                         <a class="ap-disco-item" href="#" onclick="closeArtistPanel();document.querySelector('[data-album=\\'DARKEST DREAMS\\']')?.click();return false;">
                             <img class="ap-disco-cover" src="images/Darkest_Dreams.png" alt="Darkest Dreams">
                             <div class="ap-disco-info">
@@ -3905,7 +4036,7 @@ function openPOIPanel(body, idx) {
     if (track.clip) {
         const b = document.createElement('button');
         b.className = 'rp-btn rp-clip';
-        b.innerHTML = '&#9654;&nbsp; Clip vid&eacute;o';
+        b.innerHTML = track.teaser ? '&#9673;&nbsp; Voir le teaser' : '&#9654;&nbsp; Clip vid&eacute;o';
         b.addEventListener('click', () => window.open(track.clip, '_blank'));
         actEl.appendChild(b);
     }
@@ -4281,6 +4412,9 @@ window.addEventListener('resize', () => {
 
 // ── Easter egg: le coureur de l'espace ──
 (function initSpaceRunner() {
+    // Le teaser est la première impression du site : ne pas masquer son titre avec un easter egg.
+    if (document.querySelector('.release-teaser')) return;
+
     // Inject CSS keyframe
     const style = document.createElement('style');
     style.textContent = `
