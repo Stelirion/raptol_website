@@ -97,11 +97,18 @@ const TEXTURE_MAP = {
 // ─────────────────────────────────────────────
 // 1. DATA
 // ─────────────────────────────────────────────
+const STELLA_POLARE_RELEASE = {
+    // Une seule date et une seule vidéo à modifier pour les prochaines mises à jour.
+    date: new Date('2026-08-07T00:00:00+02:00'),
+    preorderUrl: 'https://distrokid.com/hyperfollow/raptol/stella-polare',
+    videoUrl: 'https://www.youtube.com/watch?v=xCuZa19puRM'
+};
+
 const ALBUM_DATA = {
     "STELLA POLARE": {
         type: "single", badge: "Prochain Single · 7 Août",
         color: "#f6bd45", color2: "#6b3e08", size: 58, orbitRadius: 2050,
-        listenUrl: "",
+        listenUrl: STELLA_POLARE_RELEASE.preorderUrl,
         description: "Quand la personne qui te guidait s’éloigne, qui éclaire la suite ?",
         tracks: [
             {
@@ -230,6 +237,62 @@ const ALBUM_DATA = {
     const el = document.getElementById('nav-release-link');
     if (el && latest) el.textContent = latest.tracks[0]?.name || latest.badge;
 })();
+
+function isStellaPolareReleased(now = new Date()) {
+    return now >= STELLA_POLARE_RELEASE.date;
+}
+
+function syncStellaPolareReleaseState() {
+    const released = isStellaPolareReleased();
+    const stella = ALBUM_DATA['STELLA POLARE'];
+    const track = stella?.tracks?.[0];
+    if (!stella || !track) return;
+
+    stella.badge = released ? 'Nouveau Single' : 'Prochain Single · 7 Août';
+    stella.listenUrl = STELLA_POLARE_RELEASE.preorderUrl;
+    track.clip = STELLA_POLARE_RELEASE.videoUrl;
+    track.teaser = !released;
+
+    const badge = document.getElementById('stella-release-badge');
+    const date = document.getElementById('stella-release-date');
+    const cta = document.getElementById('stella-release-cta');
+    const media = document.getElementById('stella-release-media');
+    const card = document.getElementById('album-STELLA POLARE');
+    const cardStatus = document.getElementById('stella-card-status');
+
+    if (badge) badge.textContent = released ? 'Nouveau single' : 'Prochain single';
+    if (date) date.textContent = released ? '✦ Disponible maintenant ✦' : '✦ Sortie le 7 août 2026 ✦';
+    if (cta) {
+        cta.href = STELLA_POLARE_RELEASE.preorderUrl;
+        cta.textContent = released ? '▶ Écouter maintenant' : '✦ Précommander';
+    }
+    if (card) card.classList.toggle('album-card-upcoming', !released);
+    if (cardStatus) {
+        cardStatus.textContent = released ? 'Clip officiel' : 'Bientôt disponible';
+        cardStatus.classList.toggle('release-available-label', released);
+    }
+
+    if (released && media && !media.querySelector('iframe')) {
+        const videoId = STELLA_POLARE_RELEASE.videoUrl.match(/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/)?.[1];
+        if (videoId) {
+            media.replaceChildren();
+            const frame = document.createElement('iframe');
+            frame.className = 'release-video';
+            frame.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
+            frame.title = 'Stella Polare — Raptol';
+            frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            frame.allowFullscreen = true;
+            media.appendChild(frame);
+        }
+    }
+}
+
+syncStellaPolareReleaseState();
+
+const stellaReleaseDelay = STELLA_POLARE_RELEASE.date.getTime() - Date.now();
+if (stellaReleaseDelay > 0 && stellaReleaseDelay < 2147483647) {
+    window.setTimeout(syncStellaPolareReleaseState, stellaReleaseDelay + 250);
+}
 
 function toTitleCase(str) {
     if (!str) return '';
@@ -3928,6 +3991,7 @@ function openPOIPanel(body, idx) {
     if (!_rpBackdrop || !_rpPanel) { console.error('[openPOIPanel] modal DOM not ready'); return; }
     const track = body.data.tracks[idx];
     if (!track) return;
+    const isStellaPreorder = body.key === 'STELLA POLARE' && !isStellaPolareReleased();
     activePOIIdx   = idx;
     _activePOIBody = body;
 
@@ -3974,7 +4038,7 @@ function openPOIPanel(body, idx) {
     layoutEl.classList.remove('audio-only');
 
     const playlist = body.data.ytPlaylist ?? null;
-    const vid      = ytID(track.clip);
+    const vid      = isStellaPreorder ? null : ytID(track.clip);
 
     let embedSrc = null;
     if (vid && playlist) {
@@ -4029,11 +4093,11 @@ function openPOIPanel(body, idx) {
     if (body.data.listenUrl) {
         const b = document.createElement('button');
         b.className = 'rp-btn rp-listen';
-        b.innerHTML = '&#9654;&nbsp; &Eacute;couter';
+        b.innerHTML = isStellaPreorder ? '&#10022;&nbsp; Pr&eacute;commander' : '&#9654;&nbsp; &Eacute;couter';
         b.addEventListener('click', () => window.open(body.data.listenUrl, '_blank'));
         actEl.appendChild(b);
     }
-    if (track.clip) {
+    if (track.clip && !isStellaPreorder) {
         const b = document.createElement('button');
         b.className = 'rp-btn rp-clip';
         b.innerHTML = track.teaser ? '&#9673;&nbsp; Voir le teaser' : '&#9654;&nbsp; Clip vid&eacute;o';

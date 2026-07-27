@@ -430,9 +430,20 @@ section .glass-card, section .section-title, section .gallery-item {
     object-fit: cover;
 }
 
+.release-video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+}
+
 .upcoming-label {
     font-size: 0.8rem;
     color: #ffdc84;
+}
+
+.release-available-label {
+    color: var(--accent-cyan);
 }
 
 .album-card-upcoming {

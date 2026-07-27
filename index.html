@@ -31,8 +31,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Outfit:wght@300;500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1.1">
-    <script defer src="script.js?v=1.1"></script>
+    <link rel="stylesheet" href="styles.css?v=1.2">
+    <script defer src="script.js?v=1.2"></script>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -196,16 +196,16 @@
             <!-- Sections remain the same -->
             <section id="release" class="hero-showcase release-teaser">
                 <div class="hero-typography">
-                    <span class="badge">Prochain single</span>
+                    <span class="badge" id="stella-release-badge">Prochain single</span>
                     <h1 class="music-title release-wordmark"><img src="images/stella-polare-wordmark-v2.png" alt="Stella Polare"></h1>
                     <p class="subtitle">Quand la personne qui te guidait s’éloigne, qui éclaire la suite&nbsp;?</p>
-                    <p class="release-date">✦ Sortie le 7 août 2026 ✦</p>
+                    <p class="release-date" id="stella-release-date">✦ Sortie le 7 août 2026 ✦</p>
                     <div class="button-group release-teaser-action">
-                        <a href="https://www.youtube.com/watch?v=xCuZa19puRM" target="_blank" class="btn-secondary">◉ Voir le teaser</a>
+                        <a id="stella-release-cta" href="https://distrokid.com/hyperfollow/raptol/stella-polare" target="_blank" rel="noopener noreferrer" class="btn-secondary">✦ Précommander</a>
                     </div>
                 </div>
                 <div class="hologram-screen-wrapper release-cover-wrapper">
-                    <div class="hologram-screen release-cover-frame">
+                    <div class="hologram-screen release-cover-frame" id="stella-release-media">
                         <img class="release-cover" src="images/stella-polare.jpg" alt="Pochette de Stella Polare par Raptol">
                     </div>
                     <div class="screen-reflection"></div>
@@ -224,7 +224,7 @@
                         <div class="item-overlay">
                             <h3>Stella Polare</h3>
                             <p>Single • 7 août 2026</p>
-                            <span class="upcoming-label">Bientôt disponible</span>
+                            <span class="upcoming-label" id="stella-card-status">Bientôt disponible</span>
                         </div>
                     </div>
                     <div class="gallery-item glass-card album-card" data-album="DARKEST DREAMS" id="album-DARKEST DREAMS">
