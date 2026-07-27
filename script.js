@@ -106,7 +106,7 @@ const STELLA_POLARE_RELEASE = {
 
 const ALBUM_DATA = {
     "STELLA POLARE": {
-        type: "single", badge: "Prochain Single · 7 Août",
+        type: "single", badge: "Single",
         color: "#f6bd45", color2: "#6b3e08", size: 58, orbitRadius: 2050,
         listenUrl: STELLA_POLARE_RELEASE.preorderUrl,
         description: "Quand la personne qui te guidait s’éloigne, qui éclaire la suite ?",
@@ -123,10 +123,10 @@ const ALBUM_DATA = {
         ]
     },
     "DARKEST DREAMS": {
-        type: "single", badge: "Nouveau Single",
+        type: "single", badge: "Single",
         color: "#e8000a", color2: "#3d0000", size: 45, orbitRadius: 1750,
         listenUrl: "https://distrokid.com/hyperfollow/raptol/darkest-dreams",
-        description: "Le nouveau single. Death metal mélodique.",
+        description: "Death metal mélodique.",
         tracks: [
             {
                 ytID: "XWSBWOjRi88",
@@ -248,30 +248,20 @@ function syncStellaPolareReleaseState() {
     const track = stella?.tracks?.[0];
     if (!stella || !track) return;
 
-    stella.badge = released ? 'Nouveau Single' : 'Prochain Single · 7 Août';
+    stella.badge = 'Single';
     stella.listenUrl = STELLA_POLARE_RELEASE.preorderUrl;
     track.clip = STELLA_POLARE_RELEASE.videoUrl;
     track.teaser = !released;
 
-    const badge = document.getElementById('stella-release-badge');
     const date = document.getElementById('stella-release-date');
     const cta = document.getElementById('stella-release-cta');
     const media = document.getElementById('stella-release-media');
-    const card = document.getElementById('album-STELLA POLARE');
-    const cardStatus = document.getElementById('stella-card-status');
 
-    if (badge) badge.textContent = released ? 'Nouveau single' : 'Prochain single';
-    if (date) date.textContent = released ? '✦ Disponible maintenant ✦' : '✦ Sortie le 7 août 2026 ✦';
+    if (date) date.textContent = '✦ Sortie le 7 août 2026 ✦';
     if (cta) {
         cta.href = STELLA_POLARE_RELEASE.preorderUrl;
         cta.textContent = released ? '▶ Écouter maintenant' : '✦ Précommander';
     }
-    if (card) card.classList.toggle('album-card-upcoming', !released);
-    if (cardStatus) {
-        cardStatus.textContent = released ? 'Clip officiel' : 'Bientôt disponible';
-        cardStatus.classList.toggle('release-available-label', released);
-    }
-
     if (released && media && !media.querySelector('iframe')) {
         const videoId = STELLA_POLARE_RELEASE.videoUrl.match(/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/)?.[1];
         if (videoId) {
@@ -3270,7 +3260,7 @@ function exitSurfaceMode() {
                             <img class="ap-disco-cover" src="images/stella-polare.jpg" alt="Stella Polare">
                             <div class="ap-disco-info">
                                 <div class="ap-disco-name">Stella Polare</div>
-                                <div class="ap-disco-meta">Single · 7 août 2026 · Prochainement</div>
+                                <div class="ap-disco-meta">Single · 7 août 2026</div>
                             </div>
                         </a>
                     </li>

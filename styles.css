@@ -437,20 +437,6 @@ section .glass-card, section .section-title, section .gallery-item {
     border: 0;
 }
 
-.upcoming-label {
-    font-size: 0.8rem;
-    color: #ffdc84;
-}
-
-.release-available-label {
-    color: var(--accent-cyan);
-}
-
-.album-card-upcoming {
-    box-shadow: 0 0 32px rgba(255, 190, 64, 0.15);
-}
-
-
 .badge {
     display: inline-block;
     padding: 0.5rem 1.8rem;
