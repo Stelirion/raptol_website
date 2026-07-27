@@ -99,7 +99,7 @@ const TEXTURE_MAP = {
 // ─────────────────────────────────────────────
 const ALBUM_DATA = {
     "STELLA POLARE": {
-        type: "single", badge: "Prochain Single · 3 Août",
+        type: "single", badge: "Prochain Single · 7 Août",
         color: "#f6bd45", color2: "#6b3e08", size: 58, orbitRadius: 2050,
         listenUrl: "",
         description: "Quand la personne qui te guidait s’éloigne, qui éclaire la suite ?",
@@ -3207,7 +3207,7 @@ function exitSurfaceMode() {
                             <img class="ap-disco-cover" src="images/stella-polare.jpg" alt="Stella Polare">
                             <div class="ap-disco-info">
                                 <div class="ap-disco-name">Stella Polare</div>
-                                <div class="ap-disco-meta">Single · 3 août 2026 · Prochainement</div>
+                                <div class="ap-disco-meta">Single · 7 août 2026 · Prochainement</div>
                             </div>
                         </a>
                     </li>
