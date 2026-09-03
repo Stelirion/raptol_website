@@ -3170,28 +3170,6 @@ function exitSurfaceMode() {
         letter-spacing: 1px; margin-top: 2px;
     }
 
-    .ap-quote-block {
-        padding: 2rem;
-        background: rgba(255,120,0,0.04);
-        border-left: 3px solid rgba(255,140,0,0.4);
-        border-radius: 0 10px 10px 0;
-        margin-bottom: 1.5rem;
-    }
-    .ap-quote {
-        font-family: 'Inter', sans-serif;
-        font-size: 0.95rem;
-        font-style: italic;
-        line-height: 1.8;
-        color: rgba(255,255,255,0.7);
-    }
-    .ap-quote-author {
-        font-size: 0.7rem;
-        letter-spacing: 2px;
-        color: rgba(255,140,0,0.5);
-        text-transform: uppercase;
-        margin-top: 0.8rem;
-    }
-
     /* Mobile */
     @media (max-width: 768px) {
         #artist-panel { width: 96vw; max-height: 96vh; }
@@ -3303,12 +3281,6 @@ function exitSurfaceMode() {
 
             <div>
                 <div class="ap-section-title">◈ À propos</div>
-                <div class="ap-quote-block">
-                    <div class="ap-quote">
-                        "La lumière la plus difficile à trouver, c'est celle qu'on a appris à ne pas mériter."
-                    </div>
-                    <div class="ap-quote-author">— Raptol, Darkest Dreams</div>
-                </div>
                 <p class="ap-bio" style="margin:0;">
                     Plus qu'un simple projet musical, RAPTOL est un espace de narration où les frontières de genres n'ont pas leur place. Chaque sortie est pensée comme le nouveau chapitre d'une histoire en constante évolution. Si des projets comme <em>Starlight</em> ou <em>Ulonia</em> ont posé les bases d'un univers très immersif et émotionnel, la suite s'annonce totalement décloisonnée.<br><br>
                     Avec <em>Darkest Dreams</em> et les titres à venir, RAPTOL assume une liberté créative totale : faire le grand écart entre le metal, le shatta, ou encore des morceaux en italien. Peu importe le style, le fil conducteur reste le même : casser les codes pour livrer des récits intenses et des émotions brutes.
