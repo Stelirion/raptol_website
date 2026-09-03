@@ -253,11 +253,9 @@ function syncStellaPolareReleaseState() {
     track.clip = STELLA_POLARE_RELEASE.videoUrl;
     track.teaser = !released;
 
-    const date = document.getElementById('stella-release-date');
     const cta = document.getElementById('stella-release-cta');
     const media = document.getElementById('stella-release-media');
 
-    if (date) date.textContent = '✦ Sortie le 7 août 2026 ✦';
     if (cta) {
         cta.href = STELLA_POLARE_RELEASE.preorderUrl;
         cta.textContent = released ? '▶ Écouter maintenant' : '✦ Précommander';
